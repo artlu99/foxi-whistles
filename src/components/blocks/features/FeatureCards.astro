@@ -1,0 +1,72 @@
+---
+// Feature Cards grid Section
+// ------------
+// Description: A grid of cards with feature information in a 4 column layout.
+
+// Components
+// - Layout
+import Col from '../../ui/Col.astro'
+import Row from '../../ui/Row.astro'
+import Section from '../../ui/Section.astro'
+// - UI
+import Card from '../../ui/cards/FeatureCard.astro'
+
+// Content
+// - Cards
+import feature01 from '../../../assets/cards/feature-01.svg'
+import feature02 from '../../../assets/cards/feature-02.svg'
+import feature03 from '../../../assets/cards/feature-03.svg'
+import feature04 from '../../../assets/cards/feature-04.svg'
+import feature05 from '../../../assets/cards/feature-05.svg'
+---
+
+<Section id="features">
+	<Row>
+		<Col span="12" align="center" classes="mb-12 max-w-4xl mx-auto">
+			<h2 class="text-pretty">Innovative tools to <strong>transform</strong> your workflow</h2>
+			<p class="pb-0 text-lg">
+				Explore the suite of tools designed to streamline your workflow, enhance productivity, and
+				drive growth. Each product is crafted with precision to meet your needs and exceed your
+				expectations.
+			</p>
+		</Col>
+	</Row>
+	<Row>
+		<Col span="4">
+			<Card
+				title="All your data are belong to you"
+				subtitle="Decode everything you have ever submitted via Whistles Protocol, and (optionally) download it for self storage."
+				image={feature01}
+				link="/features"
+			/>
+		</Col>
+		<Col span="4" classes="flex flex-col gap-6">
+			<Card
+				title="Visualize your channel members' permissions "
+				subtitle="Easily organize who can read what, where, when. "
+				image={feature02}
+				link="/features"
+			/>
+			<Card
+				title="Keep your team connected"
+				subtitle="With our integrated chat platform share updates, files, and messages in a secure and user-friendly environment. Umm."
+				image={feature03}
+				link="/features"
+			/>
+		</Col>
+		<Col span="4" classes="flex flex-col gap-6">
+			<Card
+				title="Manage your customers"
+				subtitle="Build and nurture customer relationships with our powerful CRM system. Umm."
+				image={feature04}
+				link="/features"
+			/>
+			<Card
+				title="Simplify your financial operations"
+				subtitle="Streamline your billing process with our easy-to-use invoicing tool. Create, send, and track invoices effortlessly. Umm."
+				image={feature05}
+				link="/features"
+			/>
+		</Col>
+	</Row>
+</Section>

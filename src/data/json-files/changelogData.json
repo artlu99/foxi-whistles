@@ -1,0 +1,14 @@
+[
+	{
+		"title": "v1.0.0: Protocol released to public",
+		"date": "2024-10-07",
+		"text": "<ul><li>First cast in /bcbhshow [<a href='https://warpcast.com/bcbhshow.eth/0x84ebc0cf' target='_blank' rel='noopener noreferrer'>link</a>]</li><li>Read+decode <a href='https://warpcast.com/~/add-cast-action?url=https%3A%2F%2Fkeccak256-composer-action.artlu.workers.dev%2Fcast-action' target='_blank' rel='noopener noreferrer'>cast action</a> released to the wild</li><li><a href='https://yoga-whistles.artlu.workers.dev/graphql' target='_blank' rel='noopener noreferrer'>GraphQL API</a> shared with devs</li></ul>", 
+		"image": "/feeds/feed-01.png"
+	},
+	{
+		"title": "Composer Action submitted to Warpcast for approval",
+		"date": "2024-09-27",
+		"text": "<ul><li>Try it in Playground [<a href='https://warpcast.com/~/developers/composer-actions?name=keccak-256&postUrl=https%3A%2F%2Fkeccak256-composer-action.artlu.workers.dev' target='_blank' rel='noopener noreferrer'>link</a>]</li><li>use <code>testnet</code> as nonce</li></ul>", 
+		"image": "/feeds/feed-03.png"
+	}
+]

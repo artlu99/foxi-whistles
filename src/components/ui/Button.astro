@@ -13,11 +13,14 @@
 // - classes: additional classes
 // Reference: https://wind-ui.com/components/buttons/
 
+import { Icon } from 'astro-icon/components'
+
 // Props
 type Props = {
-	type?: 'link' | 'button' | 'submit' | 'reset'
+	type?: 'link' | 'external' |'button' | 'submit' | 'reset'
 	size?: 'lg' | 'base' | 'sm'
 	link?: string
+	external?: string
 	modal?: string
 	style?: 'primary' | 'secondary' | 'neutral'
 	variation?: 'outline' | 'link'
@@ -28,6 +31,7 @@ const {
 	type = 'button',
 	size = 'base',
 	link,
+	external,
 	modal,
 	style = 'primary',
 	variation,
@@ -37,7 +41,24 @@ const {
 ---
 
 {
-	type === 'link' || link ? (
+	type === 'external' || external ? (
+		<a
+			href={link}
+			class:list={[
+				'button',
+				{ ['button--' + `${size}`]: size },
+				{ ['button--' + `${style}`]: style },
+				{ ['button--' + `${variation}`]: variation },
+				{ ['button--elevated']: elevated },
+				{ [`${classes}`]: classes }
+			]}
+			target="_blank" 
+			rel="noopener noreferrer"
+		>
+			<slot />
+			<Icon name={external} class="button__icon" />
+		</a>
+		) : type === 'link' || link ? (
 		<a
 			href={link}
 			class:list={[

@@ -1,0 +1,49 @@
+---
+// Components
+// - Layout
+import Layout from '../layouts/Layout.astro'
+// - UI
+import CTA from '../components/blocks/CTA/BasicDark.astro'
+import FAQ from '../components/blocks/FAQ/Basic.astro'
+import Feature from '../components/blocks/features/FeatureList.astro'
+import Hero from '../components/blocks/hero/PageHeader.astro'
+import Price from '../components/blocks/pricing/PricingColumns.astro'
+import SocialProof from '../components/blocks/socialproof/Basic.astro'
+import Testimonial from '../components/blocks/testimonials/BasicDark.astro'
+
+// Content
+// - SEO
+const SEO = {
+	title: 'Whistles | Delightful DX for Developers',
+	description:
+		'Discover the perfect DX for a composable whistling client. With Typescript, GraphQL, and composable permissionless Farcaster primitives, Whistles is the perfect tool for developers.'
+}
+// - Page Header
+const header = {
+	title: '<strong>Based buidlers</strong>, we want YOU to build on <strong>Whistles</strong>.',  
+	text: 'Otherwise, eat a <strong>bag of dwr&apos;s</strong>.'
+}
+// - Testimonial data
+import testimonialBackground from '../assets/testimonial-bg-02.webp'
+const testimonialData = {
+	blockquote:
+		"Bitcoin...some memecoins too, but mostly more bitcoin.",
+	figcaption: '🎩 Kenny',
+	cite: ' Chairman, MicroStrategy'
+}
+---
+
+<Layout title={SEO.title} description={SEO.description}>
+	<Hero title={header.title} text={header.text} />
+
+	<Testimonial
+	bg={testimonialBackground}
+	bgPosition="left"
+	blockquote={testimonialData.blockquote}
+	figcaption={testimonialData.figcaption}
+	cite={testimonialData.cite}
+	/>
+	<SocialProof />
+	<FAQ classes="bg-slate-50 dark:bg-neutral-900/40" />
+	<CTA />
+</Layout>

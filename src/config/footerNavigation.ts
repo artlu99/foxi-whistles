@@ -49,10 +49,6 @@ export const footerNavigationData: FooterData = {
 			category: 'Product',
 			subCategories: [
 				{
-					subCategory: 'Features',
-					subCategoryLink: '/features'
-				},
-				{
 					subCategory: 'FAQ',
 					subCategoryLink: '/faq'
 				},
@@ -64,46 +60,21 @@ export const footerNavigationData: FooterData = {
 					subCategory: 'Changelog',
 					subCategoryLink: '/changelog'
 				},
-				{
-					subCategory: 'Terms',
-					subCategoryLink: '/terms'
-				}
 			]
 		},
 		{
 			category: 'About us',
 			subCategories: [
 				{
-					subCategory: 'About us',
-					subCategoryLink: '/'
-				},
-				{
 					subCategory: 'News',
 					subCategoryLink: '/blog'
-				},
-				{
-					subCategory: 'Careers',
-					subCategoryLink: '/blog'
-				}
-			]
-		},
-		{
-			category: 'Get in touch',
-			subCategories: [
-				{
-					subCategory: 'Contact',
-					subCategoryLink: '/contact'
 				},
 				{
 					subCategory: 'Support',
 					subCategoryLink: '/contact'
 				},
-				{
-					subCategory: 'Join us',
-					subCategoryLink: '/contact'
-				}
 			]
-		}
+		},
 	],
 	subFooter: {
 		copywriteText: '© Whistles 2024.'

@@ -40,18 +40,31 @@ export const navigationBarData: NavData = {
 	navItems: [
 		{ name: 'Home', link: '/' },
 		{ name: 'Pricing', link: '/pricing' },
-		{ name: 'Features', link: '/features' },
 		{
 			name: 'Resources',
 			link: '#',
 			submenu: [
-				{ name: 'Blog', link: '/blog' },
-				{ name: 'Changelog', link: '/changelog' },
 				{ name: 'FAQ', link: '/faq' },
-				{ name: 'Terms', link: '/terms' }
+				{ name: 'Manage My Channels', link: '/' },
+				{ name: 'Download My Whistles Casts', link: '/' },
+				{ name: 'Contact', link: '/contact' }
 			]
 		},
-		{ name: 'Contact', link: '/contact' }
+		{ name: 'Blog', link: '/blog' },
+		{ name: 'Changelog', link: '/changelog' },
+		{
+			name: 'Developers',
+			link: '#',
+			submenu: [
+				{ name: 'Introduction', link: '/developers#introduction' },
+				{ name: 'Whitepaper', link: '/developers#whitepaper' },
+				{ name: 'Getting Started', link: '/developers#getting-started' },
+				{ name: 'Examples', link: '/developers#examples' },
+				{ name: 'Composer Action', link: '/developers#composer-action' },
+				{ name: 'Cast Action', link: '/developers#cast-action' },
+				{ name: 'Whistles GQL API', link: '/developers#whistles-gql-api' },
+			]
+		},
 	],
 	navActions: [{ name: 'Try it now', link: '/', style: 'primary', size: 'lg' }]
 }

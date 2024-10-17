@@ -12,19 +12,19 @@ tags: ['journeys']
 After you become a member of a channel, you can decode all casts in that channel going forward, as long as your membership remains valid. You can also decode messages that were written <strong>7 days</strong> prior to your joining the channel, but not earlier. *This may become configurable in the future.* 
 
 - To read a cast in an enabled channel, use the permissionless [Cast Action](https://warpcast.com/~/add-cast-action?url=https%3A%2F%2Fkeccak256-composer-action.artlu.workers.dev%2Fcast-action).
-- **alt clients** may support Whistles natively in the near future
-- a **Farcaster mini-app** may be used to scroll the feed and auto-magically decode Whistles
+- **alt clients** may decode Whistles natively in the near future
+- a **Farcaster mini-app** may enable users to scroll the feed and auto-magically decode Whistles
 - **no-code mini-app builders** may support Whistles via plugin
 
 Casts older than <strong>30 days</strong> are removed from Whistles Protocol. *This may change in the future, specifically as we observe how channel dynamics evolve.* Users should always have access to their own Whistles data, and be able to download it for their own records.
 
 ### Writin'
 
-- **before Composer Action allowlist approval** use the [Composer Action](https://warpcast.com/~/developers/composer-actions?name=keccak-256&postUrl=https%3A%2F%2Fkeccak256-composer-action.artlu.workers.dev) via the developer playground 
-- **after Composer Action allowlist approval** start creating your cast, and click a button in the bar to Whistle
+- **before Composer Action allowlist approval** use the [Composer Action](https://warpcast.com/~/developers/composer-actions?name=keccak-256&postUrl=https%3A%2F%2Fkeccak256-composer-action.artlu.workers.dev) via the developer playground (desktop only)
+- **after Composer Action allowlist approval** draft your cast, and click a button in the bar to Whistle
 - in **alt clients** find the toggle or other UX setting
 
-Each channel owner must opt in to allowing the Whistles server to decode messages in their channel. This will be made transparent via the user-facing website. It is already visible in the backend API for devs.
+Each channel owner must first opt in to allow the Whistles server to decode messages in their channel. This will be made transparent via the user-facing website. It is already visible in the backend API for devs.
 
 ### Farchivin'
 

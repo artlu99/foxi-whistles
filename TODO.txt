@@ -1,0 +1,3 @@
+- user SIWF
+- enable channels
+- download all own data 

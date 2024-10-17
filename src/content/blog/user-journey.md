@@ -1,6 +1,6 @@
 ---
 title: 'User Journey'
-pubDate: 2024-10-17T12:00:00Z
+pubDate: 2024-10-17T00:00:00Z
 description: "Readers and Writers"
 author: 'artlu99'
 image: '/blog/post-01-cover.png'

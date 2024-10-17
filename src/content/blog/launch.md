@@ -21,7 +21,7 @@ If you cast the same Low Effort Reply (e.g., "wowow", "lol, no") as many others,
 
 For true private messaging, use a private message frame or something like XMTP / Comm from ashoat.eth.
 
-The <strong>Decentralized Whistles Protocol</strong> leverages cryptographic building blocks and the open Farcaster Protocol, to share restricted-distribution information in self-sovereign, transparent, and decentralized blah blah. Sufficiently permissionless and decentralized data availability for fun and profit!
+The <strong>Decentralized Whistles Protocol</strong> leverages cryptographic building blocks and the open Farcaster Protocol, to share restricted-distribution information in self-sovereign, transparent, and sufficiently decentralized blah blah. Sufficiently permissionless and decentralized data availability for fun and profit!
 
 > Fun fact: Whistles was inspired by sha25leo.eth's Dolphin Translate frame and many community casts in /dolphin-zone .
 

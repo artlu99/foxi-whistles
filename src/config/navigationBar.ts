@@ -45,8 +45,8 @@ export const navigationBarData: NavData = {
 			link: '#',
 			submenu: [
 				{ name: 'FAQ', link: '/faq' },
-				{ name: 'Manage My Channels', link: '/' },
-				{ name: 'Download My Whistles Casts', link: '/' },
+				{ name: 'Manage My Channels', link: '/soonTM' },
+				{ name: 'Download My Own Data', link: '/soonTM' },
 				{ name: 'Contact', link: '/contact' }
 			]
 		},
@@ -56,15 +56,19 @@ export const navigationBarData: NavData = {
 			name: 'Developers',
 			link: '#',
 			submenu: [
-				{ name: 'Introduction', link: '/developers#introduction' },
-				{ name: 'Whitepaper', link: '/developers#whitepaper' },
-				{ name: 'Getting Started', link: '/developers#getting-started' },
-				{ name: 'Examples', link: '/developers#examples' },
-				{ name: 'Composer Action', link: '/developers#composer-action' },
-				{ name: 'Cast Action', link: '/developers#cast-action' },
-				{ name: 'Whistles GQL API', link: '/developers#whistles-gql-api' },
+				{ name: 'Quick Start', link: '/blog/developer-journey' },
+				{ name: 'Whitepaper', link: '/rug#whitepaper' },
+				{
+					name: 'Composer Action',
+					link: 'https://warpcast.com/~/developers/composer-actions?name=keccak-256&postUrl=https%3A%2F%2Fkeccak256-composer-action.artlu.workers.dev'
+				},
+				{
+					name: 'Cast Action',
+					link: 'https://warpcast.com/~/add-cast-action?url=https%3A%2F%2Fkeccak256-composer-action.artlu.workers.dev%2Fcast-action'
+				},
+				{ name: 'GraphQL API', link: 'https://yoga-whistles.artlu.workers.dev/graphql' }
 			]
-		},
+		}
 	],
 	navActions: [{ name: 'Try it now', link: '/', style: 'primary', size: 'lg' }]
 }

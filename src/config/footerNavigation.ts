@@ -37,7 +37,7 @@ export const footerNavigationData: FooterData = {
 	footerAbout: {
 		title: 'Decentralized Whistles Protocol',
 		aboutText:
-			'The Decentralized Whistles Protocol leverages cryptographic building blocks and the open Farcaster Protocol, to share restricted-distribution information in self-sovereign, transparent, and decentralized blah blah.',
+			'The Decentralized Whistles Protocol leverages cryptographic building blocks and the open Farcaster Protocol, to share restricted-distribution information in self-sovereign, transparent, and sufficiently decentralized blah blah.',
 		logo: {
 			src: '/logo.svg',
 			alt: 'Decentralized Whistles Protocol',
@@ -60,6 +60,31 @@ export const footerNavigationData: FooterData = {
 					subCategory: 'Changelog',
 					subCategoryLink: '/changelog'
 				},
+			]
+		},
+		{
+			category: 'Developers',
+			subCategories: [
+				{
+					subCategory: 'Quick Start',
+					subCategoryLink: '/blog/developer-journey'
+				},
+				{
+					subCategory: 'Whitepaper',
+					subCategoryLink: '/rug#whitepaper'
+				},
+				{
+					subCategory: "Composer Action",
+					subCategoryLink: 'https://warpcast.com/~/developers/composer-actions?name=keccak-256&postUrl=https%3A%2F%2Fkeccak256-composer-action.artlu.workers.dev'
+				},
+				{
+					subCategory: "Cast Action",
+					subCategoryLink: 'https://warpcast.com/~/add-cast-action?url=https%3A%2F%2Fkeccak256-composer-action.artlu.workers.dev%2Fcast-action'
+				},
+				{
+					subCategory: "GraphQL API",
+					subCategoryLink: 'https://yoga-whistles.artlu.workers.dev/graphql'
+				}
 			]
 		},
 		{

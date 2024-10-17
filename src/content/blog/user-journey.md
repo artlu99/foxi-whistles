@@ -28,7 +28,8 @@ Each channel owner must opt in to allowing the Whistles server to decode message
 
 ### Farchivin'
 
-- *on the roadmap* **Sign In With Farcaster** on this user-facing site in order to download your Whistles data
+- users own their own content. Channel owners own the distribution, not the content.
+- *on the roadmap* **Sign In With Farcaster** on this user-facing site in order to download your own Whistles data
 
 > Fun fact: Whistles was conceived by the same person who built Farchiver
 

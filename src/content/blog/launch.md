@@ -2,7 +2,7 @@
 title: 'Whistles released in the wild'
 pubDate: 2024-10-07T12:00:00Z
 description: "We're excited to introduce you to the Decentralized Whistles Protocol a..."
-author: 'Art Lu'
+author: 'artlu99'
 image: '/blog/post-01-cover.png'
 tags: ['announcement']
 ---
@@ -17,7 +17,7 @@ Encoding of a whistle is more like a language than a cipher, and the decoding of
 
 No shared content should ever be considered secret. As we all should have learned in middle school, the recipient of a secret may share it without the permission of the creator of the secret. Screenshots are impossible to stop, and this is a feature (not a bug!) of memetic, viral content.
 
-If you cast the same Low Effort Reply (e.g., "wowow", "lol, no") as many others, the encoding of that reply will be as easy to decode as the links to YouTube Rickroll videos.
+If you cast the same Low Effort Reply (e.g., "wowow", "lol, no") as many others, the encoding of that reply will be as easy to decode as recognizing links to YouTube Rickroll videos.
 
 For true private messaging, use a private message frame or something like XMTP / Comm from ashoat.eth.
 

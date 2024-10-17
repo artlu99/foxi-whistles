@@ -39,7 +39,7 @@ Supply your own secrets if you don't want other developers (permissionless, dece
 
 > Use the GraphQL server at [Whistles Yoga](https://yoga-whistles.artlu.workers.dev/graphql).
 
-Use graphql-request [[example](https://github.com/artlu99/keccak-256-composer-action)] or Apollo Client or whatever you like.
+Use graphql-request [[example](https://github.com/artlu99/keccak256-composer-action)] or Apollo Client or whatever you like.
 
 FOSS Composer Action [[here]]
 

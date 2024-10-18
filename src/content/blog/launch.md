@@ -19,7 +19,7 @@ No shared content should ever be considered secret. As we all should have learne
 
 If you cast the same Low Effort Reply (e.g., "wowow", "lol, no") as many others, the encoding of that reply will be as easy to decode as recognizing links to YouTube Rickroll videos.
 
-For true private messaging, use a private message frame or something like XMTP / Comm from ashoat.eth.
+For true private messaging, use a [private message frame](https://github.com/artlu99/private-frame-artlu-xyz) or something like XMTP / Comm from ashoat.eth.
 
 The <strong>Decentralized Whistles Protocol</strong> leverages cryptographic building blocks and the open Farcaster Protocol, to share restricted-distribution information in self-sovereign, transparent, and sufficiently decentralized blah blah. Sufficiently permissionless and decentralized data availability for fun and profit!
 

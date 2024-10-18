@@ -45,5 +45,5 @@ Encoding of a whistle is more like a language than a cipher, and the decoding of
 
 > If you cast the same Low Effort Reply (e.g., "lol, no") as others, the encoding of that reply will be as easy to decode as recognizing links to YouTube Rickroll videos.
 
-For true private messaging, use a private message frame, or something like XMTP / Comm from ashoat.eth.
+For true private messaging, use a [private message frame](https://github.com/artlu99/private-frame-artlu-xyz), or something like XMTP / Comm from ashoat.eth.
 

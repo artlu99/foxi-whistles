@@ -25,7 +25,7 @@ All casts older than <strong>30 days</strong> are removed from Whistles Protocol
 
 ### Writin'
 
-Use the endpoint to write to the [rainbow table](https://en.wikipedia.org/wiki/Rainbow_table), encrypted-at-rest using the shared secrets and made available to all. 
+Use the endpoint to write to the [rainbow table](https://en.wikipedia.org/wiki/Rainbow_table), encrypted-at-rest using the shared secrets and made available to all.
 
 Or, supply your own secrets if you don't want other developers (permissionless, decentralized) to be able to read the content shared across the network.
 
@@ -47,10 +47,10 @@ Or, use the shared secrets for maximum distribution, but encapsulate further per
 
 > Use the GraphQL server at [Whistles Yoga](https://yoga-whistles.artlu.workers.dev/graphql).
 
-FOSS Composer Action [[here](https://github.com/artlu99/keccak256-composer-action)]
+FOSS Composer Action (front-end) [[here](https://github.com/artlu99/keccak256-composer-action)]
 
-FOSS Cast Action [[here]]
+FOSS Composer Action (back-end) + Cast Action [[here](https://github.com/artlu99/keccak256-composer-action-worker)]
 
 FOSS Whistles Server [[here]]
 
-FOSS Farcaster alt client [[here]]
+FOSS Farcaster alt client [[here](https://github.com/artlu99/bcbhshow-lite-client)]

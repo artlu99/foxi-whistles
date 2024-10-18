@@ -45,7 +45,7 @@ Or, use the shared secrets for maximum distribution, but encapsulate further per
 
 ![How to Whistle.](/blog/post-05.png)
 
-> Use the GraphQL server at [Whistles Yoga](https://yoga-whistles.artlu.workers.dev/graphql).
+> Use the GraphQL server at [Whistles Yoga](https://whistles.artlu.xyz/graphql). 
 
 FOSS Composer Action (front-end) [[here](https://github.com/artlu99/keccak256-composer-action)]
 

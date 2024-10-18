@@ -1,5 +1,10 @@
 [
 	{
+		"title": "Released all components as FOSS under MIT license",
+		"date": "2024-10-18",
+		"text": "<ul><li>Yoga GraphQL server, deployed on Cloudflare [<a href='https://github.com/artlu99/yoga-whistles' target='_blank' rel='noopener noreferrer'>GH</a>].</li><li>Composer Action and Cast Action, deployed as Cloudflare Workers [<a href='https://github.com/artlu99/keccak256-composer-action-worker' target='_blank' rel='noopener noreferrer'>GH</a>].</li><li>Composer Action form (aka mini-app), deployed on Vercel [<a href='https://github.com/artlu99/keccak256-composer-action' target='_blank' rel='noopener noreferrer'>GH</a>].</li><li>Private Frame, deployed on Vercel [<a href='https://github.com/artlu99/private-frame-artlu-xyz' target='_blank' rel='noopener noreferrer'>GH</a>]. (<i>not part of Whistles, but adjacent</i>)</li></ul>"
+	},
+	{
 		"title": "v1.0.0: Protocol released to public",
 		"date": "2024-10-07",
 		"text": "<ul><li>First cast in /bcbhshow [<a href='https://warpcast.com/bcbhshow.eth/0x84ebc0cf' target='_blank' rel='noopener noreferrer'>link</a>]</li><li>Read+decode <a href='https://warpcast.com/~/add-cast-action?url=https%3A%2F%2Fkeccak256-composer-action.artlu.workers.dev%2Fcast-action' target='_blank' rel='noopener noreferrer'>cast action</a> released to the wild</li><li><a href='https://yoga-whistles.artlu.workers.dev/graphql' target='_blank' rel='noopener noreferrer'>GraphQL API</a> shared with devs</li></ul>", 

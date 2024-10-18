@@ -51,6 +51,6 @@ FOSS Composer Action (front-end) [[here](https://github.com/artlu99/keccak256-co
 
 FOSS Composer Action (back-end) + Cast Action [[here](https://github.com/artlu99/keccak256-composer-action-worker)]
 
-FOSS Whistles Server [[here]]
+FOSS Whistles Server [[here](https://github.com/artlu99/yoga-whistles)]
 
 FOSS Farcaster alt client [[here](https://github.com/artlu99/bcbhshow-lite-client)]

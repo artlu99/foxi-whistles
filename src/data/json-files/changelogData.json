@@ -1,5 +1,10 @@
 [
 	{
+		"title": "User flow 100% permissionless, from soup to nuts",
+		"date": "2024-10-21",
+		"text": "<ul><li>channel owners opt in/out via cast action</li><li>frame now emphasizes the encoded/decoded text, 'Show more' button added</li><li>QR Code to install Composer Action as a <a href='https://recaster.org' target='_blank' rel='noopener noreferrer'>Recaster</a> Mini-App</li></ul>"
+	},
+	{
 		"title": "Released all components as FOSS under MIT license",
 		"date": "2024-10-18",
 		"text": "<ul><li>Yoga GraphQL server, deployed on Cloudflare [<a href='https://github.com/artlu99/yoga-whistles' target='_blank' rel='noopener noreferrer'>GH</a>].</li><li>Composer Action and Cast Action, deployed as Cloudflare Workers [<a href='https://github.com/artlu99/keccak256-composer-action-worker' target='_blank' rel='noopener noreferrer'>GH</a>].</li><li>Composer Action form (aka mini-app), deployed on Vercel [<a href='https://github.com/artlu99/keccak256-composer-action' target='_blank' rel='noopener noreferrer'>GH</a>].</li><li>Private Frame, deployed on Vercel [<a href='https://github.com/artlu99/private-frame-artlu-xyz' target='_blank' rel='noopener noreferrer'>GH</a>]. (<i>not part of Whistles, but adjacent</i>)</li></ul>"

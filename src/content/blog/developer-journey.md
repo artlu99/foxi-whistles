@@ -11,7 +11,7 @@ tags: ['journeys']
 
 ### tl;dr
 
-- all data served via [GraphQL backend](https://yoga-whistles.artlu.workers.dev/graphql)
+- all data served via [GraphQL backend](https://whistles.artlu.xyz/graphql)
 
 - use *graphql-request* [[38-line Next App Router on Vercel example in TS](https://github.com/artlu99/keccak256-composer-action/blob/main/external/schema.ts)] or Apollo Client or whatever you like
 

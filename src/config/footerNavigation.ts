@@ -83,7 +83,7 @@ export const footerNavigationData: FooterData = {
 				},
 				{
 					subCategory: "GraphQL API",
-					subCategoryLink: 'https://yoga-whistles.artlu.workers.dev/graphql'
+					subCategoryLink: 'https://whistles.artlu.xyz/graphql'
 				}
 			]
 		},

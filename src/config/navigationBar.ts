@@ -66,7 +66,7 @@ export const navigationBarData: NavData = {
 					name: 'Cast Action',
 					link: 'https://warpcast.com/~/add-cast-action?url=https%3A%2F%2Fkeccak256-composer-action.artlu.workers.dev%2Fcast-action'
 				},
-				{ name: 'GraphQL API', link: 'https://yoga-whistles.artlu.workers.dev/graphql' }
+				{ name: 'GraphQL API', link: 'https://whistles.artlu.xyz/graphql' }
 			]
 		}
 	],

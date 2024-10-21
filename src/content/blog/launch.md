@@ -29,7 +29,7 @@ To read the contents of a post that has included a Whistle, use the permissionle
 
 ### Key Features
 
-- **Composable**: an open GraphQL [backend](https://yoga-whistles.artlu.workers.dev/graphql) to enable permissionless innovation.
+- **Composable**: an open GraphQL [backend](https://whistles.artlu.xyz/graphql) to enable permissionless innovation.
 - **Transparent**: the encrypted-at-rest data is available for everyone to copy, redistribute, enhance.
 - **Portable**: an independent cryptography primitive on top of Farcaster social tech.
 

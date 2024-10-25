@@ -15,8 +15,13 @@ const EnabledChannelsTable = () => {
 			if (validator.success) {
 				setData(validator.data)
 			} else {
-				console.log("res:", res)
-				console.error("validator.error:", validator)
+				const validator2 = EnabledChannelsSchema.safeParse(JSON.parse(res as string))
+				if (validator2.success) {
+					setData(validator2.data)
+				} else {
+					console.log("res:", res)
+					console.error("validator.error:", validator)
+				}
 			}
 		}
 		fetchData()

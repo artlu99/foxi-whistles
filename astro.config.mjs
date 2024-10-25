@@ -1,16 +1,16 @@
 import partytown from "@astrojs/partytown";
+import preact from "@astrojs/preact";
+import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
-import vercelStatic from "@astrojs/vercel/static";
+import vercelServerless from "@astrojs/vercel/serverless";
 import icon from "astro-icon";
 import { defineConfig } from "astro/config";
-
-import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://foxi-whistles.vercel.app/",
-  output: "static",
-  adapter: vercelStatic(),
+  output: "hybrid",
+  adapter: vercelServerless(),
   integrations: [
     tailwind(),
     icon(),
@@ -20,5 +20,7 @@ export default defineConfig({
         forward: ["dataLayer.push"],
       },
     }),
+    preact(),
   ],
+  security: { checkOrigin: true },
 });

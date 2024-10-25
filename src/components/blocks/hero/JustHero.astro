@@ -1,0 +1,33 @@
+---
+// Just Hero Section
+// ------------
+// Description: Plain vanilla hero section
+
+// Components
+// - Layout
+import Col from '../../ui/Col.astro'
+import Row from '../../ui/Row.astro'
+import Section from '../../ui/Section.astro'
+import EnabledChannelsTable from '../data/EnabledChannelsTable'
+
+// Props
+type Props = {
+	id?: string
+	title?: string
+	text?: string
+	classes?: string
+}
+const { id, title, text, classes } = Astro.props
+---
+
+<Section id={id} classes={classes}>
+	<Row>
+		<Col span="6" classes={`self-center`}>
+			<header class="max-w-xl">
+				<h1 set:html={title} />
+				<p class="text-lg leading-relaxed">{text}</p>
+			</header>
+			<EnabledChannelsTable client:only="preact"/>
+		</Col>
+	</Row>
+</Section>

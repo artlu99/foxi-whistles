@@ -1,0 +1,29 @@
+---
+// Components
+// - Layout
+import Layout from '../layouts/Layout.astro'
+// - UI
+import JustHero from '../components/blocks/hero/JustHero.astro'
+
+// Content
+// - SEO
+const SEO = {
+	title: 'Whistles | Enabled Channels',
+	description:
+		'List of Farcaster Channels where the owner has opted in to allow Whistles Protocol to decode messages for Channel members.'
+}
+// - Page Header
+const header = {
+	title: 'Whistles-enabled <strong>Channels</strong>.',
+	text: "Each of these channel owners has opted in to allow members to see decoded messages in their channel."
+}
+---
+
+<Layout title={SEO.title} description={SEO.description}>
+	<JustHero
+		title={header.title}
+		text={header.text}
+		id="contact"
+		classes="bg-neutral-50 dark:bg-neutral-950/80"
+	/>
+</Layout>

@@ -4,24 +4,25 @@ import { fetcher } from 'itty-fetcher'
 import { useEffect, useState } from 'preact/hooks'
 import { alphabetical } from 'radash'
 import { EnabledChannelsSchema, type EnabledChannelsResponse } from '../../../rpc/types'
+import type { SafeParseReturnType } from 'zod'
 
 const EnabledChannelsTable = () => {
 	const [data, setData] = useState<EnabledChannelsResponse | undefined>()
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const res = await fetcher().get('/api/getEnabledChannels', {})
-			const validator = EnabledChannelsSchema.safeParse(res)
+			const res = await fetcher().get('/api/getEnabledChannels', {});
+			let validator: SafeParseReturnType<EnabledChannelsResponse, EnabledChannelsResponse>
+			try {
+				validator = EnabledChannelsSchema.safeParse(JSON.parse(res as string))
+			} catch {
+				validator = EnabledChannelsSchema.safeParse(res)
+			}
+			
 			if (validator.success) {
 				setData(validator.data)
 			} else {
-				const validator2 = EnabledChannelsSchema.safeParse(JSON.parse(res as string))
-				if (validator2.success) {
-					setData(validator2.data)
-				} else {
-					console.log("res:", res)
-					console.error("validator.error:", validator)
-				}
+				console.error("validator.error:", validator)
 			}
 		}
 		fetchData()

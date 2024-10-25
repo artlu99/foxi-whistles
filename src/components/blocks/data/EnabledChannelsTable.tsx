@@ -23,11 +23,64 @@ const EnabledChannelsTable = () => {
 
 	return data ? (
 		<div>
-			<ul>
-				{alphabetical(data.getEnabledChannels, (c) => c.toLocaleLowerCase()).map((channel) => (
-					<li>&bull;&nbsp;{channel}</li>
+			<ol>
+				{alphabetical(data.getEnabledChannels, (c) => c.toLocaleLowerCase()).map((channel, idx) => (
+					<li>
+						<span className={'text-xs'}>{idx}</span>&nbsp;{channel}&nbsp;
+						<span className={'text-xs'}>
+							[
+							<a
+								href={`https://warpcast.com/~/channel/${channel}`}
+								target={'_blank'}
+								rel={'noopener noreferrer'}
+							>
+								Warpcast
+							</a>
+							{/* ]&nbsp;[
+							<a
+								href={`https://supercast.xyz/channel/${channel}`}
+								target={'_blank'}
+								rel={'noopener noreferrer'}
+							>
+								supercast
+							</a> */}
+							{/* ]&nbsp;[
+							<a
+								href={`recaster://channel/${channel}`}
+								target={'_blank'}
+								rel={'noopener noreferrer'}
+							>
+								Recaster
+							</a> */}
+							{/* ]&nbsp;[
+							<a
+								href={`https://firefly.mask.social/channel/${channel}/recent`}
+								target={'_blank'}
+								rel={'noopener noreferrer'}
+							>
+								Firefly
+							</a> */}
+							]&nbsp;[
+							<a
+								href={`https://far.quest/channel/${channel}`}
+								target={'_blank'}
+								rel={'noopener noreferrer'}
+							>
+								Far.Quest Pro
+							</a>
+							{/* ]&nbsp;[
+							<a
+								href={`https://client-bcbhshow.artlu.xyz/~/channel/${channel}`}
+								target={'_blank'}
+								rel={'noopener noreferrer'}
+							>
+								BCBHShow Lite Client
+							</a> */}
+							]
+						</span>
+					</li>
 				))}
-			</ul>
+			</ol>
 		</div>
 	) : null
 }

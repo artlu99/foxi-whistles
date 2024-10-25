@@ -16,7 +16,7 @@ const EnabledChannelsTable = () => {
 				setData(validator.data)
 			} else {
 				console.log("res:", res)
-				console.error("validator.error:", validator.error)
+				console.error("validator.error:", validator)
 			}
 		}
 		fetchData()

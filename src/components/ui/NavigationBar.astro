@@ -21,6 +21,9 @@ import Switcher from './ModeSwitcher.astro'
 import { navigationBarData } from '../../config/navigationBar'
 const { logo, navItems, navActions } = navigationBarData
 
+// Session
+import { getSession } from 'auth-astro/server'
+
 // Determine current path
 const path = new URL(Astro.request.url).pathname
 function isActivePath(currentPath: string): boolean {
@@ -33,6 +36,8 @@ const savedNavActions = navActions.map((action) => ({
 	size: action.size as 'base' | 'lg' | 'sm',
 	style: action.style as 'primary' | 'secondary' | 'neutral'
 }))
+
+const session = await getSession(Astro.request)
 ---
 
 <header class="header">
@@ -99,6 +104,9 @@ const savedNavActions = navActions.map((action) => ({
 					))
 				}
 			</ul>
+
+			{session ? 'Logged in as ' + session.user?.name : null}
+			{session ? <img src={session.user?.image} /> : null}
 
 			<!-- Theme Switcher -->
 			<Switcher />

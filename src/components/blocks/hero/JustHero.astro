@@ -8,7 +8,6 @@
 import Col from '../../ui/Col.astro'
 import Row from '../../ui/Row.astro'
 import Section from '../../ui/Section.astro'
-import EnabledChannelsTable from '../data/EnabledChannelsTable'
 
 // Props
 type Props = {
@@ -27,7 +26,7 @@ const { id, title, text, classes } = Astro.props
 				<h1 set:html={title} />
 				<p class="text-lg leading-relaxed">{text}</p>
 			</header>
-			<EnabledChannelsTable client:only="preact"/>
+			<slot />
 		</Col>
 	</Row>
 </Section>

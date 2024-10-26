@@ -1,0 +1,25 @@
+---
+// Components
+// - Layout
+import type { Session } from '@auth/core/types'
+import { Auth, SignIn, SignOut } from 'auth-astro/components'
+
+// Props
+type Props = {
+	id?: string
+	title?: string
+	text?: string
+	classes?: string
+}
+const { id, title, text, classes } = Astro.props
+---
+
+<div>
+	<Auth>
+		{
+			(session: Session) => {
+				return session ? <SignOut>Logout</SignOut> : <SignIn provider="Farcaster">Login</SignIn>
+			}
+		}
+	</Auth>
+</div>

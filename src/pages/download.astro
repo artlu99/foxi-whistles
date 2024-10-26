@@ -1,0 +1,35 @@
+---
+// Components
+// - Layout
+import Layout from '../layouts/Layout.astro'
+// - UI
+import JustHero from '../components/blocks/hero/JustHero.astro'
+// Session
+import { getSession } from 'auth-astro/server'
+
+// Content
+// - SEO
+const SEO = {
+	title: 'Whistles | Download My Data',
+	description: 'Download My Own Data from the Whistles Protocol'
+}
+// - Page Header
+const header = {
+	title: 'Own My <strong>Data</strong>.',
+	text: 'Read-Write-Own by downloading my data.'
+}
+
+// - Session
+const session = await getSession(Astro.request)
+---
+
+<Layout title={SEO.title} description={SEO.description}>
+	<JustHero
+		title={header.title}
+		text={header.text}
+		id="contact"
+		classes="bg-neutral-50 dark:bg-neutral-950/80"
+	>
+		{session ? 'Logged in as ' + session.user?.name : 'Not logged in'}
+	</JustHero>
+</Layout>

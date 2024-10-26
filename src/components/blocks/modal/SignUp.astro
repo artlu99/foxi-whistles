@@ -11,6 +11,7 @@ import Modal from '../../ui/Modal.astro'
 import Form from '../../ui/forms/Form.astro'
 import InputField from '../../ui/forms/form-elements/InputField.astro'
 import FormField from '../../ui/forms/partials/FormField.astro'
+import AuthBlock from '../hero/AuthBlock.astro'
 
 // Props
 type Props = {
@@ -26,9 +27,9 @@ const { classes } = Astro.props
 			<InputField type="email" id="email" label="Your Email" />
 		</FormField>
 		<div class="my-4 text-center">Enter your email above. It goes nowhere.</div>
-		<Button style="primary" type="submit" classes="w-full" size="lg"
-			>These buttons do nothing really</Button
-		>
+		<Button style="primary" type="submit" classes="w-full" size="lg">
+			These buttons do nothing really
+		</Button>
 		<div class="my-2 text-center">or</div>
 		<Button
 			style="primary"
@@ -40,5 +41,6 @@ const { classes } = Astro.props
 			Sign In With Farcaster
 			<Icon name="google-logo" class="h-6 w-6" />
 		</Button>
+		<AuthBlock />
 	</Form>
 </Modal>

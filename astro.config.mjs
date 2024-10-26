@@ -10,7 +10,7 @@ import auth from "auth-astro";
 // https://astro.build/config
 export default defineConfig({
   site: "https://foxi-whistles.vercel.app/",
-  output: "server",
+  output: "hybrid",
   adapter: vercelServerless(),
   integrations: [
     auth(),

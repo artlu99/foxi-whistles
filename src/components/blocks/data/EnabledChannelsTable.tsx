@@ -3,26 +3,26 @@
 import { fetcher } from 'itty-fetcher'
 import { useEffect, useState } from 'preact/hooks'
 import { alphabetical } from 'radash'
-import { EnabledChannelsSchema, type EnabledChannelsResponse } from '../../../rpc/types'
 import type { SafeParseReturnType } from 'zod'
+import { EnabledChannelsSchema, type EnabledChannelsResponse } from '../../../rpc/types'
 
 const EnabledChannelsTable = () => {
 	const [data, setData] = useState<EnabledChannelsResponse | undefined>()
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const res = await fetcher().get('/api/getEnabledChannels', {});
+			const res = await fetcher().get('/api/getEnabledChannels', {})
 			let validator: SafeParseReturnType<EnabledChannelsResponse, EnabledChannelsResponse>
 			try {
 				validator = EnabledChannelsSchema.safeParse(JSON.parse(res as string))
 			} catch {
 				validator = EnabledChannelsSchema.safeParse(res)
 			}
-			
+
 			if (validator.success) {
 				setData(validator.data)
 			} else {
-				console.error("validator.error:", validator)
+				console.error('validator.error:', validator)
 			}
 		}
 		fetchData()
@@ -31,19 +31,20 @@ const EnabledChannelsTable = () => {
 	return data ? (
 		<div>
 			<ol>
-				{alphabetical(data.getEnabledChannels, (c) => c.toLocaleLowerCase()).map((channel, idx) => (
-					<li>
-						<span className={'text-xs'}>{idx}</span>&nbsp;{channel}&nbsp;
-						<span className={'text-xs'}>
-							[
-							<a
-								href={`https://warpcast.com/~/channel/${channel}`}
-								target={'_blank'}
-								rel={'noopener noreferrer'}
-							>
-								Warpcast
-							</a>
-							{/* ]&nbsp;[
+				{alphabetical(data.getEnabledChannels, (c) => c.toLocaleLowerCase(), 'desc').map(
+					(channel, idx) => (
+						<li>
+							<span className={'text-xs'}>{idx + 1}</span>&nbsp;{channel}&nbsp;
+							<span className={'text-xs'}>
+								[
+								<a
+									href={`https://warpcast.com/~/channel/${channel}`}
+									target={'_blank'}
+									rel={'noopener noreferrer'}
+								>
+									Warpcast
+								</a>
+								{/* ]&nbsp;[
 							<a
 								href={`https://supercast.xyz/channel/${channel}`}
 								target={'_blank'}
@@ -51,7 +52,7 @@ const EnabledChannelsTable = () => {
 							>
 								supercast
 							</a> */}
-							{/* ]&nbsp;[
+								{/* ]&nbsp;[
 							<a
 								href={`recaster://channel/${channel}`}
 								target={'_blank'}
@@ -59,7 +60,7 @@ const EnabledChannelsTable = () => {
 							>
 								Recaster
 							</a> */}
-							{/* ]&nbsp;[
+								{/* ]&nbsp;[
 							<a
 								href={`https://firefly.mask.social/channel/${channel}/recent`}
 								target={'_blank'}
@@ -67,15 +68,15 @@ const EnabledChannelsTable = () => {
 							>
 								Firefly
 							</a> */}
-							]&nbsp;[
-							<a
-								href={`https://far.quest/channel/${channel}`}
-								target={'_blank'}
-								rel={'noopener noreferrer'}
-							>
-								Far.Quest Pro
-							</a>
-							{/* ]&nbsp;[
+								]&nbsp;[
+								<a
+									href={`https://far.quest/channel/${channel}`}
+									target={'_blank'}
+									rel={'noopener noreferrer'}
+								>
+									Far.Quest Pro
+								</a>
+								{/* ]&nbsp;[
 							<a
 								href={`https://client-bcbhshow.artlu.xyz/~/channel/${channel}`}
 								target={'_blank'}
@@ -83,10 +84,11 @@ const EnabledChannelsTable = () => {
 							>
 								BCBHShow Lite Client
 							</a> */}
-							]
-						</span>
-					</li>
-				))}
+								]
+							</span>
+						</li>
+					)
+				)}
 			</ol>
 		</div>
 	) : null

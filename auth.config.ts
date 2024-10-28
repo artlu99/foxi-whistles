@@ -51,9 +51,9 @@ export default defineConfig({
         }
 
         return {
-          id: fid ? fid.toString() : "3",
-          name: credentials?.name ?? "dwr.eth",
-          image: credentials?.pfp ?? "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/bc698287-5adc-4cc5-a503-de16963ed900/original",
+          id:  fid ? fid.toString() : "3",
+          name: credentials?.name as string ?? "dwr.eth", // 
+          image: credentials?.pfp as string ?? "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/bc698287-5adc-4cc5-a503-de16963ed900/original",
         };
       },
     }),

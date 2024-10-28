@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/preact": "^3.5.3",
+    "@astrojs/react": "^3.6.2",
     "@astrojs/sitemap": "^3.2.1",
     "@astrojs/tailwind": "^5.1.2",
     "@astrojs/vercel": "^7.8.2",
@@ -28,11 +28,12 @@
     "cookie": "^1.0.1",
     "graphql-request": "^7.1.0",
     "itty-fetcher": "^0.9.4",
-    "preact": "^10.24.3",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.8",
     "radash": "^12.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "sharp": "^0.33.5",
     "tailwindcss": "^3.4.14",
     "typescript": "^5.6.3",
@@ -40,6 +41,7 @@
   },
   "devDependencies": {
     "@astrojs/partytown": "^2.1.2",
-    "@tailwindcss/typography": "^0.5.15"
+    "@tailwindcss/typography": "^0.5.15",
+    "@types/react": "^18.3.12"
   }
 }

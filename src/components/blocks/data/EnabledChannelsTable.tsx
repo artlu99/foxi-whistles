@@ -1,7 +1,7 @@
 'use client'
 
 import { fetcher } from 'itty-fetcher'
-import { useEffect, useState } from 'preact/hooks'
+import { useEffect, useState } from 'react'
 import { alphabetical } from 'radash'
 import type { SafeParseReturnType } from 'zod'
 import { EnabledChannelsSchema, type EnabledChannelsResponse } from '../../../rpc/types'

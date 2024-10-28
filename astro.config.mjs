@@ -1,5 +1,5 @@
 import partytown from "@astrojs/partytown";
-import preact from "@astrojs/preact";
+import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import vercelServerless from "@astrojs/vercel/serverless";
@@ -22,7 +22,7 @@ export default defineConfig({
         forward: ["dataLayer.push"],
       },
     }),
-    preact(),
+    react(),
   ],
   security: { checkOrigin: true },
 });

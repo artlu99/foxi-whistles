@@ -31,8 +31,8 @@ export default defineConfig({
           placeholder: "0x0",
         },
       },
-      async authorize(credentials) {
-        const csrfToken = "noncey";
+      async authorize(credentials, request) {
+        const csrfToken = "abcd1234";
 
         const appClient = createAppClient({
           ethereum: viemConnector(),
@@ -44,20 +44,16 @@ export default defineConfig({
           domain: "example.com",
           nonce: csrfToken,
         });
-        // const { success, fid } = verifyResponse;
+        const { success, fid } = verifyResponse;
 
-        // if (!success) {
-        //   return null;
-        // }
-        const fid = 3;
+        if (!success) {
+          return null;
+        }
 
         return {
-          id: fid.toString(),
-          // name: credentials?.name ,
-          name: "dwr.eth",
-          // image: credentials?.pfp,
-          image:
-            "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/bc698287-5adc-4cc5-a503-de16963ed900/original",
+          id: fid ? fid.toString() : "3",
+          name: credentials?.name ?? "dwr.eth",
+          image: credentials?.pfp ?? "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/bc698287-5adc-4cc5-a503-de16963ed900/original",
         };
       },
     }),

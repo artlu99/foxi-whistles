@@ -4,8 +4,11 @@ import {
 	createColumnHelper,
 	flexRender,
 	getCoreRowModel,
+	getPaginationRowModel,
+	getSortedRowModel,
 	useReactTable,
-	type ColumnOrderState
+	type ColumnOrderState,
+	type SortingState
 } from '@tanstack/react-table'
 import { fetcher } from 'itty-fetcher'
 import { useEffect, useState } from 'react'
@@ -15,13 +18,16 @@ import { EnabledChannelsSchema, type EnabledChannelsResponse } from '../../../rp
 const columnHelper = createColumnHelper<{ channelName: string }>()
 const columns = [
 	columnHelper.accessor('channelName', {
+		id: 'idx',
 		header: '#',
 		cell: (info) => <span className="text-xs">{info.row.index + 1}</span>
 	}),
 	columnHelper.accessor('channelName', {
+		id: 'channelName',
 		header: 'Channel'
 	}),
 	columnHelper.accessor('channelName', {
+		id: 'wcLink',
 		header: '🚾',
 		cell: (info) => {
 			return (
@@ -37,6 +43,7 @@ const columns = [
 		}
 	}),
 	columnHelper.accessor('channelName', {
+		id: 'fcpLink',
 		header: 'Far.Quest',
 		cell: (info) => {
 			return (
@@ -57,6 +64,11 @@ const EnabledChannelsTable = () => {
 	const [response, setResponse] = useState<EnabledChannelsResponse | undefined>()
 	const [data, setData] = useState<{ channelName: string }[]>([])
 	const [columnOrder, setColumnOrder] = useState<ColumnOrderState>(['channelName'])
+	const [sorting, setSorting] = useState<SortingState>([]);
+	const [pagination, setPagination] = useState({
+		pageIndex: 0, //initial page index
+		pageSize: 5, //default page size
+	  });
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -81,12 +93,20 @@ const EnabledChannelsTable = () => {
 	const table = useReactTable({
 		data,
 		columns,
-		state: {
-			columnOrder,
+		initialState: {
 			sorting: [{ id: 'channelName', desc: true }]
 		},
+		state: {
+			columnOrder,
+			pagination,
+			sorting: [{ id: 'channelName', desc: true }]
+		},
+		getCoreRowModel: getCoreRowModel(),
+		getPaginationRowModel: getPaginationRowModel(), //load client-side pagination code
+		getSortedRowModel: getSortedRowModel(),
 		onColumnOrderChange: setColumnOrder,
-		getCoreRowModel: getCoreRowModel()
+		onPaginationChange: setPagination,
+		onSortingChange: setSorting,
 	})
 
 	return response ? (
@@ -128,6 +148,42 @@ const EnabledChannelsTable = () => {
 					))}
 				</tfoot>
 			</table>
+			<button
+  onClick={() => table.firstPage()}
+  disabled={!table.getCanPreviousPage()}
+>
+  {'<<'}
+</button>
+<button
+  onClick={() => table.previousPage()}
+  disabled={!table.getCanPreviousPage()}
+>
+  {'<'}
+</button>
+<button
+  onClick={() => table.nextPage()}
+  disabled={!table.getCanNextPage()}
+>
+  {'>'}
+</button>
+<button
+  onClick={() => table.lastPage()}
+  disabled={!table.getCanNextPage()}
+>
+  {'>>'}
+</button>
+<select
+  value={table.getState().pagination.pageSize}
+  onChange={e => {
+    table.setPageSize(Number(e.target.value))
+  }}
+>
+  {[5, 25, 50].map(pageSize => (
+    <option key={pageSize} value={pageSize}>
+      {pageSize}
+    </option>
+  ))}
+</select>
 		</div>
 	) : null
 }

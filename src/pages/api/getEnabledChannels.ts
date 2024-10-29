@@ -1,4 +1,4 @@
-export const prerender = false;
+export const prerender = false
 
 export const config = {
 	runtime: 'edge'
@@ -7,8 +7,8 @@ export const config = {
 import { sendCorsHeaders } from './common'
 import { getEnabledChannels } from './gql'
 
-export async function GET(request: Request) {
-	sendCorsHeaders(request)
+export async function GET(request: { request: Request }) {
+	sendCorsHeaders(request.request)
 
 	try {
 		const enabledChannels = await getEnabledChannels()

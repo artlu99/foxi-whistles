@@ -5,11 +5,22 @@ import { signIn, signOut } from 'auth-astro/client'
 import { useCallback, useState } from 'react'
 import './authKitStyles.css'
 
+async function getCsrfToken() {
+	const csrfToken = await fetch('/api/auth/csrf')
+		.then((response) => {
+			if (!response.ok) throw new Error('Failed to fetch CSRF token')
+			return response.json()
+		})
+		.then((data) => data.csrfToken)
+	if (!csrfToken) throw new Error('No CSRF token found')
+	return csrfToken
+}
+
 function CustomSignInButton() {
 	const [error, setError] = useState(false)
 
 	const getNonce = useCallback(async () => {
-		const nonce = 'abcd1234' // await getCsrfToken();
+		const nonce = await getCsrfToken()
 		if (!nonce) throw new Error('Unable to generate nonce')
 		return nonce
 	}, [])

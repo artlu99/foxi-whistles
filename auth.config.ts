@@ -32,7 +32,10 @@ export default defineConfig({
         },
       },
       async authorize(credentials, request) {
-        const csrfToken = "abcd1234";
+        const body = await request.body?.getReader().read();
+        const text = new TextDecoder().decode(body?.value);
+        const parsedBody = JSON.parse(text);
+        const csrfToken = parsedBody.csrfToken;
 
         const appClient = createAppClient({
           ethereum: viemConnector(),
@@ -41,7 +44,7 @@ export default defineConfig({
         const verifyResponse = await appClient.verifySignInMessage({
           message: credentials?.message as string,
           signature: credentials?.signature as `0x${string}`,
-          domain: "example.com",
+          domain: "Whistles-Protocol.com",
           nonce: csrfToken,
         });
         const { success, fid } = verifyResponse;
@@ -51,9 +54,9 @@ export default defineConfig({
         }
 
         return {
-          id:  fid ? fid.toString() : "3",
-          name: credentials?.name as string ?? "dwr.eth", // 
-          image: credentials?.pfp as string ?? "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/bc698287-5adc-4cc5-a503-de16963ed900/original",
+          id: fid.toString(),
+          name: credentials?.name as string,
+          image: credentials?.pfp as string,
         };
       },
     }),

@@ -33,7 +33,7 @@ const EnabledChannelsTable = () => {
 			<ol>
 				{alphabetical(data.getEnabledChannels, (c) => c.toLocaleLowerCase(), 'desc').map(
 					(channel, idx) => (
-						<li>
+						<li key={`${channel}-${idx}`}>
 							<span className={'text-xs'}>{idx + 1}</span>&nbsp;{channel}&nbsp;
 							<span className={'text-xs'}>
 								[

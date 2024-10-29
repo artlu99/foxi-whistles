@@ -6,8 +6,8 @@ import CustomSignInButton from './CustomSignInButton'
 const config = {
 	relay: 'https://relay.farcaster.xyz',
 	rpcUrl: 'https://mainnet.optimism.io',
-	siweUri: 'http://Whistles-Protocol.com/login',
-	domain: 'Whistles-Protocol.com'
+	siweUri: 'http://Whistles.Protocol/login',
+	domain: 'Whistles.Protocol'
 }
 
 function Siwf() {

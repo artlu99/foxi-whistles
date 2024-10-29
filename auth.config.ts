@@ -44,7 +44,7 @@ export default defineConfig({
         const verifyResponse = await appClient.verifySignInMessage({
           message: credentials?.message as string,
           signature: credentials?.signature as `0x${string}`,
-          domain: "Whistles-Protocol.com",
+          domain: "Whistles.Protocol",
           nonce: csrfToken,
         });
         const { success, fid } = verifyResponse;
@@ -54,7 +54,7 @@ export default defineConfig({
         }
 
         return {
-          id: fid.toString(),
+          email: fid.toString(),
           name: credentials?.name as string,
           image: credentials?.pfp as string,
         };

@@ -2,10 +2,11 @@ export const config = {
 	runtime: 'edge'
 }
 
+import { sendCorsHeaders } from './common'
 import { getEnabledChannels } from './gql'
 
 export async function GET(request: Request) {
-	// TODO: tighten security so there's no CORS or CRSF
+	sendCorsHeaders(request)
 
 	try {
 		const enabledChannels = await getEnabledChannels()

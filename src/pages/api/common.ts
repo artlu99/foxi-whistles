@@ -3,7 +3,7 @@ const allowedOrigins = ['https://foxi-whistles.vercel.app', 'http://localhost:43
 export const sendCorsHeaders = (request: Request) => {
 	const origin = request.headers.get('Origin') ?? ''
 
-	if (allowedOrigins.includes(origin || '')) {
+	if (allowedOrigins.includes(origin)) {
 		const corsHeaders = {
 			'Access-Control-Allow-Origin': origin,
 			'Access-Control-Allow-Methods': 'GET',

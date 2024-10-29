@@ -2,13 +2,14 @@
 export const prerender = false;
 
 // Components
+// - Session
+import { getSession } from 'auth-astro/server';
 // - Layout
 import Layout from '../layouts/Layout.astro';
 // - UI
+import MyMessagesTable from '../components/blocks/data/MyMessagesTable';
 import JustHero from '../components/blocks/hero/JustHero.astro';
 import AuthBlock from '../components/blocks/modal/AuthBlock.astro';
-// Session
-import { getSession } from 'auth-astro/server';
 
 // Content
 // - SEO
@@ -18,12 +19,13 @@ const SEO = {
 }
 // - Page Header
 const header = {
-	title: 'Own My <strong>Data</strong>.',
-	text: 'Read-Write-Own by downloading my data.'
+	title: 'My Own <strong>Data</strong>.',
+	text: 'Proof of Read-Write-Own by downloading my data.'
 }
 
 // - Session
 const session = await getSession(Astro.request)
+const fid = session?.user?.email ? parseInt(session?.user?.email) : null
 ---
 
 <Layout title={SEO.title} description={SEO.description}>
@@ -34,5 +36,6 @@ const session = await getSession(Astro.request)
 	classes="bg-neutral-50 dark:bg-neutral-950/80"
 	>
 	<AuthBlock />
+	{fid && <MyMessagesTable fid={fid} client:only="react" />}
 	</JustHero>
 </Layout>

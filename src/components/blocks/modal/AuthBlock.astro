@@ -2,9 +2,11 @@
 export const prerender = false;
 
 // Components
+// - UI
 // - Layout
-import type { Session } from '@auth/core/types'
-import { Auth, SignIn, SignOut } from 'auth-astro/components'
+import type { Session } from '@auth/core/types';
+import { Auth, SignOut } from 'auth-astro/components';
+import Siwf from './Siwf';
 
 // Props
 type Props = {
@@ -20,7 +22,7 @@ const { id, title, text, classes } = Astro.props
 	<Auth>
 		{
 			(session: Session) => {
-				return session ? <SignOut>Logout</SignOut> : <SignIn provider="Farcaster">Login</SignIn>
+				return session ? <SignOut><strong>Logout</strong></SignOut> : <Siwf client:only="react" />}
 			}
 		}
 	</Auth>

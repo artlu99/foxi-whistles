@@ -5,13 +5,11 @@
 
 // Components
 // - UI
-import { Icon } from 'astro-icon/components'
-import Button from '../../ui/Button.astro'
-import Modal from '../../ui/Modal.astro'
-import Form from '../../ui/forms/Form.astro'
-import InputField from '../../ui/forms/form-elements/InputField.astro'
-import FormField from '../../ui/forms/partials/FormField.astro'
-import AuthBlock from './AuthBlock.astro'
+import Modal from '../../ui/Modal.astro';
+import Form from '../../ui/forms/Form.astro';
+import InputField from '../../ui/forms/form-elements/InputField.astro';
+import FormField from '../../ui/forms/partials/FormField.astro';
+import AuthBlock from './AuthBlock.astro';
 
 // Props
 type Props = {
@@ -20,27 +18,13 @@ type Props = {
 const { classes } = Astro.props
 ---
 
-<Modal id="signup" classes={classes} title="Sign up">
-	<p class="mb-0">Please pester @horsefacts to approve the Composer Action already.</p>
+<Modal id="signup" classes={classes} title="Sign In With Farcaster">
+	<AuthBlock />
+	<p class="mb-0 my-4">Please pester @horsefacts to approve the Composer Action already.</p>
 	<Form>
 		<FormField>
 			<InputField type="email" id="email" label="Your Email" />
 		</FormField>
 		<div class="my-4 text-center">Enter your email above. It goes nowhere.</div>
-		<Button style="primary" type="submit" classes="w-full" size="lg">
-			These buttons do nothing really
-		</Button>
-		<div class="my-2 text-center">or</div>
-		<Button
-			style="primary"
-			type="submit"
-			classes="w-full"
-			size="lg"
-			classes="!bg-white w-full !text-neutral-500 border border-neutral-100"
-		>
-			Sign In With Farcaster
-			<Icon name="google-logo" class="h-6 w-6" />
-		</Button>
-		<AuthBlock />
 	</Form>
 </Modal>

@@ -3,12 +3,11 @@ export const prerender = false;
 
 // Components
 // - Layout
-import Layout from '../layouts/Layout.astro'
+import Layout from '../layouts/Layout.astro';
 // - UI
-import JustHero from '../components/blocks/hero/JustHero.astro'
-import Siwf from '../components/blocks/modal/Siwf';
+import JustHero from '../components/blocks/hero/JustHero.astro';
 // Session
-import { getSession } from 'auth-astro/server'
+import { getSession } from 'auth-astro/server';
 
 // Content
 // - SEO
@@ -27,7 +26,6 @@ const session = await getSession(Astro.request)
 ---
 
 <Layout title={SEO.title} description={SEO.description}>
-	<Siwf client:only="react" />
 	<JustHero
 		title={header.title}
 		text={header.text}

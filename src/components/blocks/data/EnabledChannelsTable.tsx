@@ -1,13 +1,62 @@
 'use client'
 
+import {
+	createColumnHelper,
+	flexRender,
+	getCoreRowModel,
+	useReactTable,
+	type ColumnOrderState
+} from '@tanstack/react-table'
 import { fetcher } from 'itty-fetcher'
 import { useEffect, useState } from 'react'
-import { alphabetical } from 'radash'
 import type { SafeParseReturnType } from 'zod'
 import { EnabledChannelsSchema, type EnabledChannelsResponse } from '../../../rpc/types'
 
+const columnHelper = createColumnHelper<{ channelName: string }>()
+const columns = [
+	columnHelper.accessor('channelName', {
+		header: '#',
+		cell: (info) => <span className="text-xs">{info.row.index + 1}</span>
+	}),
+	columnHelper.accessor('channelName', {
+		header: 'Channel'
+	}),
+	columnHelper.accessor('channelName', {
+		header: '🚾',
+		cell: (info) => {
+			return (
+				<a
+					href={`https://warpcast.com/~/channel/${info.getValue()}`}
+					target={'_blank'}
+					rel={'noopener noreferrer'}
+					className={'text-xs'}
+				>
+					[Warpcast]
+				</a>
+			)
+		}
+	}),
+	columnHelper.accessor('channelName', {
+		header: 'Far.Quest',
+		cell: (info) => {
+			return (
+				<a
+					href={`https://far.quest/channel/${info.getValue()}`}
+					target={'_blank'}
+					rel={'noopener noreferrer'}
+					className={'text-xs'}
+				>
+					[Far.Quest Pro]
+				</a>
+			)
+		}
+	})
+]
+
 const EnabledChannelsTable = () => {
-	const [data, setData] = useState<EnabledChannelsResponse | undefined>()
+	const [response, setResponse] = useState<EnabledChannelsResponse | undefined>()
+	const [data, setData] = useState<{ channelName: string }[]>([])
+	const [columnOrder, setColumnOrder] = useState<ColumnOrderState>(['channelName'])
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -20,7 +69,8 @@ const EnabledChannelsTable = () => {
 			}
 
 			if (validator.success) {
-				setData(validator.data)
+				setResponse(validator.data)
+				setData(validator.data.getEnabledChannels.map((c) => ({ channelName: c })))
 			} else {
 				console.error('validator.error:', validator)
 			}
@@ -28,68 +78,56 @@ const EnabledChannelsTable = () => {
 		fetchData()
 	}, [])
 
-	return data ? (
-		<div>
-			<ol>
-				{alphabetical(data.getEnabledChannels, (c) => c.toLocaleLowerCase(), 'desc').map(
-					(channel, idx) => (
-						<li key={`${channel}-${idx}`}>
-							<span className={'text-xs'}>{idx + 1}</span>&nbsp;{channel}&nbsp;
-							<span className={'text-xs'}>
-								[
-								<a
-									href={`https://warpcast.com/~/channel/${channel}`}
-									target={'_blank'}
-									rel={'noopener noreferrer'}
-								>
-									Warpcast
-								</a>
-								{/* ]&nbsp;[
-							<a
-								href={`https://supercast.xyz/channel/${channel}`}
-								target={'_blank'}
-								rel={'noopener noreferrer'}
-							>
-								supercast
-							</a> */}
-								{/* ]&nbsp;[
-							<a
-								href={`recaster://channel/${channel}`}
-								target={'_blank'}
-								rel={'noopener noreferrer'}
-							>
-								Recaster
-							</a> */}
-								{/* ]&nbsp;[
-							<a
-								href={`https://firefly.mask.social/channel/${channel}/recent`}
-								target={'_blank'}
-								rel={'noopener noreferrer'}
-							>
-								Firefly
-							</a> */}
-								]&nbsp;[
-								<a
-									href={`https://far.quest/channel/${channel}`}
-									target={'_blank'}
-									rel={'noopener noreferrer'}
-								>
-									Far.Quest Pro
-								</a>
-								{/* ]&nbsp;[
-							<a
-								href={`https://client-bcbhshow.artlu.xyz/~/channel/${channel}`}
-								target={'_blank'}
-								rel={'noopener noreferrer'}
-							>
-								BCBHShow Lite Client
-							</a> */}
-								]
-							</span>
-						</li>
-					)
-				)}
-			</ol>
+	const table = useReactTable({
+		data,
+		columns,
+		state: {
+			columnOrder,
+			sorting: [{ id: 'channelName', desc: true }]
+		},
+		onColumnOrderChange: setColumnOrder,
+		getCoreRowModel: getCoreRowModel()
+	})
+
+	return response ? (
+		<div className="p-2">
+			<table>
+				<thead>
+					{table.getHeaderGroups().map((headerGroup) => (
+						<tr key={headerGroup.id}>
+							{headerGroup.headers.map((header) => (
+								<th key={header.id}>
+									{header.isPlaceholder
+										? null
+										: flexRender(header.column.columnDef.header, header.getContext())}
+								</th>
+							))}
+						</tr>
+					))}
+				</thead>
+				<tbody>
+					{table.getRowModel().rows.map((row) => (
+						<tr key={row.id}>
+							{row.getVisibleCells().map((cell) => (
+								<td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
+							))}
+						</tr>
+					))}
+				</tbody>
+				<tfoot>
+					{table.getFooterGroups().map((footerGroup) => (
+						<tr key={footerGroup.id}>
+							{footerGroup.headers.map((header) => (
+								<th key={header.id}>
+									{header.isPlaceholder
+										? null
+										: flexRender(header.column.columnDef.footer, header.getContext())}
+								</th>
+							))}
+						</tr>
+					))}
+				</tfoot>
+			</table>
 		</div>
 	) : null
 }

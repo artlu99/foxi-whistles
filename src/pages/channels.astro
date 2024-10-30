@@ -1,10 +1,26 @@
 ---
+export const prerender = false
+
 // Components
 // - Layout
 import Layout from '../layouts/Layout.astro'
 // - UI
-import EnabledChannelsTable from '../components/blocks/data/EnabledChannelsTable'
+import SimpleFeed from '../components/blocks/feeds/BasicFeed.astro'
 import JustHero from '../components/blocks/hero/JustHero.astro'
+
+// Data
+import { alphabetical } from 'radash'
+import { getEnabledChannels } from './api/gql'
+const channels = await getEnabledChannels()
+const feedData = alphabetical( channels.getEnabledChannels, (c) => c, 'desc')
+	.map((channelName) => ({
+		date: channelName,
+		text: '<ul><li>' + [
+			`<a href="https://warpcast.com/~/channel/${channelName}" target="_blank" rel="noopener noreferrer">Warpcast</a>`,
+			`<a href="https://far.quest/channel/${channelName}" target="_blank" rel="noopener noreferrer">Far.Quest</a>`,
+		].join('</li><li>') + '</li></ul>'
+	}
+))
 
 // Content
 // - SEO
@@ -27,6 +43,6 @@ const header = {
 		id="contact"
 		classes="bg-neutral-50 dark:bg-neutral-950/80"
 	>
-		<EnabledChannelsTable client:only="react" />
 	</JustHero>
+	<SimpleFeed data={feedData} />
 </Layout>

@@ -29,6 +29,7 @@
     "cookie": "^1.0.1",
     "graphql-request": "^7.1.0",
     "itty-fetcher": "^0.9.4",
+    "keccak256": "^1.0.6",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.8",

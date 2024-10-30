@@ -15,8 +15,9 @@ import type { SafeParseReturnType } from 'zod'
 import { MyMessagesSchema, type MyMessagesResponse } from '../../../rpc/types'
 
 type Message = {
-	text: string
+	plaintext: string
 	timestamp: number
+	ciphertext: string
 }
 
 const columnHelper = createColumnHelper<Message>()
@@ -26,7 +27,7 @@ const columns = [
 		header: '#',
 		cell: (info) => <span className="text-xs">{info.row.index + 1}</span>
 	}),
-	columnHelper.accessor('text', {
+	columnHelper.accessor('plaintext', {
 		id: 'text',
 		header: 'plaintext'
 	}),
@@ -35,6 +36,13 @@ const columns = [
 		header: 'timestamp',
 		cell: (info) => {
 			return <span className="text-xs">{new Date(info.getValue()).toLocaleString()}</span>
+		}
+	}),
+	columnHelper.accessor('ciphertext', {
+		id: 'ciphertext',
+		header: 'ciphertext',
+		cell: (info) => {
+			return <span className="text-xs">{info.getValue()}</span>
 		}
 	})
 ]
@@ -71,8 +79,9 @@ const MyMessagesTable = (props: MyMessagesTableProps) => {
 								maybeUnixTimestamp > Date.now() ? Number(msg.timestamp) : maybeUnixTimestamp
 
 							return {
-								text: msg.text,
-								timestamp: fallbackTimestamp
+								plaintext: msg.text,
+								timestamp: fallbackTimestamp,
+								ciphertext: msg.text
 							}
 						}),
 						(c) => c.timestamp,
@@ -119,8 +128,13 @@ const MyMessagesTable = (props: MyMessagesTableProps) => {
 					))}
 				</thead>
 				<tbody>
-					{table.getRowModel().rows.map((row) => (
-						<tr key={row.id}>
+					{table.getRowModel().rows.map((row, index) => (
+						<tr
+							key={row.id}
+							className={
+								index % 2 === 0 ? 'bg-gray-200 dark:bg-gray-700' : 'bg-white dark:bg-gray-800'
+							}
+						>
 							{row.getVisibleCells().map((cell) => (
 								<td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
 							))}

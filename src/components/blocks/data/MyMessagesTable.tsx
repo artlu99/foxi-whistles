@@ -44,7 +44,11 @@ const columns = [
 		id: 'ciphertext',
 		header: 'ciphertext',
 		cell: (info) => {
-			return <span className="text-xs">{info.getValue()}</span>
+			return (
+				<span className="text-xs">
+					{info.getValue().slice(0, 5)}...{info.getValue().slice(-5)}
+				</span>
+			)
 		}
 	})
 ]
@@ -58,7 +62,7 @@ const MyMessagesTable = (props: MyMessagesTableProps) => {
 	const [data, setData] = useState<Message[]>([])
 	const [pagination, setPagination] = useState({
 		pageIndex: 0, //initial page index
-		pageSize: 100 //default page size
+		pageSize: 1000 //default page size
 	})
 
 	useEffect(() => {

@@ -1,5 +1,10 @@
 [
 	{
+		"title": "Own your own data, protected by SIWF",
+		"date": "2024-10-29",
+		"text": "<ul><li>see your most recent messages</li><li><a href='/download'>download</a> all your data</li><li>nonces (<i>'number used once'</i>) for your safety and pleasure</li></ul>"
+	},
+	{
 		"title": "User flow 100% permissionless, from soup to nuts",
 		"date": "2024-10-21",
 		"text": "<ul><li>channel owners opt in/out via cast action</li><li>frame now emphasizes the encoded/decoded text, 'Show more' button added</li><li>QR Code to install Composer Action as a <a href='https://recaster.org' target='_blank' rel='noopener noreferrer'>Recaster</a> Mini-App</li></ul>"

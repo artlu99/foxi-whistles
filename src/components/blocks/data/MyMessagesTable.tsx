@@ -1,5 +1,7 @@
 'use client'
 
+import { keccak256 } from '@ethersproject/keccak256'
+import { toUtf8Bytes } from '@ethersproject/strings'
 import {
 	createColumnHelper,
 	flexRender,
@@ -81,7 +83,7 @@ const MyMessagesTable = (props: MyMessagesTableProps) => {
 							return {
 								plaintext: msg.text,
 								timestamp: fallbackTimestamp,
-								ciphertext: msg.text
+								ciphertext: keccak256(toUtf8Bytes(msg.text)).slice(2)
 							}
 						}),
 						(c) => c.timestamp,

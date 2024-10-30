@@ -13,11 +13,11 @@ import { alphabetical } from 'radash'
 import { getEnabledChannels } from './api/gql'
 const channels = await getEnabledChannels()
 const feedData = alphabetical( channels.getEnabledChannels, (c) => c, 'desc')
-	.map((channelName) => ({
-		date: channelName,
+	.map((channelName, idx) => ({
+		title: `${idx + 1}: ${channelName}`,
 		text: '<ul><li>' + [
-			`<a href="https://warpcast.com/~/channel/${channelName}" target="_blank" rel="noopener noreferrer">Warpcast</a>`,
-			`<a href="https://far.quest/channel/${channelName}" target="_blank" rel="noopener noreferrer">Far.Quest</a>`,
+			`view in <a href="https://warpcast.com/~/channel/${channelName}" target="_blank" rel="noopener noreferrer">Warpcast</a>`,
+			`view in <a href="https://far.quest/channel/${channelName}" target="_blank" rel="noopener noreferrer">Far.Quest</a>`,
 		].join('</li><li>') + '</li></ul>'
 	}
 ))
@@ -32,7 +32,7 @@ const SEO = {
 // - Page Header
 const header = {
 	title: 'Whistles-enabled <strong>Channels</strong>.',
-	text: 'Each of these channel owners has opted in to allow members to see decoded messages in their channel.'
+	text: `Each owner of these ${feedData.length} channels has opted in to allow members to see decoded messages in their channel.` 
 }
 ---
 

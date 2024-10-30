@@ -7,17 +7,23 @@ import {
 	getPaginationRowModel,
 	getSortedRowModel,
 	useReactTable,
-	type ColumnOrderState,
 	type SortingState
 } from '@tanstack/react-table'
 import { fetcher } from 'itty-fetcher'
+import { alphabetical } from 'radash'
 import { useEffect, useState } from 'react'
 import type { SafeParseReturnType } from 'zod'
 import { EnabledChannelsSchema, type EnabledChannelsResponse } from '../../../rpc/types'
 
-const columnHelper = createColumnHelper<{ channelName: string }>()
+type Channel = {
+	channelName: string
+	wcLink: string
+	fqpLink: string
+}
+
+const columnHelper = createColumnHelper<Channel>()
 const columns = [
-	columnHelper.accessor('channelName', {
+	columnHelper.display({
 		id: 'idx',
 		header: '#',
 		cell: (info) => <span className="text-xs">{info.row.index + 1}</span>
@@ -26,13 +32,13 @@ const columns = [
 		id: 'channelName',
 		header: 'Channel'
 	}),
-	columnHelper.accessor('channelName', {
+	columnHelper.accessor('wcLink', {
 		id: 'wcLink',
 		header: '🚾',
 		cell: (info) => {
 			return (
 				<a
-					href={`https://warpcast.com/~/channel/${info.getValue()}`}
+					href={info.getValue()}
 					target={'_blank'}
 					rel={'noopener noreferrer'}
 					className={'text-xs'}
@@ -42,13 +48,13 @@ const columns = [
 			)
 		}
 	}),
-	columnHelper.accessor('channelName', {
-		id: 'fcpLink',
+	columnHelper.accessor('fqpLink', {
+		id: 'fqpLink',
 		header: 'Far.Quest',
 		cell: (info) => {
 			return (
 				<a
-					href={`https://far.quest/channel/${info.getValue()}`}
+					href={info.getValue()}
 					target={'_blank'}
 					rel={'noopener noreferrer'}
 					className={'text-xs'}
@@ -62,13 +68,11 @@ const columns = [
 
 const EnabledChannelsTable = () => {
 	const [response, setResponse] = useState<EnabledChannelsResponse | undefined>()
-	const [data, setData] = useState<{ channelName: string }[]>([])
-	const [columnOrder, setColumnOrder] = useState<ColumnOrderState>(['channelName'])
-	const [sorting, setSorting] = useState<SortingState>([]);
+	const [data, setData] = useState<Channel[]>([])
 	const [pagination, setPagination] = useState({
 		pageIndex: 0, //initial page index
-		pageSize: 5, //default page size
-	  });
+		pageSize: 100 //default page size
+	})
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -82,7 +86,13 @@ const EnabledChannelsTable = () => {
 
 			if (validator.success) {
 				setResponse(validator.data)
-				setData(validator.data.getEnabledChannels.map((c) => ({ channelName: c })))
+				setData(
+					alphabetical(validator.data.getEnabledChannels.map((c) => ({
+						channelName: c,
+						wcLink: `https://warpcast.com/~/channel/${c}`,
+						fqpLink: `https://far.quest/channel/${c}`
+					})), (c) => c.channelName, 'desc')
+				)
 			} else {
 				console.error('validator.error:', validator)
 			}
@@ -97,16 +107,13 @@ const EnabledChannelsTable = () => {
 			sorting: [{ id: 'channelName', desc: true }]
 		},
 		state: {
-			columnOrder,
 			pagination,
 			sorting: [{ id: 'channelName', desc: true }]
 		},
 		getCoreRowModel: getCoreRowModel(),
 		getPaginationRowModel: getPaginationRowModel(), //load client-side pagination code
 		getSortedRowModel: getSortedRowModel(),
-		onColumnOrderChange: setColumnOrder,
 		onPaginationChange: setPagination,
-		onSortingChange: setSorting,
 	})
 
 	return response ? (
@@ -148,42 +155,6 @@ const EnabledChannelsTable = () => {
 					))}
 				</tfoot>
 			</table>
-			<button
-  onClick={() => table.firstPage()}
-  disabled={!table.getCanPreviousPage()}
->
-  {'<<'}
-</button>
-<button
-  onClick={() => table.previousPage()}
-  disabled={!table.getCanPreviousPage()}
->
-  {'<'}
-</button>
-<button
-  onClick={() => table.nextPage()}
-  disabled={!table.getCanNextPage()}
->
-  {'>'}
-</button>
-<button
-  onClick={() => table.lastPage()}
-  disabled={!table.getCanNextPage()}
->
-  {'>>'}
-</button>
-<select
-  value={table.getState().pagination.pageSize}
-  onChange={e => {
-    table.setPageSize(Number(e.target.value))
-  }}
->
-  {[5, 25, 50].map(pageSize => (
-    <option key={pageSize} value={pageSize}>
-      {pageSize}
-    </option>
-  ))}
-</select>
 		</div>
 	) : null
 }

@@ -1,4 +1,3 @@
-import partytown from "@astrojs/partytown";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
@@ -12,17 +11,6 @@ export default defineConfig({
   site: "https://foxi-whistles.vercel.app/",
   output: "hybrid",
   adapter: vercelServerless(),
-  integrations: [
-    auth(),
-    tailwind(),
-    icon(),
-    sitemap(),
-    partytown({
-      config: {
-        forward: ["dataLayer.push"],
-      },
-    }),
-    react(),
-  ],
+  integrations: [auth(), tailwind(), icon(), sitemap(), react()],
   security: { checkOrigin: true },
 });

@@ -7,8 +7,7 @@ import Footer from '../components/ui/Footer.astro'
 import Modal from '../components/blocks/modal/SignUp.astro'
 import Header from '../components/blocks/head/Header.astro'
 // Scripts
-import Scriprs from '../components/scripts/LocalScripts.astro'
-import GoogleTagManagerBody from '../components/scripts/googleTagManagerBody.astro'
+import Scripts from '../components/scripts/LocalScripts.astro'
 // Styles
 import '../styles/global.css'
 // Fonts
@@ -37,13 +36,12 @@ const { title, description, ogImage, noindex } = Astro.props
 			{ ['scroll-animation']: configData.scrollAnimations }
 		]}
 	>
-		<GoogleTagManagerBody />
 		<NavigationBar />
 		<Main>
 			<slot />
 		</Main>
 		<Footer />
 		<Modal />
-		<Scriprs />
+		<Scripts />
 	</body>
 </html>

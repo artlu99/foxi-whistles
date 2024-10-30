@@ -8,6 +8,16 @@ export const EnabledChannelsSchema = z.object({
 	getEnabledChannels: z.array(z.string())
 })
 
+export interface SharedDatabaseMetricsResponse {
+		numSchemas: number
+		numPartitions: number
+}
+
+export const SharedDatabaseMetricsSchema = z.object({
+		numSchemas: z.number(),
+		numPartitions: z.number()
+})
+
 export interface MyMessagesResponse {
 	getDecryptedMessagesByFid: {
 		messages: {

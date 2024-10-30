@@ -2,8 +2,10 @@ import { gql, GraphQLClient } from 'graphql-request'
 import {
 	EnabledChannelsSchema,
 	MyMessagesSchema,
+	SharedDatabaseMetricsSchema,
 	type EnabledChannelsResponse,
-	type MyMessagesResponse
+	type MyMessagesResponse,
+	type SharedDatabaseMetricsResponse
 } from '../../rpc/types'
 
 const endpoint = 'https://whistles.artlu.xyz/graphql'
@@ -27,6 +29,29 @@ export const getEnabledChannels = async () => {
 	} catch (error: any) {
 		console.error('Error response:', error.response || error)
 		throw new Error('Failed to get channels list')
+	}
+}
+
+export const getSharedDatabaseMetrics = async () => {
+	const graphQLClient = new GraphQLClient(endpoint)
+
+	try {
+		const res = await graphQLClient.request<SharedDatabaseMetricsResponse>(gql`
+			query sharedDatabaseMetrics {
+				numPartitions
+  				numSchemas
+			}
+		`)
+		const validated = SharedDatabaseMetricsSchema.safeParse(res)
+		if (!validated.success) {
+			console.log(res)
+			throw new Error('Failed to validate response')
+		}
+
+		return validated.data
+	} catch (error: any) {
+		console.error('Error response:', error.response || error)
+		throw new Error('Failed to get shared database metrics')
 	}
 }
 

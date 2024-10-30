@@ -7,6 +7,7 @@ import Layout from '../layouts/Layout.astro'
 // - UI
 import JustHero from '../components/blocks/hero/JustHero.astro'
 import Button from '../components/ui/Button.astro'
+import { getEnabledChannels, getSharedDatabaseMetrics } from './api/gql'
 
 // Content
 // - SEO
@@ -16,9 +17,18 @@ const SEO = {
 }
 // - Page Header
 const header = {
-	title: 'Data <strong>Transparency</strong>.', 
+	title: 'Private Data <strong>Transparency</strong>.', 
 	text: 'Anonymized analytics for Whistles Protocol.'
 }
+
+const numEnabledChannels = (await getEnabledChannels()).getEnabledChannels.length
+
+const numMessages = 151
+const numMessagesMarkedForPruning = 0
+const earliestMessageTimestamp = "2024-10-18"
+const numUniqueUsers = 17
+
+const { numPartitions, numSchemas } = (await getSharedDatabaseMetrics())
 ---
 
 <Layout title={SEO.title} description={SEO.description}>
@@ -28,26 +38,22 @@ const header = {
 		id="contact"
 		classes="bg-neutral-50 dark:bg-neutral-950/80"
 	>
-	<Button 
-		type="external"
-		size="lg"
-		link="https://whistles.artlu.xyz/graphql"   
-		style="primary"
-		external="circle-stack"
-	>
- 		GraphQL
-	</Button>
+	<hr />
 	<ul>
-		<li>&bull;&nbsp;# of messages: {17}</li>
+		<li>&nbsp;# of enabled channels: {numEnabledChannels}</li>
+		<hr />
+		<li>&nbsp;# of messages: {numMessages}</li>
 		<li><ul>
-				<li>&nbsp;&nbsp;&nbsp;&bull;&nbsp;valid: {148}</li>
-				<li>&nbsp;&nbsp;&nbsp;&bull;&nbsp;earliest message timestamp: {"2024-10-18"}.</li>
-				<li>&nbsp;&nbsp;&nbsp;&bull;&nbsp;marked for pruning: {0}</li>
+				<li>&nbsp;&nbsp;&nbsp;&bull;&nbsp;valid: {numMessages - numMessagesMarkedForPruning}</li>
+				<li>&nbsp;&nbsp;&nbsp;&bull;&nbsp;earliest message: {earliestMessageTimestamp}</li>
+				<li>&nbsp;&nbsp;&nbsp;&bull;&nbsp;marked for pruning: {numMessagesMarkedForPruning}</li>
 			</ul></li>
-		<li>&bull;&nbsp;# of unique users (FIDs): {17}</li>
-		<li>&bull;&nbsp;# of enabled channels: {9}</li>
-		<li>&bull;&nbsp;# of partitions: {1}</li>
-		<li>&bull;&nbsp;# of schemas: {1}</li>
+		<li>&nbsp;# of unique users (FIDs): {numUniqueUsers}</li>
+		<hr />
+		<Button type="external" size="lg" link="https://whistles.artlu.xyz/graphql" style="primary" external="circle-stack">GraphQL</Button>
+		<li>&nbsp;# of partitions: {numPartitions}</li>
+		<li>&nbsp;# of schemas: {numSchemas}</li>
 	</ul>
+	<hr />
 	</JustHero>
 </Layout>

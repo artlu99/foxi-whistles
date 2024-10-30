@@ -6,8 +6,7 @@ import {
 	getCoreRowModel,
 	getPaginationRowModel,
 	getSortedRowModel,
-	useReactTable,
-	type SortingState
+	useReactTable
 } from '@tanstack/react-table'
 import { fetcher } from 'itty-fetcher'
 import { alphabetical } from 'radash'

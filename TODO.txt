@@ -1,3 +1,2 @@
-- user SIWF
-- enable channels
-- download all own data 
+- anonymized analytics
+- manage / enable/disable channels

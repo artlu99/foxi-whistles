@@ -48,6 +48,7 @@ export const navigationBarData: NavData = {
 				{ name: 'See Enabled Channels', link: '/channels'},
 				{ name: 'Manage My Channels', link: '/manage' },
 				{ name: 'Download My Own Data', link: '/download' },
+				{ name: 'Anonymized Analytics', link: '/soonTM' },
 				{ name: 'Contact', link: '/contact' }
 			]
 		},

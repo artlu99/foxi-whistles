@@ -113,8 +113,34 @@ const MyMessagesTable = (props: MyMessagesTableProps) => {
 		onPaginationChange: setPagination
 	})
 
+	const downloadCSV = () => {
+		const csvContent =
+			'data:text/csv;charset=utf-8,' +
+			'plaintext,timestamp,ciphertext\n' +
+			data
+				.map(
+					(e) =>
+						`"${e.plaintext.replace(/"/g, '""')}",${e.timestamp},${e.ciphertext}"`
+				)
+				.join('\n')
+		const encodedUri = encodeURI(csvContent)
+		const link = document.createElement('a')
+		link.setAttribute('href', encodedUri)
+		link.setAttribute('download', fid.toString() + '.csv')
+		document.body.appendChild(link) // Required for FF
+		link.click()
+		document.body.removeChild(link)
+	}
+
 	return response ? (
 		<div className="p-2">
+			<div>
+				[
+				<a href="#" onClick={downloadCSV}>
+					csv
+				</a>
+				] [json] [xls-csv]
+			</div>
 			<table>
 				<thead>
 					{table.getHeaderGroups().map((headerGroup) => (

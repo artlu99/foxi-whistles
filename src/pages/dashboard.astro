@@ -1,0 +1,53 @@
+---
+export const prerender = false
+
+// Components
+// - Layout
+import Layout from '../layouts/Layout.astro'
+// - UI
+import JustHero from '../components/blocks/hero/JustHero.astro'
+import Button from '../components/ui/Button.astro'
+
+// Content
+// - SEO
+const SEO = {
+	title: 'Whistles | Anonymized Analytics Dashboard',
+	description: 'See Anonymized Analytics about Whistles Protocol.'
+}
+// - Page Header
+const header = {
+	title: 'Data <strong>Transparency</strong>.', 
+	text: 'Anonymized analytics for Whistles Protocol.'
+}
+---
+
+<Layout title={SEO.title} description={SEO.description}>
+	<JustHero
+		title={header.title}
+		text={header.text}
+		id="contact"
+		classes="bg-neutral-50 dark:bg-neutral-950/80"
+	>
+	<Button 
+		type="external"
+		size="lg"
+		link="https://whistles.artlu.xyz/graphql"   
+		style="primary"
+		external="circle-stack"
+	>
+ 		GraphQL
+	</Button>
+	<ul>
+		<li>&bull;&nbsp;# of messages: {17}</li>
+		<li><ul>
+				<li>&nbsp;&nbsp;&nbsp;&bull;&nbsp;valid: {148}</li>
+				<li>&nbsp;&nbsp;&nbsp;&bull;&nbsp;earliest message timestamp: {"2024-10-18"}.</li>
+				<li>&nbsp;&nbsp;&nbsp;&bull;&nbsp;marked for pruning: {0}</li>
+			</ul></li>
+		<li>&bull;&nbsp;# of unique users (FIDs): {17}</li>
+		<li>&bull;&nbsp;# of enabled channels: {9}</li>
+		<li>&bull;&nbsp;# of partitions: {1}</li>
+		<li>&bull;&nbsp;# of schemas: {1}</li>
+	</ul>
+	</JustHero>
+</Layout>

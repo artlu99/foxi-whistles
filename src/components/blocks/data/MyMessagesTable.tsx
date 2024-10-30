@@ -58,7 +58,7 @@ const MyMessagesTable = (props: MyMessagesTableProps) => {
 	const [data, setData] = useState<Message[]>([])
 	const [pagination, setPagination] = useState({
 		pageIndex: 0, //initial page index
-		pageSize: 1000 //default page size
+		pageSize: 100 //default page size
 	})
 
 	useEffect(() => {
@@ -113,15 +113,17 @@ const MyMessagesTable = (props: MyMessagesTableProps) => {
 		onPaginationChange: setPagination
 	})
 
-	const downloadCSV = () => {
+	const downloadCSV = (convertToExcelDate = false) => {
 		const csvContent =
 			'data:text/csv;charset=utf-8,' +
 			'plaintext,timestamp,ciphertext\n' +
 			data
-				.map(
-					(e) =>
-						`"${e.plaintext.replace(/"/g, '""')}",${e.timestamp},${e.ciphertext}"`
-				)
+				.map((e) => {
+					const timestamp = convertToExcelDate
+						? new Date(e.timestamp).getTime() / 1000 / 86400 + 25569 // Convert to Excel date
+						: e.timestamp
+					return `"${e.plaintext.replace(/"/g, '""')}",${timestamp},${e.ciphertext}"`
+				})
 				.join('\n')
 		const encodedUri = encodeURI(csvContent)
 		const link = document.createElement('a')
@@ -132,14 +134,34 @@ const MyMessagesTable = (props: MyMessagesTableProps) => {
 		document.body.removeChild(link)
 	}
 
+	const downloadJSON = () => {
+		const jsonContent = JSON.stringify(data, null, 2) // Convert data to JSON string
+		const blob = new Blob([jsonContent], { type: 'application/json' }) // Create a Blob from the JSON string
+		const url = URL.createObjectURL(blob) // Create a URL for the Blob
+		const link = document.createElement('a')
+		link.setAttribute('href', url)
+		link.setAttribute('download', fid.toString() + '.json') // Set the download filename
+		document.body.appendChild(link) // Required for FF
+		link.click() // Trigger the download
+		document.body.removeChild(link) // Clean up
+	}
+
 	return response ? (
 		<div className="p-2">
-			<div>
-				[
-				<a href="#" onClick={downloadCSV}>
+			<div className="flex justify-end">
+				Download as [
+				<a href="#" onClick={() => downloadCSV()}>
 					csv
 				</a>
-				] [json] [xls-csv]
+				] [
+				<a href="#" onClick={downloadJSON}>
+					json
+				</a>
+				] [
+				<a href="#" onClick={() => downloadCSV(true)}>
+					csv-xlsx
+				</a>
+				]
 			</div>
 			<table>
 				<thead>

@@ -4,6 +4,8 @@
 import Layout from '../layouts/Layout.astro'
 // - UI
 import JustHero from '../components/blocks/hero/JustHero.astro'
+import Button from '../components/ui/Button.astro'
+import { Icon } from 'astro-icon/components'
 
 // Content
 // - SEO
@@ -14,7 +16,7 @@ const SEO = {
 // - Page Header
 const header = {
 	title: 'Manage <strong>My</strong> Channels.',
-	text: 'How To Enable and Disable channels for Whistles Protocol.'
+	text: 'Enable and Disable channels for Whistles Protocol.'
 }
 ---
 
@@ -25,10 +27,18 @@ const header = {
 		id="contact"
 		classes="bg-neutral-50 dark:bg-neutral-950/80"
 	>
-		<p>
-			Call the Read Keccack256 Cast Action on any cast in your channel. Cast action will call up
-			a frame, with a special button for channel owners only. Click the button to enable or disable
-			Whistles Protocol for your channel.
-		</p>
+		<ul>
+			<li>&bull;&nbsp;Read Keccack256 Cast Action on any cast in your channel.</li>
+			<li>&bull;&nbsp;Cast action will call up a frame, with a special button visible to channel owners only.</li>
+			<li>&bull;&nbsp;Click button to enable or disable your channel.</li>
+		</ul>
+		<Button 
+			style="primary"
+			size="lg"
+			link="https://warpcast.com/~/add-cast-action?url=https%3A%2F%2Fkeccak256-composer-action.artlu.workers.dev%2Fcast-action"  
+		 	external="squares-plus"
+		>
+		Enable Whistles Protocol
+		</Button>
 	</JustHero>
 </Layout>

@@ -1,89 +1,106 @@
 import { gql, GraphQLClient } from 'graphql-request'
+import type { ZodObject } from 'zod'
 import { GRAPHQL_ENDPOINT, YOGA_READ_TOKEN } from '../../rpc/constants'
 import {
+	DatabaseViewSchema,
 	EnabledChannelsSchema,
 	MyMessagesSchema,
 	SharedDatabaseMetricsSchema,
+	type DatabaseViewResponse,
 	type EnabledChannelsResponse,
 	type MyMessagesResponse,
 	type SharedDatabaseMetricsResponse
 } from '../../rpc/types'
 
-export const getEnabledChannels = async () => {
-	const graphQLClient = new GraphQLClient(GRAPHQL_ENDPOINT)
-
-	try {
-		const res = await graphQLClient.request<EnabledChannelsResponse>(gql`
-			query getEnabledChannels {
-				getEnabledChannels
-			}
-		`)
-		const validated = EnabledChannelsSchema.safeParse(res)
-		if (!validated.success) {
-			throw new Error('Failed to validate response')
+const queries: Record<string, string> = {
+	['getEnabledChannels']: gql`
+		query getEnabledChannels {
+			getEnabledChannels
 		}
+	`,
+	['sharedDatabaseMetrics']: gql`
+		query sharedDatabaseMetrics {
+			numPartitions
+			numSchemas
+		}
+	`,
+	['databaseView']: gql`
+		query dbView {
+			numMessages
+			getTimestampOfEarliestMessage
+			numMessagesMarkedForPruning
+			numFids
+		}
+	`,
+	['getDecryptedMessagesByFid']: gql`
+		query getDecryptedMessagesByFid($fid: Int!, $limit: Int, $token: String) {
+			getDecryptedMessagesByFid(
+				limit: $limit
+				order: { asc: true }
+				fid: $fid
+				bearerToken: $token
+			) {
+				messages {
+					fid
+					timestamp
+					text
+				}
+			}
+		}
+	`
+}
 
-		return validated.data
-	} catch (error: any) {
-		console.error('Error response:', error.response || error)
-		throw new Error('Failed to get channels list')
-	}
+export const getEnabledChannels = async () => {
+	const res = await genericGraphQLQuery<EnabledChannelsResponse>(
+		'getEnabledChannels',
+		EnabledChannelsSchema
+	)
+	return res
 }
 
 export const getSharedDatabaseMetrics = async () => {
-	const graphQLClient = new GraphQLClient(GRAPHQL_ENDPOINT)
+	const res = await genericGraphQLQuery<SharedDatabaseMetricsResponse>(
+		'sharedDatabaseMetrics',
+		SharedDatabaseMetricsSchema
+	)
+	return res
+}
 
-	try {
-		const res = await graphQLClient.request<SharedDatabaseMetricsResponse>(gql`
-			query sharedDatabaseMetrics {
-				numPartitions
-  				numSchemas
-			}
-		`)
-		const validated = SharedDatabaseMetricsSchema.safeParse(res)
-		if (!validated.success) {
-			console.log(res)
-			throw new Error('Failed to validate response')
-		}
-
-		return validated.data
-	} catch (error: any) {
-		console.error('Error response:', error.response || error)
-		throw new Error('Failed to get shared database metrics')
-	}
+export const getDatabaseView = async () => {
+	const res = await genericGraphQLQuery<DatabaseViewResponse>('databaseView', DatabaseViewSchema)
+	return res
 }
 
 export const getMyMessages = async (fid: number, limit: number = 500) => {
+	const res = await genericGraphQLQuery<MyMessagesResponse>(
+		'getDecryptedMessagesByFid',
+		MyMessagesSchema,
+		{ fid, limit, token: YOGA_READ_TOKEN }
+	)
+	return res
+}
+
+const genericGraphQLQuery = async <T>(
+	queryName: string,
+	schema: ZodObject<any>,
+	variables?: any
+) => {
 	const graphQLClient = new GraphQLClient(GRAPHQL_ENDPOINT)
 
+	const query = queries[queryName]
 	try {
-		const res = await graphQLClient.request<MyMessagesResponse>(
-			gql`
-				query getDecryptedMessagesByFid($fid: Int!, $limit: Int, $token: String) {
-					getDecryptedMessagesByFid(
-						limit: $limit
-						order: { asc: true }
-						fid: $fid
-						bearerToken: $token
-					) {
-						messages {
-							fid
-							timestamp
-							text
-						}
-					}
-				}
-			`,
-			{ fid, limit, token: YOGA_READ_TOKEN }
-		)
-		const validated = MyMessagesSchema.safeParse(res)
+		const res = await graphQLClient.request<T>(query, variables)
+
+		const validated = schema.safeParse(res)
 		if (!validated.success) {
-			throw new Error('Failed to validate response')
+			throw new Error('Failed to validate response:' + validated.error)
 		}
 
-		return validated.data
+		return validated.data as T
 	} catch (error: any) {
-		console.error('Error response:', error.response) // || error.response || error)
-		throw new Error('Failed to get casts for fid: ' + fid)
+		console.error('Error response:', error.response || error)
+		throw new Error(
+			'Failed to get ' + queryName + variables ? ` on: ${JSON.stringify(variables)}` : ''
+		)
 	}
 }

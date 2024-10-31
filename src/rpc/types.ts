@@ -9,13 +9,27 @@ export const EnabledChannelsSchema = z.object({
 })
 
 export interface SharedDatabaseMetricsResponse {
-		numSchemas: number
-		numPartitions: number
+	numSchemas: number
+	numPartitions: number
 }
 
 export const SharedDatabaseMetricsSchema = z.object({
-		numSchemas: z.number(),
-		numPartitions: z.number()
+	numSchemas: z.number(),
+	numPartitions: z.number()
+})
+
+export interface DatabaseViewResponse {
+	numMessages: number
+	getTimestampOfEarliestMessage: number
+	numMessagesMarkedForPruning: number
+	numFids: number
+}
+
+export const DatabaseViewSchema = z.object({
+	numMessages: z.number(),
+	getTimestampOfEarliestMessage: z.number(),
+	numMessagesMarkedForPruning: z.number(),
+	numFids: z.number()
 })
 
 export interface MyMessagesResponse {

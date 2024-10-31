@@ -25,10 +25,10 @@ const ClientDashboard = () => {
 		<div className="p-2">
 			<div className=""># of enabled channels: {enabledChannelsCount}</div>
 			<hr />
-			<div className=""># of messages: {dbView.numMessages}</div>
+			<div className=""># of messages: {dbView.numMessages + dbView.numMessagesMarkedForPruning}</div>
 			<div className="">
 				&nbsp;&nbsp;&nbsp;&bull;&nbsp;valid:{' '}
-				{dbView.numMessages - dbView.numMessagesMarkedForPruning}
+				{dbView.numMessages }
 			</div>
 			<div className="">
 				&nbsp;&nbsp;&nbsp;&bull;&nbsp;marked for pruning: {dbView.numMessagesMarkedForPruning}

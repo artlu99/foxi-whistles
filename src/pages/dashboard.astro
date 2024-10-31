@@ -5,7 +5,7 @@ import Layout from '../layouts/Layout.astro'
 // - UI
 import JustHero from '../components/blocks/hero/JustHero.astro'
 import Button from '../components/ui/Button.astro'
-import { getEnabledChannels, getSharedDatabaseMetrics } from './api/gql'
+import { getSharedDatabaseMetrics } from './api/gql'
 // - Data
 import ClientDashboard from '../components/blocks/data/ClientDashboard.tsx'
 
@@ -35,7 +35,9 @@ const { numPartitions, numSchemas } = (await getSharedDatabaseMetrics())
 	<ClientDashboard client:only="react" />
 	<ul>
 		<hr />
-		<Button type="external" size="lg" link="https://whistles.artlu.xyz/graphql" style="primary" external="circle-stack">GraphQL</Button>
+		<span class="text-xs">View entire encrypted-at-rest data set for the current (latest) schema:</span><br />
+		<Button type="external" size="lg" link="https://whistles.artlu.xyz/graphql?query=query+MyQuery+%7B%0A++getEncryptedData%28limit%3A+10000%29+%7B%0A++++rows+%7B%0A++++++how%0A++++++messageId%0A++++++partitionId%0A++++++what%0A++++++when%0A++++++who%0A++++%7D%0A++%7D%0A%7D" style="primary" external="circle-stack">GraphQL</Button>
+		<span class="text-xs">(no login required)</span><br />  
 		<li>&nbsp;# of partitions: {numPartitions}</li>
 		<li>&nbsp;# of schemas: {numSchemas}</li>
 	</ul>

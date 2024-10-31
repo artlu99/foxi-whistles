@@ -1,5 +1,10 @@
 [
 	{
+		"title": "Watch the protocol live",
+		"date": "2024-10-31",
+		"text": "<ul><li>privacy-preserving analytics</li><li>view as <a href='/dashboard'>dashboard</a></li></ul>"
+	},
+	{
 		"title": "Own your own data, protected by SIWF",
 		"date": "2024-10-29",
 		"text": "<ul><li>see your most recent messages</li><li><a href='/download'>download</a> all your data</li><li>nonces (<i>'number used once'</i>) for your safety and pleasure</li></ul>"

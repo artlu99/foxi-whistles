@@ -1,2 +1,3 @@
+- earliest message timestamp
 - scale indicator for channels list + messages list
 - manage + enable/disable channels

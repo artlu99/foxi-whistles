@@ -1,4 +1,5 @@
 import { gql, GraphQLClient } from 'graphql-request'
+import { GRAPHQL_ENDPOINT, YOGA_READ_TOKEN } from '../../rpc/constants'
 import {
 	EnabledChannelsSchema,
 	MyMessagesSchema,
@@ -8,11 +9,8 @@ import {
 	type SharedDatabaseMetricsResponse
 } from '../../rpc/types'
 
-const endpoint = 'https://whistles.artlu.xyz/graphql'
-const token = import.meta.env.YOGA_READ_TOKEN
-
 export const getEnabledChannels = async () => {
-	const graphQLClient = new GraphQLClient(endpoint)
+	const graphQLClient = new GraphQLClient(GRAPHQL_ENDPOINT)
 
 	try {
 		const res = await graphQLClient.request<EnabledChannelsResponse>(gql`
@@ -33,7 +31,7 @@ export const getEnabledChannels = async () => {
 }
 
 export const getSharedDatabaseMetrics = async () => {
-	const graphQLClient = new GraphQLClient(endpoint)
+	const graphQLClient = new GraphQLClient(GRAPHQL_ENDPOINT)
 
 	try {
 		const res = await graphQLClient.request<SharedDatabaseMetricsResponse>(gql`
@@ -56,7 +54,7 @@ export const getSharedDatabaseMetrics = async () => {
 }
 
 export const getMyMessages = async (fid: number, limit: number = 500) => {
-	const graphQLClient = new GraphQLClient(endpoint)
+	const graphQLClient = new GraphQLClient(GRAPHQL_ENDPOINT)
 
 	try {
 		const res = await graphQLClient.request<MyMessagesResponse>(
@@ -76,7 +74,7 @@ export const getMyMessages = async (fid: number, limit: number = 500) => {
 					}
 				}
 			`,
-			{ fid, limit, token }
+			{ fid, limit, token: YOGA_READ_TOKEN }
 		)
 		const validated = MyMessagesSchema.safeParse(res)
 		if (!validated.success) {

@@ -1,6 +1,4 @@
 ---
-export const prerender = false
-
 // Components
 // - Layout
 import Layout from '../layouts/Layout.astro'
@@ -8,6 +6,8 @@ import Layout from '../layouts/Layout.astro'
 import JustHero from '../components/blocks/hero/JustHero.astro'
 import Button from '../components/ui/Button.astro'
 import { getEnabledChannels, getSharedDatabaseMetrics } from './api/gql'
+// - Data
+import ClientDashboard from '../components/blocks/data/ClientDashboard.tsx'
 
 // Content
 // - SEO
@@ -21,13 +21,6 @@ const header = {
 	text: 'Anonymized analytics for Whistles Protocol.'
 }
 
-const numEnabledChannels = (await getEnabledChannels()).getEnabledChannels.length
-
-const numMessages = 151
-const numMessagesMarkedForPruning = 0
-const earliestMessageTimestamp = "2024-10-18"
-const numUniqueUsers = 17
-
 const { numPartitions, numSchemas } = (await getSharedDatabaseMetrics())
 ---
 
@@ -39,21 +32,15 @@ const { numPartitions, numSchemas } = (await getSharedDatabaseMetrics())
 		classes="bg-neutral-50 dark:bg-neutral-950/80"
 	>
 	<hr />
+	<ClientDashboard client:only="react" />
 	<ul>
-		<li>&nbsp;# of enabled channels: {numEnabledChannels}</li>
-		<hr />
-		<li>&nbsp;# of messages: {numMessages}</li>
-		<li><ul>
-				<li>&nbsp;&nbsp;&nbsp;&bull;&nbsp;valid: {numMessages - numMessagesMarkedForPruning}</li>
-				<li>&nbsp;&nbsp;&nbsp;&bull;&nbsp;earliest message: {earliestMessageTimestamp}</li>
-				<li>&nbsp;&nbsp;&nbsp;&bull;&nbsp;marked for pruning: {numMessagesMarkedForPruning}</li>
-			</ul></li>
-		<li>&nbsp;# of unique users (FIDs): {numUniqueUsers}</li>
 		<hr />
 		<Button type="external" size="lg" link="https://whistles.artlu.xyz/graphql" style="primary" external="circle-stack">GraphQL</Button>
 		<li>&nbsp;# of partitions: {numPartitions}</li>
 		<li>&nbsp;# of schemas: {numSchemas}</li>
 	</ul>
+	<span class="text-emphasis text-xs">as of 2024-10-31</span> 
 	<hr />
+
 	</JustHero>
 </Layout>

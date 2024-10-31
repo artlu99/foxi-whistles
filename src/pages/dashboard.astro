@@ -39,7 +39,7 @@ const { numPartitions, numSchemas } = (await getSharedDatabaseMetrics())
 		<li>&nbsp;# of partitions: {numPartitions}</li>
 		<li>&nbsp;# of schemas: {numSchemas}</li>
 	</ul>
-	<span class="text-emphasis text-xs">as of 2024-10-31</span> 
+	<span class="text-emphasis text-xs">as of {new Date().toISOString().slice(0, 10)}</span> 
 	<hr />
 
 	</JustHero>

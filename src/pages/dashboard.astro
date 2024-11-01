@@ -41,7 +41,9 @@ const { numPartitions, numSchemas } = (await getSharedDatabaseMetrics())
 		<li>&nbsp;# of partitions: {numPartitions}</li>
 		<li>&nbsp;# of schemas: {numSchemas}</li>
 	</ul>
-	<span class="text-emphasis text-xs">as of {new Date().toLocaleDateString('en-US').split(' ')[0]</span> 
+	<span class="text-emphasis text-xs">as of 
+		{new Date().toLocaleDateString('en-US', {timeZone: 'America/New_York'}).split(' ')[0]}
+	</span> 
 	<hr />
 
 	</JustHero>

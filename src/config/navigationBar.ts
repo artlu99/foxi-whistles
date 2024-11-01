@@ -39,21 +39,20 @@ export const navigationBarData: NavData = {
 	},
 	navItems: [
 		{ name: 'Home', link: '/' },
-		{ name: 'Pricing', link: '/pricing' },
+		{ name: 'Blog', link: '/blog' },
 		{
 			name: 'Resources',
 			link: '#',
 			submenu: [
 				{ name: 'FAQ', link: '/faq' },
-				{ name: 'See Enabled Channels', link: '/channels'},
+				{ name: 'See Enabled Channels', link: '/channels' },
 				{ name: 'Manage My Channels', link: '/manage' },
 				{ name: 'Download My Own Data', link: '/download' },
 				{ name: 'Anonymized Analytics', link: '/dashboard' },
+				{ name: 'Pricing', link: '/pricing' },
 				{ name: 'Contact', link: '/contact' }
 			]
 		},
-		{ name: 'Blog', link: '/blog' },
-		{ name: 'Changelog', link: '/changelog' },
 		{
 			name: 'Developers',
 			link: '#',
@@ -68,7 +67,8 @@ export const navigationBarData: NavData = {
 					name: 'Cast Action',
 					link: 'https://warpcast.com/~/add-cast-action?url=https%3A%2F%2Fkeccak256-composer-action.artlu.workers.dev%2Fcast-action'
 				},
-				{ name: 'GraphQL API', link: 'https://whistles.artlu.xyz/graphql' }
+				{ name: 'GraphQL API', link: 'https://whistles.artlu.xyz/graphql' },
+				{ name: 'Changelog', link: '/changelog' }
 			]
 		}
 	],

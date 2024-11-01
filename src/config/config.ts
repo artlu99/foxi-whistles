@@ -21,13 +21,13 @@ export interface Config {
 }
 
 export const configData: Config = {
-	siteTitle: 'Decentralized Whistles Protocol',
+	siteTitle: 'SassyHash',
 	siteDescription:
-		'The Decentralized Whistles Protocol leverages cryptographic building blocks and the open Farcaster Protocol, to share restricted-distribution information in self-sovereign, transparent, and sufficiently decentralized blah blah.',
+		'SassyHash leverages cryptographic building blocks and the open Farcaster Protocol, to share restricted-distribution information in self-sovereign, transparent, and sufficiently decentralized blah blah.', 
 	ogImage: '/og.jpg',
 	logo: {
 		src: '/logo.svg',
-		alt: 'Whistles. logo'
+		alt: 'SassyHash.logo'
 	},
 	canonical: true,
 	noindex: false,

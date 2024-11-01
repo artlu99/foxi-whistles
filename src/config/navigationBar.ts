@@ -35,7 +35,7 @@ export const navigationBarData: NavData = {
 	logo: {
 		src: '/logo.svg',
 		alt: 'Decentralized Whistles Protocol',
-		text: 'Whistles.'
+		text: 'SassyHash'
 	},
 	navItems: [
 		{ name: 'Home', link: '/' },

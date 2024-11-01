@@ -35,13 +35,13 @@ export interface FooterData {
 
 export const footerNavigationData: FooterData = {
 	footerAbout: {
-		title: 'Decentralized Whistles Protocol',
+		title: 'SassyHash',
 		aboutText:
-			'The Decentralized Whistles Protocol leverages cryptographic building blocks and the open Farcaster Protocol, to share restricted-distribution information in self-sovereign, transparent, and sufficiently decentralized blah blah.',
+			'SassyHash leverages cryptographic building blocks and the open Farcaster Protocol, to share restricted-distribution information in self-sovereign, transparent, and sufficiently decentralized blah blah.',
 		logo: {
 			src: '/logo.svg',
-			alt: 'Decentralized Whistles Protocol',
-			text: 'Whistles.'
+			alt: 'SassyHash',
+			text: 'SassyHash.'
 		}
 	},
 	footerColumns: [
@@ -102,6 +102,6 @@ export const footerNavigationData: FooterData = {
 		},
 	],
 	subFooter: {
-		copywriteText: '© Whistles 2024.'
+		copywriteText: '© SassyHash 2024.'
 	}
 }

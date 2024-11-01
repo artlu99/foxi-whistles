@@ -9,13 +9,13 @@ import Button from '../components/ui/Button.astro'
 // Content
 // - SEO
 const SEO = {
-	title: 'Whistles | Manage My Channels',
+	title: 'SassyHash | Manage My Channels',
 	description: 'Manage Channels owned by me on Warpcast'
 }
 // - Page Header
 const header = {
 	title: 'Manage <strong>My</strong> Channels.',
-	text: 'Enable and Disable channels for Whistles Protocol.'
+	text: 'How to Enable and Disable channels for SassyHash:' 
 }
 ---
 
@@ -26,18 +26,18 @@ const header = {
 		id="contact"
 		classes="bg-neutral-50 dark:bg-neutral-950/80"
 	>
+	<Button 
+		style="primary"
+		size="lg"
+		link="https://warpcast.com/~/add-cast-action?url=https%3A%2F%2Fkeccak256-composer-action.artlu.workers.dev%2Fcast-action"  
+		external="squares-plus"
+	>
+ 		Cast Action
+	</Button>
 		<ul>
-			<li>&bull;&nbsp;Read Keccack256 Cast Action on any cast in your channel.</li>
-			<li>&bull;&nbsp;Cast action will call up a frame, with a special button visible to channel owners only.</li>
-			<li>&bull;&nbsp;Click button to enable or disable your channel.</li>
-		</ul>
-		<Button 
-			style="primary"
-			size="lg"
-			link="https://warpcast.com/~/add-cast-action?url=https%3A%2F%2Fkeccak256-composer-action.artlu.workers.dev%2Fcast-action"  
-		 	external="squares-plus"
-		>
-		 Cast Action
-		</Button>
-	</JustHero>
+			<li>&bull;&nbsp;Call the Cast Action on any cast in your channel.</li>
+			<li>&bull;&nbsp;An ephemeral frame should appear, with a special button visible to channel owners only.</li>
+			<li>&bull;&nbsp;Click the button to enable or disable your channel.</li> 
+	</ul>
+</JustHero>
 </Layout>

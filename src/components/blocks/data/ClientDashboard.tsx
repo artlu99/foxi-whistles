@@ -34,7 +34,7 @@ const ClientDashboard = () => {
 				&nbsp;&nbsp;&nbsp;&bull;&nbsp;marked for pruning: {dbView.numMessagesMarkedForPruning}
 			</div>
 			<div className=""># of unique users (FIDs): {dbView.numFids}</div>
-			<span className="text-emphasis text-xs">as of {new Date().toISOString().slice(0, 10)}</span>
+			<span className="text-emphasis text-xs">as of {new Date().toLocaleDateString().split(' ')[0]}</span>
 		</div>
 	) : null
 }

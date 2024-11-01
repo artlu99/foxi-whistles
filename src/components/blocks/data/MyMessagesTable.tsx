@@ -126,7 +126,7 @@ const MyMessagesTable = (props: MyMessagesTableProps) => {
 					const timestamp = convertToExcelDate
 						? new Date(e.timestamp).getTime() / 1000 / 86400 + 25569 // Convert to Excel date
 						: e.timestamp
-					return `"${e.plaintext.replace(/"/g, '""')}",${timestamp},${e.ciphertext}"`
+					return `"${e.plaintext.replace(/"/g, '""')}",${timestamp},${e.ciphertext}`
 				})
 				.join('\n')
 		const encodedUri = encodeURI(csvContent)

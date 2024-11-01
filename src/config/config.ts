@@ -24,7 +24,7 @@ export const configData: Config = {
 	siteTitle: 'SassyHash',
 	siteDescription:
 		'SassyHash leverages cryptographic building blocks and the open Farcaster Protocol, to share restricted-distribution information in self-sovereign, transparent, and sufficiently decentralized blah blah.', 
-	ogImage: '/og.jpg',
+	ogImage: '/og-clean.jpg',
 	logo: {
 		src: '/logo.svg',
 		alt: 'SassyHash.logo'

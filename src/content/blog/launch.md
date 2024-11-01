@@ -1,5 +1,5 @@
 ---
-title: 'Whistles released in the wild'
+title: 'A wild Whistle appears'
 pubDate: 2024-10-07T12:00:00Z
 description: "We're excited to introduce you to the Decentralized Whistles Protocol a..."
 author: 'artlu99'

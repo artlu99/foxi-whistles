@@ -20,6 +20,7 @@ type Message = {
 	plaintext: string
 	timestamp: number
 	ciphertext: string
+	deleted: boolean
 }
 
 const columnHelper = createColumnHelper<Message>()
@@ -31,7 +32,15 @@ const columns = [
 	}),
 	columnHelper.accessor('plaintext', {
 		id: 'text',
-		header: 'plaintext'
+		header: 'plaintext',
+		cell: (info) => {
+			const isDeleted = info.row.original.deleted;
+			return (
+				<span style={{ textDecoration: isDeleted ? 'line-through' : 'none' }}>
+					{info.getValue()}
+				</span>
+			);
+		}
 	}),
 	columnHelper.accessor('timestamp', {
 		id: 'timestamp',
@@ -87,7 +96,8 @@ const MyMessagesTable = (props: MyMessagesTableProps) => {
 							return {
 								plaintext: msg.text,
 								timestamp: fallbackTimestamp,
-								ciphertext: keccak256(toUtf8Bytes(msg.text)).slice(2)
+								ciphertext: keccak256(toUtf8Bytes(msg.text)).slice(2),
+								deleted: msg.deletedAt ? true : false
 							}
 						}),
 						(c) => c.timestamp,
@@ -120,13 +130,13 @@ const MyMessagesTable = (props: MyMessagesTableProps) => {
 	const downloadCSV = (convertToExcelDate = false) => {
 		const csvContent =
 			'data:text/csv;charset=utf-8,' +
-			'plaintext,timestamp,ciphertext\n' +
+			'plaintext,timestamp,ciphertext,deleted\n' +
 			data
 				.map((e) => {
 					const timestamp = convertToExcelDate
 						? new Date(e.timestamp).getTime() / 1000 / 86400 + 25569 // Convert to Excel date
 						: e.timestamp
-					return `"${e.plaintext.replace(/"/g, '""')}",${timestamp},${e.ciphertext}`
+					return `"${e.plaintext.replace(/"/g, '""')}",${timestamp},${e.ciphertext},${e.deleted}`
 				})
 				.join('\n')
 		const encodedUri = encodeURI(csvContent)

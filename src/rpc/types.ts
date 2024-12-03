@@ -38,6 +38,7 @@ export interface MyMessagesResponse {
 			fid: number
 			timestamp: string
 			text: string
+			deletedAt: string | null
 		}[]
 	}
 }
@@ -48,7 +49,8 @@ export const MyMessagesSchema = z.object({
 			z.object({
 				fid: z.number(),
 				timestamp: z.string(),
-				text: z.string()
+				text: z.string(),
+				deletedAt: z.string().nullable()
 			})
 		)
 	})

@@ -44,6 +44,7 @@ const queries: Record<string, string> = {
 					fid
 					timestamp
 					text
+					deletedAt
 				}
 			}
 		}

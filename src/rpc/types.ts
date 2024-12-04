@@ -1,5 +1,13 @@
 import { z } from 'zod'
 
+export interface DisabledChannelsResponse {
+	getDisabledChannels: string[]
+}
+
+export const DisabledChannelsSchema = z.object({
+	getDisabledChannels: z.array(z.string())
+})
+
 export interface EnabledChannelsResponse {
 	getEnabledChannels: string[]
 }

@@ -1,0 +1,48 @@
+---
+export const prerender = false
+
+// Components
+// - Layout
+import Layout from '../layouts/Layout.astro'
+// - UI
+import SimpleFeed from '../components/blocks/feeds/BasicFeed.astro'
+import JustHero from '../components/blocks/hero/JustHero.astro'
+
+// Data
+import { alphabetical } from 'radash'
+import { getDisabledChannels } from './api/gql'
+const channels = await getDisabledChannels()
+const feedData = alphabetical( channels.getDisabledChannels, (c) => c, 'desc')
+	.map((channelName, idx) => ({
+		title: `${idx + 1}: ${channelName}`,
+		text: '<ul><li>' + [
+			`view in <a href="https://warpcast.com/~/channel/${channelName}" target="_blank" rel="noopener noreferrer">Warpcast</a>`,
+			`view in <a href="https://far.quest/channel/${channelName}" target="_blank" rel="noopener noreferrer">Far.Quest</a>`,
+		].join('</li><li>') + '</li></ul>'
+	}
+))
+
+// Content
+// - SEO
+const SEO = {
+	title: 'SassyHash | Disabled Channels',
+	description:
+		'List of Farcaster Channels where the owner has opted out of allowing SassyHash Protocol to decode messages.'
+}
+// - Page Header
+const header = {
+	title: 'Disabled <strong>Channels</strong>.',
+	text: `Each owner of these ${feedData.length} channels has opted out of allowing members to see decoded messages in their channel.` 
+}
+---
+
+<Layout title={SEO.title} description={SEO.description}>
+	<JustHero
+		title={header.title}
+		text={header.text}
+		id="contact"
+		classes="bg-neutral-50 dark:bg-neutral-950/80"
+	>
+	</JustHero>
+	<SimpleFeed data={feedData} />
+</Layout>

@@ -45,6 +45,7 @@ export const navigationBarData: NavData = {
 			link: '#',
 			submenu: [
 				{ name: 'FAQ', link: '/faq' },
+				{ name: 'See Disabled Channels', link: '/nospam' }, 
 				{ name: 'See Enabled Channels', link: '/channels' },
 				{ name: 'Manage My Channels', link: '/manage' },
 				{ name: 'Download My Own Data', link: '/download' },

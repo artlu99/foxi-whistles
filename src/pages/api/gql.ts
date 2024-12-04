@@ -3,16 +3,23 @@ import type { ZodObject } from 'zod'
 import { GRAPHQL_ENDPOINT, YOGA_READ_TOKEN } from '../../rpc/constants'
 import {
 	DatabaseViewSchema,
+	DisabledChannelsSchema,
 	EnabledChannelsSchema,
 	MyMessagesSchema,
 	SharedDatabaseMetricsSchema,
 	type DatabaseViewResponse,
+	type DisabledChannelsResponse,
 	type EnabledChannelsResponse,
 	type MyMessagesResponse,
 	type SharedDatabaseMetricsResponse
 } from '../../rpc/types'
 
 const queries: Record<string, string> = {
+	['getDisabledChannels']: gql`
+		query getDisabledChannels {
+			getDisabledChannels
+		}
+	`,
 	['getEnabledChannels']: gql`
 		query getEnabledChannels {
 			getEnabledChannels
@@ -49,6 +56,14 @@ const queries: Record<string, string> = {
 			}
 		}
 	`
+}
+
+export const getDisabledChannels = async () => {
+	const res = await genericGraphQLQuery<DisabledChannelsResponse>(
+		'getDisabledChannels',
+		DisabledChannelsSchema
+	)
+	return res
 }
 
 export const getEnabledChannels = async () => {

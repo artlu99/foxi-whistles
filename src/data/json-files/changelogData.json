@@ -1,5 +1,15 @@
 [
 	{
+		"title": "Permissions inverted",
+		"date": "2024-12-04",
+		"text": "<ul><li>channels enabled by default</li><li>see <a href='/nospam'>opt-outs</a></li></ul>"
+	},
+	{
+		"title": "Works with anonymous accounts",
+		"date": "2024-12-03",
+		"text": "<ul><li>user may opt into casting as <b>@superanon</b> or <b>@rawanon</b>|<b>@anoncast</b></li><li>anyone on internet can <a href='https://whistles.artlu.xyz/graphql'>trigger</a> pruning of old messages</li><li>(the <i>nonce</i> becomes a <i>thronce</i>)</li></ul>"
+	},
+	{
 		"title": "Watch the protocol live",
 		"date": "2024-10-31",
 		"text": "<ul><li>privacy-preserving analytics</li><li>view as <a href='/dashboard'>dashboard</a></li></ul>"

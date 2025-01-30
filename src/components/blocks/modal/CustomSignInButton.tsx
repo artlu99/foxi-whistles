@@ -29,6 +29,15 @@ function CustomSignInButton() {
 			sdk.on('primaryButtonClicked', () => sdk.actions.close())
 			await sdk.actions.setPrimaryButton({ text: 'Close Frame' })
 
+			const nonce = await getCsrfToken()
+			if (!nonce) throw new Error('Unable to generate nonce')
+			const result = await sdk.actions.signIn({ nonce })
+			await signIn('credentials', {
+				message: result.message,
+				signature: result.signature,
+				redirect: false
+			})
+
 			sdk.actions.ready({})
 		}
 

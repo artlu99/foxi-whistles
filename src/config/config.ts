@@ -23,10 +23,10 @@ export interface Config {
 export const configData: Config = {
 	siteTitle: 'SassyHash',
 	siteDescription:
-		'SassyHash leverages cryptographic building blocks and the open Farcaster Protocol, to share restricted-distribution information in self-sovereign, transparent, and sufficiently decentralized blah blah.', 
-	ogImage: '/og-clean.jpg',
+		'SassyHash leverages cryptographic building blocks and the open Farcaster Protocol, to share restricted-distribution information in self-sovereign, transparent, and sufficiently decentralized blah blah.',
+	ogImage: new URL('/og-clean.jpg', import.meta.env.SITE).href,
 	logo: {
-		src: '/logo.svg',
+		src: new URL('/logo.svg', import.meta.env.SITE).href,
 		alt: 'SassyHash.logo'
 	},
 	canonical: true,

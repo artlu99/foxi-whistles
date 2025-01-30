@@ -38,6 +38,9 @@ importers:
       '@farcaster/auth-kit':
         specifier: ^0.6.0
         version: 0.6.0(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(viem@2.21.35(typescript@5.6.3)(zod@3.23.8))
+      '@farcaster/frame-sdk':
+        specifier: ^0.0.26
+        version: 0.0.26(typescript@5.6.3)(zod@3.23.8)
       '@fontsource-variable/inter':
         specifier: ^5.1.0
         version: 5.1.0
@@ -499,6 +502,12 @@ packages:
     peerDependencies:
       react: '>= 17'
       react-dom: '>= 17'
+
+  '@farcaster/frame-core@0.0.24':
+    resolution: {integrity: sha512-iO/Jxz6mZBVUoLIY753Id5Yhn6DHBakQkIBXf0mreAcnjPGCMvKx/0xKEM3ns3M801PqoX7VLYO4q+kKxYzQ0A==}
+
+  '@farcaster/frame-sdk@0.0.26':
+    resolution: {integrity: sha512-tOoJcJLXXezjmP0gg/MOU/mCjNdWyL+j99XMylYCovel1etDQjLovGamVex8A6eELryLZ4LElV9AIbxP/i9IfA==}
 
   '@fontsource-variable/inter@5.1.0':
     resolution: {integrity: sha512-Wj2dUGP0vUpxRGQTXQTCNJO+aLcFcQm+gUPXfj/aS877bQkEPBPv9JvZJpwdm2vzelt8NTZ+ausKlBCJjh2XIg==}
@@ -1312,6 +1321,9 @@ packages:
   combined-stream@1.0.8:
     resolution: {integrity: sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==}
     engines: {node: '>= 0.8'}
+
+  comlink@4.4.2:
+    resolution: {integrity: sha512-OxGdvBmJuNKSCMO4NTl1L47VRp6xn2wG4F/2hYzB6tiCb709otOxtEYCSvK80PtjODfXXZu8ds+Nw5kVCjqd2g==}
 
   comma-separated-tokens@2.0.3:
     resolution: {integrity: sha512-Fu4hJdvzeylCfQPp9SGWidpzrMs7tTrlu6Vb8XGaRGck8QSNZJJp538Wrb60Lax4fPwR64ViY468OIUTbRlGZg==}
@@ -2301,6 +2313,14 @@ packages:
   ora@8.1.0:
     resolution: {integrity: sha512-GQEkNkH/GHOhPFXcqZs3IDahXEQcQxsSjEkK4KvEEST4t7eNzoMjxTzef+EZ+JluDEV+Raoi3WQ2CflnRdSVnQ==}
     engines: {node: '>=18'}
+
+  ox@0.4.4:
+    resolution: {integrity: sha512-oJPEeCDs9iNiPs6J0rTx+Y0KGeCGyCAA3zo94yZhm8G5WpOxrwUtn2Ie/Y8IyARSqqY/j9JTKA3Fc1xs1DvFnw==}
+    peerDependencies:
+      typescript: '>=5.4.0'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
 
   p-limit@2.3.0:
     resolution: {integrity: sha512-//88mFWSJx8lxCzwdAABTJL2MyWB12+eIY7MDL2SqLmAkeKU9qxRvWuSyTjm3FUmpBEMuFfckAIqEaVGUDxb6w==}
@@ -3375,6 +3395,9 @@ packages:
   zod@3.23.8:
     resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
 
+  zod@3.24.1:
+    resolution: {integrity: sha512-muH7gBL9sI1nciMZV67X5fTKKBLtwpZ5VBp1vsOQzj1MhrBZ4wlVCm3gedKZWLp0Oyel8sIGfeiz54Su+OVT+A==}
+
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
@@ -3818,6 +3841,23 @@ snapshots:
       - bufferutil
       - utf-8-validate
       - viem
+
+  '@farcaster/frame-core@0.0.24(typescript@5.6.3)':
+    dependencies:
+      ox: 0.4.4(typescript@5.6.3)(zod@3.24.1)
+      zod: 3.24.1
+    transitivePeerDependencies:
+      - typescript
+
+  '@farcaster/frame-sdk@0.0.26(typescript@5.6.3)(zod@3.23.8)':
+    dependencies:
+      '@farcaster/frame-core': 0.0.24(typescript@5.6.3)
+      comlink: 4.4.2
+      eventemitter3: 5.0.1
+      ox: 0.4.4(typescript@5.6.3)(zod@3.23.8)
+    transitivePeerDependencies:
+      - typescript
+      - zod
 
   '@fontsource-variable/inter@5.1.0': {}
 
@@ -4394,6 +4434,11 @@ snapshots:
       typescript: 5.6.3
       zod: 3.23.8
 
+  abitype@1.0.6(typescript@5.6.3)(zod@3.24.1):
+    optionalDependencies:
+      typescript: 5.6.3
+      zod: 3.24.1
+
   acorn-import-attributes@1.9.5(acorn@8.13.0):
     dependencies:
       acorn: 8.13.0
@@ -4754,6 +4799,8 @@ snapshots:
   combined-stream@1.0.8:
     dependencies:
       delayed-stream: 1.0.0
+
+  comlink@4.4.2: {}
 
   comma-separated-tokens@2.0.3: {}
 
@@ -5907,6 +5954,34 @@ snapshots:
       string-width: 7.2.0
       strip-ansi: 7.1.0
 
+  ox@0.4.4(typescript@5.6.3)(zod@3.23.8):
+    dependencies:
+      '@adraffy/ens-normalize': 1.11.0
+      '@noble/curves': 1.6.0
+      '@noble/hashes': 1.5.0
+      '@scure/bip32': 1.5.0
+      '@scure/bip39': 1.4.0
+      abitype: 1.0.6(typescript@5.6.3)(zod@3.23.8)
+      eventemitter3: 5.0.1
+    optionalDependencies:
+      typescript: 5.6.3
+    transitivePeerDependencies:
+      - zod
+
+  ox@0.4.4(typescript@5.6.3)(zod@3.24.1):
+    dependencies:
+      '@adraffy/ens-normalize': 1.11.0
+      '@noble/curves': 1.6.0
+      '@noble/hashes': 1.5.0
+      '@scure/bip32': 1.5.0
+      '@scure/bip39': 1.4.0
+      abitype: 1.0.6(typescript@5.6.3)(zod@3.24.1)
+      eventemitter3: 5.0.1
+    optionalDependencies:
+      typescript: 5.6.3
+    transitivePeerDependencies:
+      - zod
+
   p-limit@2.3.0:
     dependencies:
       p-try: 2.2.0
@@ -6983,5 +7058,7 @@ snapshots:
       zod: 3.23.8
 
   zod@3.23.8: {}
+
+  zod@3.24.1: {}
 
   zwitch@2.0.4: {}

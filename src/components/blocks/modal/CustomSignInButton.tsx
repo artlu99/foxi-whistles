@@ -1,8 +1,9 @@
 'use client'
 
 import { SignInButton, type StatusAPIResponse } from '@farcaster/auth-kit'
+import sdk, { type Context } from '@farcaster/frame-sdk'
 import { signIn, signOut } from 'auth-astro/client'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import './authKitStyles.css'
 
 async function getCsrfToken() {
@@ -18,6 +19,24 @@ async function getCsrfToken() {
 
 function CustomSignInButton() {
 	const [error, setError] = useState(false)
+	const [isSDKLoaded, setIsSDKLoaded] = useState(false)
+	const [context, setContext] = useState<Context.FrameContext>()
+
+	useEffect(() => {
+		const load = async () => {
+			setContext(await sdk.context)
+
+			sdk.on('primaryButtonClicked', () => sdk.actions.close())
+			await sdk.actions.setPrimaryButton({ text: 'Close Frame' })
+
+			sdk.actions.ready({})
+		}
+
+		if (sdk && !isSDKLoaded) {
+			setIsSDKLoaded(true)
+			load()
+		}
+	}, [isSDKLoaded])
 
 	const getNonce = useCallback(async () => {
 		const nonce = await getCsrfToken()

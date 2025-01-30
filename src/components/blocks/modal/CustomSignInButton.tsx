@@ -29,15 +29,6 @@ function CustomSignInButton() {
 			sdk.on('primaryButtonClicked', () => sdk.actions.close())
 			await sdk.actions.setPrimaryButton({ text: 'Close Frame' })
 
-			const nonce = await getCsrfToken()
-			if (!nonce) throw new Error('Unable to generate nonce')
-			const result = await sdk.actions.signIn({ nonce })
-			await signIn('credentials', {
-				message: result.message,
-				signature: result.signature,
-				redirect: false
-			})
-
 			sdk.actions.ready({})
 		}
 
@@ -46,6 +37,23 @@ function CustomSignInButton() {
 			load()
 		}
 	}, [isSDKLoaded])
+
+	useEffect(() => {
+		const seamlessSignIn = async () => {
+			const nonce = await getCsrfToken()
+			if (!nonce) throw new Error('Unable to generate nonce')
+			const result = await sdk.actions.signIn({ nonce })
+			await signIn('credentials', {
+				message: result.message,
+				signature: result.signature,
+				redirect: false
+			})
+		}
+
+		if (context) {
+			seamlessSignIn()
+		}
+	}, [context])
 
 	const getNonce = useCallback(async () => {
 		const nonce = await getCsrfToken()

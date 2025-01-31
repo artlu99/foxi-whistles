@@ -46,7 +46,8 @@ function CustomSignInButton() {
 			await signIn('credentials', {
 				message: result.message,
 				signature: result.signature,
-				redirect: false
+				pfp: context?.user?.pfpUrl,
+				redirect: true
 			})
 		}
 

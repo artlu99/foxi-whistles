@@ -12,7 +12,7 @@ import {
 } from '@tanstack/react-table'
 import { fetcher } from 'itty-fetcher'
 import { sort } from 'radash'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import type { SafeParseReturnType } from 'zod'
 import { MyMessagesSchema, type MyMessagesResponse } from '../../../rpc/types'
 
@@ -34,12 +34,12 @@ const columns = [
 		id: 'text',
 		header: 'plaintext',
 		cell: (info) => {
-			const isDeleted = info.row.original.deleted;
+			const isDeleted = info.row.original.deleted
 			return (
 				<span style={{ textDecoration: isDeleted ? 'line-through' : 'none' }}>
 					{info.getValue()}
 				</span>
-			);
+			)
 		}
 	}),
 	columnHelper.accessor('timestamp', {
@@ -160,6 +160,13 @@ const MyMessagesTable = (props: MyMessagesTableProps) => {
 		document.body.removeChild(link) // Clean up
 	}
 
+	const renderCell = (content: unknown): ReactNode => {
+		if (typeof content === 'bigint') {
+			return content.toString()
+		}
+		return content as ReactNode
+	}
+
 	return response ? (
 		<div className="p-2">
 			<div className="flex justify-end">
@@ -183,9 +190,7 @@ const MyMessagesTable = (props: MyMessagesTableProps) => {
 						<tr key={headerGroup.id}>
 							{headerGroup.headers.map((header) => (
 								<th key={header.id}>
-									{header.isPlaceholder
-										? null
-										: flexRender(header.column.columnDef.header, header.getContext())}
+									{renderCell(flexRender(header.column.columnDef.header, header.getContext()))}
 								</th>
 							))}
 						</tr>
@@ -200,7 +205,9 @@ const MyMessagesTable = (props: MyMessagesTableProps) => {
 							}
 						>
 							{row.getVisibleCells().map((cell) => (
-								<td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
+								<td key={cell.id}>
+									{renderCell(flexRender(cell.column.columnDef.cell, cell.getContext()))}
+								</td>
 							))}
 						</tr>
 					))}
@@ -210,9 +217,7 @@ const MyMessagesTable = (props: MyMessagesTableProps) => {
 						<tr key={footerGroup.id}>
 							{footerGroup.headers.map((header) => (
 								<th key={header.id}>
-									{header.isPlaceholder
-										? null
-										: flexRender(header.column.columnDef.footer, header.getContext())}
+									{renderCell(flexRender(header.column.columnDef.footer, header.getContext()))}
 								</th>
 							))}
 						</tr>

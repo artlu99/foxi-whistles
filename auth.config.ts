@@ -41,8 +41,6 @@ export default defineConfig({
           ethereum: viemConnector(),
         });
 
-        console.log("csrfToken:", csrfToken);
-
         const verifyResponse = await appClient.verifySignInMessage({
           message: credentials?.message as string,
           signature: credentials?.signature as `0x${string}`,
@@ -50,8 +48,6 @@ export default defineConfig({
           nonce: csrfToken,
         });
         
-        console.log("verifyResponse:", verifyResponse);
-
         const { success, fid } = verifyResponse;
 
         if (!success) {

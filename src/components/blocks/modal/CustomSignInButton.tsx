@@ -43,14 +43,16 @@ function CustomSignInButton() {
 			const nonce = await getCsrfToken()
 			if (!nonce) throw new Error('Unable to generate nonce')
 			const result = await sdk.actions.signIn({ nonce })
-			await signIn('credentials', {
+			const res = await signIn('credentials', {
 				message: result.message,
 				signature: result.signature,
 				name: context?.user?.username,
 				pfp: context?.user?.pfpUrl,
-				redirect: true,
-				csrfToken: nonce
+				redirect: false,
 			})
+			if (res?.ok) {
+				window.location.reload()
+			}
 		}
 
 		if (context) {

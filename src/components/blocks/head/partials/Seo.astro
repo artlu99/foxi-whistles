@@ -19,6 +19,20 @@ type Props = {
 }
 
 const { title, description, ogImage, canonical, noindex } = Astro.props
+const frame = {
+    version: "next",
+    imageUrl: ogImage,
+    button: {
+      title,
+      action: {
+        type: "launch_frame",
+        name,
+        url: Astro.url,
+        splashImageUrl: ogImage,
+        splashBackgroundColor: "#0F172A",
+      },
+    },
+  };
 ---
 
 <Fragment>
@@ -34,6 +48,7 @@ const { title, description, ogImage, canonical, noindex } = Astro.props
 	<meta property="twitter:title" content={title} />
 	<meta property="twitter:description" content={description} />
 	<meta property="twitter:image" content={ogImage} />
+	<meta property="fc:frame" content={JSON.stringify(frame)} />
 	<link rel="canonical" href={Astro.url} />
 	{canonical && <link rel="canonical" href={Astro.url} item-prop="url" />}
 	{noindex && <meta name="robots" content="noindex,nofollow" />}

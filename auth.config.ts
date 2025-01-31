@@ -47,6 +47,7 @@ export default defineConfig({
           domain: "Whistles.Protocol",
           nonce: csrfToken,
         });
+        console.log(verifyResponse);
         const { success, fid } = verifyResponse;
 
         if (!success) {

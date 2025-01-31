@@ -46,8 +46,10 @@ function CustomSignInButton() {
 			await signIn('credentials', {
 				message: result.message,
 				signature: result.signature,
+				name: context?.user?.username,
 				pfp: context?.user?.pfpUrl,
-				redirect: true
+				redirect: true,
+				csrfToken: nonce
 			})
 		}
 

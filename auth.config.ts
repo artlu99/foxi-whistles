@@ -41,13 +41,17 @@ export default defineConfig({
           ethereum: viemConnector(),
         });
 
+        console.log("csrfToken:", csrfToken);
+
         const verifyResponse = await appClient.verifySignInMessage({
           message: credentials?.message as string,
           signature: credentials?.signature as `0x${string}`,
           domain: "Whistles.Protocol",
           nonce: csrfToken,
         });
-        console.log(verifyResponse);
+        
+        console.log("verifyResponse:", verifyResponse);
+
         const { success, fid } = verifyResponse;
 
         if (!success) {

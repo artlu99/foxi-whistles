@@ -21,14 +21,14 @@ type Props = {
 const { title, description, ogImage, canonical, noindex } = Astro.props
 const frame = {
     version: "next",
-    imageUrl: ogImage,
+    imageUrl: "https://sassyhash.artlu.xyz/sassyhash-og.png",
     button: {
       title,
       action: {
         type: "launch_frame",
         name: 'SassyHash 💅',
         url: Astro.url,
-        splashImageUrl: ogImage,
+        splashImageUrl: "https://sassyhash.artlu.xyz/sassyhash-og.png",
         splashBackgroundColor: "#0F172A",
       },
     },

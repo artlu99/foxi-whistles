@@ -3,21 +3,21 @@
 // ------------
 // Description: A centered call to action section that contains: a title, text, background image, notification and a button.
 
+import { Image } from "astro:assets";
+import Button from "../../ui/Button.astro";
+// - UI
+import CTA from "../../ui/CTA.astro";
+import ChipNotification from "../../ui/ChipNotification.astro";
+import Col from "../../ui/Col.astro";
+import Highlight from "../../ui/Highlight.astro";
+import Row from "../../ui/Row.astro";
 // Components
 // - Layout
-import Section from '../../ui/Section.astro'
-import Row from '../../ui/Row.astro'
-import Col from '../../ui/Col.astro'
-// - UI
-import CTA from '../../ui/CTA.astro'
-import Button from '../../ui/Button.astro'
-import ChipNotification from '../../ui/ChipNotification.astro'
-import { Image } from 'astro:assets'
-import Highlight from '../../ui/Highlight.astro'
+import Section from "../../ui/Section.astro";
 
+import badge from "../../../assets/badge.svg";
 // Content
-import ctaImage from '../../../assets/cta-dark-bg.webp'
-import badge from '../../../assets/badge.svg'
+import ctaImage from "../../../assets/cta-dark-bg.webp";
 ---
 
 <Section>

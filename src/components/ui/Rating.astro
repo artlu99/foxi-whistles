@@ -14,19 +14,27 @@
 
 // Components
 // - UI
-import { Icon } from 'astro-icon/components'
+import { Icon } from "astro-icon/components";
 
 // Props
 type Props = {
-	title?: string
-	text?: string
-	helperText?: string
-	rating: 0 | 1 | 2 | 3 | 4 | 5
-	size?: 'base' | 'sm'
-	elevated?: boolean
-	classes?: string
-}
-const { rating = 0, size = 'base', elevated, title, text, helperText, classes } = Astro.props
+	title?: string;
+	text?: string;
+	helperText?: string;
+	rating: 0 | 1 | 2 | 3 | 4 | 5;
+	size?: "base" | "sm";
+	elevated?: boolean;
+	classes?: string;
+};
+const {
+	rating = 0,
+	size = "base",
+	elevated,
+	title,
+	text,
+	helperText,
+	classes,
+} = Astro.props;
 ---
 
 <div

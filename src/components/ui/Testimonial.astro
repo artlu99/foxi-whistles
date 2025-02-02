@@ -17,37 +17,37 @@
 
 // Components
 // - UI
-import { Icon } from 'astro-icon/components'
-import Rating from './Rating.astro'
-import Avatar from './Avatar.astro'
+import { Icon } from "astro-icon/components";
+import Avatar from "./Avatar.astro";
+import Rating from "./Rating.astro";
 
 // Props
 type Props = {
-	blockquote: string
-	figcaption: string
-	cite?: string
-	link?: string
-	avatar?: any
-	size?: string
-	mobileSize?: string
-	align?: 'left' | 'center'
-	rating?: 0 | 1 | 2 | 3 | 4 | 5
-	quoteSize?: number
-	classes?: string
-}
+	blockquote: string;
+	figcaption: string;
+	cite?: string;
+	link?: string;
+	avatar?: any;
+	size?: string;
+	mobileSize?: string;
+	align?: "left" | "center";
+	rating?: 0 | 1 | 2 | 3 | 4 | 5;
+	quoteSize?: number;
+	classes?: string;
+};
 const {
 	blockquote,
 	figcaption,
 	cite,
 	avatar,
-	size = 'base',
+	size = "base",
 	mobileSize = size,
 	rating,
-	align = 'left',
+	align = "left",
 	link,
 	classes,
-	quoteSize = 64
-} = Astro.props
+	quoteSize = 64,
+} = Astro.props;
 ---
 
 <div

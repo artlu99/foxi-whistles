@@ -3,20 +3,20 @@
 // ------------
 // Description: The basic page header.
 
+import Col from "../../ui/Col.astro";
+import Row from "../../ui/Row.astro";
 // Components
 // - Layout
-import Section from '../../ui/Section.astro'
-import Row from '../../ui/Row.astro'
-import Col from '../../ui/Col.astro'
+import Section from "../../ui/Section.astro";
 
 // Props
 type Props = {
-	id?: string
-	title?: string
-	text?: string
-	classes?: string
-}
-const { id = 'intro', title, text, classes } = Astro.props
+	id?: string;
+	title?: string;
+	text?: string;
+	classes?: string;
+};
+const { id = "intro", title, text, classes } = Astro.props;
 ---
 
 <Section id={id} classes=`bg-neutral-50 dark:bg-neutral-900 ${classes}`>

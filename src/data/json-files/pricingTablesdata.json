@@ -38,7 +38,9 @@
 		"body": {
 			"listItems": [
 				{ "listItem": "You get a little flair by your name if you are early." },
-				{ "listItem": "Ideal for devs. And devs. More devs. And influenzas larping as devs." }
+				{
+					"listItem": "Ideal for devs. And devs. More devs. And influenzas larping as devs."
+				}
 			]
 		},
 		"footer": {
@@ -63,7 +65,9 @@
 			"listItems": [
 				{ "listItem": "Join if you're part of the cabal (Love you, Brian)" },
 				{ "listItem": "Farcaster Is Open for Everyone lol" },
-				{ "listItem": "We'll talk to you after you're done talking with @cassie" }
+				{
+					"listItem": "We'll talk to you after you're done talking with @cassie"
+				}
 			]
 		},
 		"footer": {

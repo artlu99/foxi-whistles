@@ -3,27 +3,27 @@
 // ------------
 // Description: A section with the header as a sticky sidebar and features with icons and descriptions in a 3 column layout.
 
+import Col from "../../ui/Col.astro";
+// - UI
+import Feature from "../../ui/Feature.astro";
 // Components
 // - Layout
-import Row from '../../ui/Row.astro'
-import Col from '../../ui/Col.astro'
-import StickySidebar from '../basic/StickySidebar.astro'
-// - UI
-import Feature from '../../ui/Feature.astro'
+import Row from "../../ui/Row.astro";
+import StickySidebar from "../basic/StickySidebar.astro";
 
 // Props
 type FeatureData = {
-	title: string
-	icon: string
-	description: string
-}
+	title: string;
+	icon: string;
+	description: string;
+};
 type Props = {
-	title: string
-	text?: string
-	data: FeatureData[]
-	classes?: string
-}
-const { title, text, data, classes } = Astro.props
+	title: string;
+	text?: string;
+	data: FeatureData[];
+	classes?: string;
+};
+const { title, text, data, classes } = Astro.props;
 ---
 
 <StickySidebar classes={classes}>

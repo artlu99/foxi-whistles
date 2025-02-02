@@ -8,18 +8,18 @@
 // - classes: additional classes
 // Reference: https://wind-ui.com/components/modals/
 
+import { Icon } from "astro-icon/components";
 // Components
 // - UI
-import Button from './Button.astro'
-import { Icon } from 'astro-icon/components'
+import Button from "./Button.astro";
 
 // Props
 type Props = {
-	id?: string
-	title?: string
-	classes?: string
-}
-const { id, title, classes } = Astro.props
+	id?: string;
+	title?: string;
+	classes?: string;
+};
+const { id, title, classes } = Astro.props;
 ---
 
 <div {...id ? { id } : {}} class:list={['modal', { [`${classes}`]: classes }]}>

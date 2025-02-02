@@ -3,29 +3,29 @@ export const prerender = false;
 
 // Components
 // - Session
-import { getSession } from 'auth-astro/server';
-// - Layout
-import Layout from '../layouts/Layout.astro';
+import { getSession } from "auth-astro/server";
 // - UI
-import MyMessagesTable from '../components/blocks/data/MyMessagesTable';
-import JustHero from '../components/blocks/hero/JustHero.astro';
-import AuthBlock from '../components/blocks/modal/AuthBlock.astro';
+import MyMessagesTable from "../components/blocks/data/MyMessagesTable";
+import JustHero from "../components/blocks/hero/JustHero.astro";
+import AuthBlock from "../components/blocks/modal/AuthBlock.astro";
+// - Layout
+import Layout from "../layouts/Layout.astro";
 
 // Content
 // - SEO
 const SEO = {
-	title: 'SassyHash 💅 | Download My Data',
-	description: 'Download My Own Data from SassyHash 💅'
-}
+	title: "SassyHash 💅 | Download My Data",
+	description: "Download My Own Data from SassyHash 💅",
+};
 // - Page Header
 const header = {
-	title: 'My Own <strong>Data</strong>.',
-	text: 'Proof of Read-Write-Own by downloading my data.'
-}
+	title: "My Own <strong>Data</strong>.",
+	text: "Proof of Read-Write-Own by downloading my data.",
+};
 
 // - Session
-const session = await getSession(Astro.request)
-const fid = session?.user?.email ? parseInt(session?.user?.email) : null
+const session = await getSession(Astro.request);
+const fid = session?.user?.email ? Number.parseInt(session?.user?.email) : null;
 ---
 
 <Layout title={SEO.title} description={SEO.description}>

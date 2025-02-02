@@ -9,14 +9,14 @@
 // Props
 type Props = {
 	data: Array<{
-		title: string
-		date?: string
-		text?: string
-		image?: string
-	}>
-	classes?: string
-}
-const { data, classes } = Astro.props
+		title: string;
+		date?: string;
+		text?: string;
+		image?: string;
+	}>;
+	classes?: string;
+};
+const { data, classes } = Astro.props;
 ---
 
 <ul aria-label="Changelog feed" role="feed" class:list={['feed', { [`${classes}`]: classes }]}>

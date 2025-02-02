@@ -11,16 +11,16 @@
 
 // Components
 // - UI
-import Avatar from './Avatar.astro'
+import Avatar from "./Avatar.astro";
 
 // Props
 type Props = {
-	size?: 'lg' | 'base' | 'sm' | 'xs'
-	avatars: Array<any>
-	radius?: string
-	classes?: string
-}
-const { size = 'base', avatars, radius = 'rounded', classes } = Astro.props
+	size?: "lg" | "base" | "sm" | "xs";
+	avatars: Array<any>;
+	radius?: string;
+	classes?: string;
+};
+const { size = "base", avatars, radius = "rounded", classes } = Astro.props;
 ---
 
 <span class:list={['avatar-group', { [`${classes}`]: classes }]}>

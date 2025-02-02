@@ -5,54 +5,54 @@
 
 // Components
 // - UI
-import TextImage from '../basic/TextImage.astro'
+import TextImage from "../basic/TextImage.astro";
 
 // Content
-import highlight01mobile from '../../../assets/highlights/highlight-01-mobile.svg'
-import highlight01 from '../../../assets/highlights/highlight-01.svg'
-import highlight02mobile from '../../../assets/highlights/highlight-02-mobile.svg'
-import highlight02 from '../../../assets/highlights/highlight-02.svg'
-import highlight03mobile from '../../../assets/highlights/highlight-03-mobile.svg'
-import highlight03 from '../../../assets/highlights/highlight-03.svg'
+import highlight01mobile from "../../../assets/highlights/highlight-01-mobile.svg";
+import highlight01 from "../../../assets/highlights/highlight-01.svg";
+import highlight02mobile from "../../../assets/highlights/highlight-02-mobile.svg";
+import highlight02 from "../../../assets/highlights/highlight-02.svg";
+import highlight03mobile from "../../../assets/highlights/highlight-03-mobile.svg";
+import highlight03 from "../../../assets/highlights/highlight-03.svg";
 
 type HighlightBlock = {
-	title: string
-	text: string
-	image: any
-	mobileImage?: any
-	imageWidth: number
-	imageHeight: number
-	imagePosition: 'left' | 'right'
-}
+	title: string;
+	text: string;
+	image: any;
+	mobileImage?: any;
+	imageWidth: number;
+	imageHeight: number;
+	imagePosition: "left" | "right";
+};
 const highlightBlocks: HighlightBlock[] = [
 	{
-		title: 'Complete <strong>Transparency</strong>',
-		text: 'Gain complete visibility into your encoded content with our comprehensive dashboard. Easily track feeds, permissions, and communities at a glance. ',
+		title: "Complete <strong>Transparency</strong>",
+		text: "Gain complete visibility into your encoded content with our comprehensive dashboard. Easily track feeds, permissions, and communities at a glance. ",
 		image: highlight01,
 		imageWidth: highlight01.width,
 		imageHeight: highlight01.height,
 		mobileImage: highlight01mobile,
-		imagePosition: 'right'
+		imagePosition: "right",
 	},
 	{
-		title: 'Advanced <strong>Permissioning</strong> Tools',
-		text: 'Like automod.sh (RIP), but with decentralized DNA and sufficient sovereignty, ownership and forkability at every step.',
+		title: "Advanced <strong>Permissioning</strong> Tools",
+		text: "Like automod.sh (RIP), but with decentralized DNA and sufficient sovereignty, ownership and forkability at every step.",
 		image: highlight02,
 		mobileImage: highlight02mobile,
 		imageWidth: highlight02.width,
 		imageHeight: highlight02.height,
-		imagePosition: 'left'
+		imagePosition: "left",
 	},
 	{
-		title: '<strong>Nuanced</strong> Interpersonal Connections',
-		text: 'Strengthen cozy community vibes with delicious shared secrets. Unleash your inner Mean Girl and tone police to keep everyone on the same page, without the world knowing. ',
+		title: "<strong>Nuanced</strong> Interpersonal Connections",
+		text: "Strengthen cozy community vibes with delicious shared secrets. Unleash your inner Mean Girl and tone police to keep everyone on the same page, without the world knowing. ",
 		image: highlight03,
 		mobileImage: highlight03mobile,
 		imageWidth: highlight03.width,
 		imageHeight: highlight03.height,
-		imagePosition: 'right'
-	}
-]
+		imagePosition: "right",
+	},
+];
 ---
 
 {

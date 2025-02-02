@@ -14,28 +14,28 @@
 
 // Components
 // - UI
-import { Image } from 'astro:assets'
-import Card from './partials/Card.astro'
-import CardBody from './partials/CardBody.astro'
-import Badge from '../Badge.astro'
+import { Image } from "astro:assets";
+import Badge from "../Badge.astro";
+import Card from "./partials/Card.astro";
+import CardBody from "./partials/CardBody.astro";
 
 // Props
 type Props = {
-	title?: string
-	subtitle?: string
-	image?: any
-	link?: string
-	classes?: string
-	tags?: string[]
-}
+	title?: string;
+	subtitle?: string;
+	image?: any;
+	link?: string;
+	classes?: string;
+	tags?: string[];
+};
 const {
-	title = '',
+	title = "",
 	subtitle,
 	image,
 	link,
-	classes = '!shadow-none border border-neutral-100 dark:border-neutral-800',
-	tags
-} = Astro.props
+	classes = "!shadow-none border border-neutral-100 dark:border-neutral-800",
+	tags,
+} = Astro.props;
 ---
 
 <Card classes={classes}>

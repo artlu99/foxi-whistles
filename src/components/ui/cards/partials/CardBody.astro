@@ -7,9 +7,9 @@
 
 // Props
 type Props = {
-	classes?: string
-}
-const { classes } = Astro.props
+	classes?: string;
+};
+const { classes } = Astro.props;
 ---
 
 <div class:list={['card__body', { [`${classes}`]: classes }]}>

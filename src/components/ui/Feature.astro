@@ -13,18 +13,25 @@
 
 // Components
 // - UI
-import { Icon } from 'astro-icon/components'
+import { Icon } from "astro-icon/components";
 
 // Props
 type Props = {
-	type?: 'top-icon' | 'side-icon'
-	title?: string
-	icon?: string
-	iconStyle?: 'normal' | 'square'
-	align?: 'left' | 'center'
-	classes?: string
-}
-const { type = 'top-icon', title, icon = 'rocket', iconStyle, align, classes } = Astro.props
+	type?: "top-icon" | "side-icon";
+	title?: string;
+	icon?: string;
+	iconStyle?: "normal" | "square";
+	align?: "left" | "center";
+	classes?: string;
+};
+const {
+	type = "top-icon",
+	title,
+	icon = "rocket",
+	iconStyle,
+	align,
+	classes,
+} = Astro.props;
 ---
 
 <div

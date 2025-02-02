@@ -18,23 +18,23 @@
 
 // Components
 // - UI
-import { Icon } from 'astro-icon/components'
+import { Icon } from "astro-icon/components";
 
 // Props
 type Props = {
-	id: string
-	type?: 'text' | 'email' | 'password' | 'tel'
-	label: string
-	iconName?: string
-	iconPosition?: 'lead' | 'trail'
-	helperText?: string
-	required?: boolean
-	disabled?: boolean
-	value?: string
-	classes?: string
-}
+	id: string;
+	type?: "text" | "email" | "password" | "tel";
+	label: string;
+	iconName?: string;
+	iconPosition?: "lead" | "trail";
+	helperText?: string;
+	required?: boolean;
+	disabled?: boolean;
+	value?: string;
+	classes?: string;
+};
 const {
-	type = 'text',
+	type = "text",
 	id,
 	label,
 	iconName,
@@ -43,8 +43,8 @@ const {
 	required,
 	disabled,
 	value,
-	classes
-} = Astro.props
+	classes,
+} = Astro.props;
 ---
 
 <div

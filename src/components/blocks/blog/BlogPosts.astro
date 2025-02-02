@@ -5,25 +5,27 @@
 // Properties:
 // - data: An array of blog posts
 
+import Col from "../../../components/ui/Col.astro";
+import Row from "../../../components/ui/Row.astro";
 // Components
 // - Layout
-import Section from '../../../components/ui/Section.astro'
-import Row from '../../../components/ui/Row.astro'
-import Col from '../../../components/ui/Col.astro'
+import Section from "../../../components/ui/Section.astro";
+import TagNavigation from "../../../components/ui/blog/TagNavigation.astro";
 // - UI
-import Post from '../../../components/ui/cards/BlogCard.astro'
-import TagNavigation from '../../../components/ui/blog/TagNavigation.astro'
+import Post from "../../../components/ui/cards/BlogCard.astro";
 
 // Props
 type Props = {
-	data: any
-}
-const { data: allPosts } = Astro.props
+	data: any;
+};
+const { data: allPosts } = Astro.props;
 
 // Function to sort posts by date
 const sortedPosts = allPosts.sort((a: any, b: any) => {
-	return new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
-})
+	return (
+		new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+	);
+});
 ---
 
 <Section>

@@ -1,32 +1,34 @@
 ---
+import CTA from "../components/blocks/CTA/BasicDark.astro";
+import FAQ from "../components/blocks/FAQ/FaqSticky.astro";
+// - UI
+import TextImage from "../components/blocks/basic/TextImage.astro";
+import Hero from "../components/blocks/hero/PageHeader.astro";
 // Components
 // - Layout
-import Layout from '../layouts/Layout.astro'
-// - UI
-import TextImage from '../components/blocks/basic/TextImage.astro'
-import CTA from '../components/blocks/CTA/BasicDark.astro'
-import FAQ from '../components/blocks/FAQ/FaqSticky.astro'
-import Hero from '../components/blocks/hero/PageHeader.astro'
+import Layout from "../layouts/Layout.astro";
 
 // Data
-import faqData from '../data/json-files/faqData.json'
+import faqData from "../data/json-files/faqData.json";
 // - FAQ Categories
-const faqPricing = faqData.filter((faq) => faq.category === 'pricing')
-const faqIntegrations = faqData.filter((faq) => faq.category === 'integrations')
+const faqPricing = faqData.filter((faq) => faq.category === "pricing");
+const faqIntegrations = faqData.filter(
+	(faq) => faq.category === "integrations",
+);
 
 // Content
-import faqImage1 from '../assets/faq/faq-01.png'
+import faqImage1 from "../assets/faq/faq-01.png";
 // - SEO
 const SEO = {
-	title: 'SassyHash 💅 |Get Your Questions Answered with a Smile',
+	title: "SassyHash 💅 |Get Your Questions Answered with a Smile",
 	description:
-		'Dive into the SassyHash FAQ Funhouse to get answers to all your questions about pricing, integrations, features, and more. Discover how SassyHash can make your love life more productive and enjoyable.'
-}
+		"Dive into the SassyHash FAQ Funhouse to get answers to all your questions about pricing, integrations, features, and more. Discover how SassyHash can make your love life more productive and enjoyable.",
+};
 // - Page Header
 const header = {
-	title: 'Get Answers to Your <strong>SassyHash</strong> Questions.',
-	text: 'Find answers to common questions about SassyHash '
-}
+	title: "Get Answers to Your <strong>SassyHash</strong> Questions.",
+	text: "Find answers to common questions about SassyHash ",
+};
 ---
 
 <Layout title={SEO.title} description={SEO.description}>

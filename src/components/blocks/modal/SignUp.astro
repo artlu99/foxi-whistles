@@ -5,19 +5,19 @@
 
 // Components
 // - UI
-import { Image } from 'astro:assets'
-import Button from '../../ui/Button.astro';
-import Modal from '../../ui/Modal.astro';
-import Form from '../../ui/forms/Form.astro';
-import InputField from '../../ui/forms/form-elements/InputField.astro';
-import FormField from '../../ui/forms/partials/FormField.astro';
-import farcaster from '../../../assets/logos/farcaster-logo.svg';
+import { Image } from "astro:assets";
+import farcaster from "../../../assets/logos/farcaster-logo.svg";
+import Button from "../../ui/Button.astro";
+import Modal from "../../ui/Modal.astro";
+import Form from "../../ui/forms/Form.astro";
+import InputField from "../../ui/forms/form-elements/InputField.astro";
+import FormField from "../../ui/forms/partials/FormField.astro";
 
 // Props
 type Props = {
-	classes?: string
-}
-const { classes } = Astro.props
+	classes?: string;
+};
+const { classes } = Astro.props;
 ---
 
 <Modal id="signup" classes={classes} title="Sign up">

@@ -3,45 +3,45 @@
 // ------------
 // Description: A section with a list of 3 pricing plans with toggle to switch between monthly and annual pricing.
 
+import Col from "../../ui/Col.astro";
+import Row from "../../ui/Row.astro";
 // Components
 // - Layout
-import Section from '../../ui/Section.astro'
-import Row from '../../ui/Row.astro'
-import Col from '../../ui/Col.astro'
+import Section from "../../ui/Section.astro";
+import Toggle from "../../ui/forms/form-elements/Toggle.astro";
 // - UI
-import PricingTable from '../../ui/pricing-tables/PricingTable.astro'
-import Toggle from '../../ui/forms/form-elements/Toggle.astro'
+import PricingTable from "../../ui/pricing-tables/PricingTable.astro";
 
 // Content
-import pricingTablesData from '../../../data/json-files/pricingTablesdata.json'
+import pricingTablesData from "../../../data/json-files/pricingTablesdata.json";
 
 // Script
-import PricingChange from '../../scripts/PricingPlanChange.astro'
+import PricingChange from "../../scripts/PricingPlanChange.astro";
 
 // Props
 type PricingTableData = {
 	header: {
-		title: string
-		subtitle: string
-		currency: string
-		price: string
-		priceLabel: string
-		priceMonthly?: string
-		priceLabelMonthly?: string
-		buttonName: string
-		buttonLink: string
-	}
+		title: string;
+		subtitle: string;
+		currency: string;
+		price: string;
+		priceLabel: string;
+		priceMonthly?: string;
+		priceLabelMonthly?: string;
+		buttonName: string;
+		buttonLink: string;
+	};
 	body?: {
-		listItems: Array<{ listItem: string }>
-	}
+		listItems: Array<{ listItem: string }>;
+	};
 	footer?: {
-		buttonName: string
-		buttonLink: string
-	}
-	type: 'basic' | 'featured'
-}
+		buttonName: string;
+		buttonLink: string;
+	};
+	type: "basic" | "featured";
+};
 
-const pricingData: PricingTableData[] = pricingTablesData as PricingTableData[]
+const pricingData: PricingTableData[] = pricingTablesData as PricingTableData[];
 ---
 
 <Section>

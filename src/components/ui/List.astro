@@ -10,16 +10,21 @@
 
 // Components
 // - UI
-import { Icon } from 'astro-icon/components'
+import { Icon } from "astro-icon/components";
 
 // Props
 type Props = {
-	type?: 'basic' | 'checklist'
-	listItems: Array<any>
-	classes?: string
-	listColor?: 'primary' | 'neutral' | 'white'
-}
-const { type = 'basic', listColor = 'primary', listItems, classes } = Astro.props
+	type?: "basic" | "checklist";
+	listItems: Array<any>;
+	classes?: string;
+	listColor?: "primary" | "neutral" | "white";
+};
+const {
+	type = "basic",
+	listColor = "primary",
+	listItems,
+	classes,
+} = Astro.props;
 ---
 
 <ul

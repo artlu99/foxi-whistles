@@ -3,15 +3,17 @@
 
 // Components
 // - UI
-import Badge from '../Badge.astro'
+import Badge from "../Badge.astro";
 
 //Data
-import { getCollection } from 'astro:content'
-const posts = await getCollection('blog')
-const tags = [...new Set(posts.map((post) => post.data.tags).flat())]
-const currentPath = new URL(Astro.request.url).pathname
-const pathSegments = currentPath.split('/').filter((segment) => segment.length > 0)
-const currentTag = pathSegments[pathSegments.length - 1] || ''
+import { getCollection } from "astro:content";
+const posts = await getCollection("blog");
+const tags = [...new Set(posts.flatMap((post) => post.data.tags))];
+const currentPath = new URL(Astro.request.url).pathname;
+const pathSegments = currentPath
+	.split("/")
+	.filter((segment) => segment.length > 0);
+const currentTag = pathSegments[pathSegments.length - 1] || "";
 ---
 
 <div class="tags">

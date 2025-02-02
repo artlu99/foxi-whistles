@@ -5,27 +5,27 @@
 
 // Components
 // - Layout
-import Col from '../../ui/Col.astro'
-import Row from '../../ui/Row.astro'
-import Section from '../../ui/Section.astro'
+import Col from "../../ui/Col.astro";
+import Row from "../../ui/Row.astro";
+import Section from "../../ui/Section.astro";
 // - UI
-import Testimonial from '../../ui/Testimonial.astro'
+import Testimonial from "../../ui/Testimonial.astro";
 
 // Props
 type Props = {
-	blockquote?: string
-	figcaption?: string
-	cite?: string
-	bg?: any
-	bgPosition?: 'left' | 'right' | 'center'
-}
+	blockquote?: string;
+	figcaption?: string;
+	cite?: string;
+	bg?: any;
+	bgPosition?: "left" | "right" | "center";
+};
 const {
-	blockquote = 'SassyHash (the Decentralized Whistles Protocol) is the most exciting innovation for making genuine human connections since Twitter. It is like a rocket boost for separating out signal from noise! Its sleek design and out-of-this-world features make managing relationships and building communities a breeze.',
-	figcaption = 'Elon Musk',
-	cite = 'Founder and CEO, Facebook',
+	blockquote = "SassyHash (the Decentralized Whistles Protocol) is the most exciting innovation for making genuine human connections since Twitter. It is like a rocket boost for separating out signal from noise! Its sleek design and out-of-this-world features make managing relationships and building communities a breeze.",
+	figcaption = "Elon Musk",
+	cite = "Founder and CEO, Facebook",
 	bg,
-	bgPosition = 'center'
-} = Astro.props
+	bgPosition = "center",
+} = Astro.props;
 ---
 
 <Section

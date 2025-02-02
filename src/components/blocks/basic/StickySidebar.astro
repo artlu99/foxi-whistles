@@ -7,19 +7,19 @@
 // - type: determines the position of the sticky sidebar (left or right)
 // - classes: Additional classes to be added to the section
 
+import Col from "../../ui/Col.astro";
+import Row from "../../ui/Row.astro";
 // Components
 // - Layout
-import Section from '../../ui/Section.astro'
-import Row from '../../ui/Row.astro'
-import Col from '../../ui/Col.astro'
+import Section from "../../ui/Section.astro";
 
 // Props
 type Props = {
-	id?: string
-	type?: 'left' | 'right'
-	classes?: string
-}
-const { id, type = 'left', classes } = Astro.props
+	id?: string;
+	type?: "left" | "right";
+	classes?: string;
+};
+const { id, type = "left", classes } = Astro.props;
 ---
 
 <Section {...id ? { id } : {}} classes={classes} stickyCol>

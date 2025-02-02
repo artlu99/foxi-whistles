@@ -1,23 +1,23 @@
 ---
+// - UI
+import CTA from "../components/blocks/CTA/BasicDark.astro";
+import Features from "../components/blocks/features/FeatureCards.astro";
+import Hero from "../components/blocks/hero/HomeCTA.astro";
+import HighlightBlocks from "../components/blocks/highlights/HightlightRows.astro";
+import Testimonial from "../components/blocks/testimonials/BasicDark.astro";
 // Components
 // - Layout
-import Layout from '../layouts/Layout.astro'
-// - UI
-import CTA from '../components/blocks/CTA/BasicDark.astro'
-import Features from '../components/blocks/features/FeatureCards.astro'
-import Hero from '../components/blocks/hero/HomeCTA.astro'
-import HighlightBlocks from '../components/blocks/highlights/HightlightRows.astro'
-import Testimonial from '../components/blocks/testimonials/BasicDark.astro'
+import Layout from "../layouts/Layout.astro";
 
 // Content
 // - Testimonial background
-import testimonialBackground from '../assets/testimonial-bg-01.webp'
+import testimonialBackground from "../assets/testimonial-bg-01.webp";
 // - SEO
 const SEO = {
-	title: 'SassyHash 💅 |Whistling in a Cacophonous Space',
+	title: "SassyHash 💅 |Whistling in a Cacophonous Space",
 	description:
-		'The Decentralized Whistles Protocol leverages cryptographic building blocks and the open Farcaster Protocol, to share restricted-distribution information in self-sovereign, transparent, and sufficiently decentralized blah blah.'
-}
+		"The Decentralized Whistles Protocol leverages cryptographic building blocks and the open Farcaster Protocol, to share restricted-distribution information in self-sovereign, transparent, and sufficiently decentralized blah blah.",
+};
 ---
 
 <Layout title={SEO.title} description={SEO.description}>

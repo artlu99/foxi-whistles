@@ -11,21 +11,21 @@
 
 // Components
 // - UI
-import { Icon } from 'astro-icon/components'
+import { Icon } from "astro-icon/components";
 
 // Props
 type Props = {
-	title: string
-	text: string
-	open?: boolean
-	classes?: string
-}
+	title: string;
+	text: string;
+	open?: boolean;
+	classes?: string;
+};
 const {
-	title = 'Title goes here',
-	text = 'Sufficiently decentralized and Open For Everyone blah blah.',
+	title = "Title goes here",
+	text = "Sufficiently decentralized and Open For Everyone blah blah.",
 	open = false,
-	classes
-} = Astro.props
+	classes,
+} = Astro.props;
 ---
 
 <details

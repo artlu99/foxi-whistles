@@ -3,21 +3,21 @@
 // ------------
 // Description: an FAQ section with the title as a sticky sidebar.
 
+import FAQ from "../../ui/Accordion.astro";
+import Card from "../../ui/cards/partials/Card.astro";
 // Components
 // - UI
-import StickySidebar from '../basic/StickySidebar.astro'
-import FAQ from '../../ui/Accordion.astro'
-import Card from '../../ui/cards/partials/Card.astro'
+import StickySidebar from "../basic/StickySidebar.astro";
 
 // Props
 type Props = {
-	title: string
-	text?: string
-	data: any
-	type?: 'left' | 'right'
-	classes?: string
-}
-const { title, text, data, type = 'left', classes } = Astro.props
+	title: string;
+	text?: string;
+	data: any;
+	type?: "left" | "right";
+	classes?: string;
+};
+const { title, text, data, type = "left", classes } = Astro.props;
 ---
 
 <StickySidebar classes={classes} type={type}>

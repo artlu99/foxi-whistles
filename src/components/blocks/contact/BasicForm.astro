@@ -6,21 +6,21 @@
 // - classes: Additional classes to be added to the block
 // ------------
 
+import Button from "../../ui/Button.astro";
 // Components
 // - UI
-import Card from '../../ui/cards/partials/Card.astro'
-import CardBody from '../../ui/cards/partials/CardBody.astro'
-import Form from '../../ui/forms/Form.astro'
-import FormField from '../../ui/forms/partials/FormField.astro'
-import InputField from '../../ui/forms/form-elements/InputField.astro'
-import TextArea from '../../ui/forms/form-elements/TextArea.astro'
-import Button from '../../ui/Button.astro'
+import Card from "../../ui/cards/partials/Card.astro";
+import CardBody from "../../ui/cards/partials/CardBody.astro";
+import Form from "../../ui/forms/Form.astro";
+import InputField from "../../ui/forms/form-elements/InputField.astro";
+import TextArea from "../../ui/forms/form-elements/TextArea.astro";
+import FormField from "../../ui/forms/partials/FormField.astro";
 
 // Props
 type Props = {
-	classes?: string
-}
-const { classes } = Astro.props
+	classes?: string;
+};
+const { classes } = Astro.props;
 ---
 
 <Card classes={classes}>

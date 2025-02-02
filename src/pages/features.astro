@@ -1,33 +1,43 @@
 ---
+// - UI
+import CTA from "../components/blocks/CTA/BasicDark.astro";
+import Feature from "../components/blocks/features/FeatureSticky.astro";
+import Hero from "../components/blocks/hero/PageHeader.astro";
 // Components
 // - Layout
-import Layout from '../layouts/Layout.astro'
-// - UI
-import CTA from '../components/blocks/CTA/BasicDark.astro'
-import Feature from '../components/blocks/features/FeatureSticky.astro'
-import Hero from '../components/blocks/hero/PageHeader.astro'
+import Layout from "../layouts/Layout.astro";
 
 // Data
-import featuresData from '../data/json-files/featuresData.json'
+import featuresData from "../data/json-files/featuresData.json";
 // - Feature Categories
-const featuresAnalytics = featuresData.filter((feature) => feature.category === 'Analytics')
-const featuresProductivity = featuresData.filter((feature) => feature.category === 'Productivity')
-const featuresSecurity = featuresData.filter((feature) => feature.category === 'Security')
-const featuresIntegrations = featuresData.filter((feature) => feature.category === 'Integrations')
-const featuresSupport = featuresData.filter((feature) => feature.category === 'Support')
+const featuresAnalytics = featuresData.filter(
+	(feature) => feature.category === "Analytics",
+);
+const featuresProductivity = featuresData.filter(
+	(feature) => feature.category === "Productivity",
+);
+const featuresSecurity = featuresData.filter(
+	(feature) => feature.category === "Security",
+);
+const featuresIntegrations = featuresData.filter(
+	(feature) => feature.category === "Integrations",
+);
+const featuresSupport = featuresData.filter(
+	(feature) => feature.category === "Support",
+);
 
 // Content
 // - SEO
 const SEO = {
-	title: 'SassyHash 💅 |Features to Boost Communication & Security',
+	title: "SassyHash 💅 |Features to Boost Communication & Security",
 	description:
-		"Explore SassyHash's powerful features designed to enhance communication, ensure industry-standard security, and integrate seamlessly with your favorite decentralized social clients. Join thousands of satisfied users and transform your daily workflow with SassyHash today!"
-}
+		"Explore SassyHash's powerful features designed to enhance communication, ensure industry-standard security, and integrate seamlessly with your favorite decentralized social clients. Join thousands of satisfied users and transform your daily workflow with SassyHash today!",
+};
 // - Page Header
 const header = {
-	title: 'Why you and your team will <strong>love</strong> SassyHash.',
-	text: 'This page is jokey jokes 💯.'
-}
+	title: "Why you and your team will <strong>love</strong> SassyHash.",
+	text: "This page is jokey jokes 💯.",
+};
 ---
 
 <Layout title={SEO.title} description={SEO.description}>

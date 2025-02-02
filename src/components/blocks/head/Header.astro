@@ -1,27 +1,27 @@
 ---
 // Imports
-import { ViewTransitions } from 'astro:transitions'
-// Partials
-import Seo from './partials/Seo.astro'
+import { ViewTransitions } from "astro:transitions";
 // Data
-import { configData } from '../../../config/config'
+import { configData } from "../../../config/config";
+// Partials
+import Seo from "./partials/Seo.astro";
 
 // Props
 type Props = {
-	title?: string
-	description?: string
-	ogImage?: string
-	canonical?: boolean
-	noindex?: boolean
-}
+	title?: string;
+	description?: string;
+	ogImage?: string;
+	canonical?: boolean;
+	noindex?: boolean;
+};
 // Page Metadata
 const {
 	title = configData.siteTitle,
 	description = configData.siteDescription,
 	ogImage = configData.ogImage,
 	canonical = configData.canonical,
-	noindex = configData.noindex
-} = Astro.props
+	noindex = configData.noindex,
+} = Astro.props;
 ---
 
 <head>

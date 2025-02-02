@@ -15,15 +15,23 @@
 
 // Props
 type Props = {
-	id: string
-	label: string
-	showLabel?: boolean
-	checked?: boolean
-	helperText?: string
-	disabled?: boolean
-	classes?: string
-}
-const { id, label, showLabel = true, checked = false, helperText, disabled, classes } = Astro.props
+	id: string;
+	label: string;
+	showLabel?: boolean;
+	checked?: boolean;
+	helperText?: string;
+	disabled?: boolean;
+	classes?: string;
+};
+const {
+	id,
+	label,
+	showLabel = true,
+	checked = false,
+	helperText,
+	disabled,
+	classes,
+} = Astro.props;
 ---
 
 <div class:list={['toggle', { [`${classes}`]: classes }]}>

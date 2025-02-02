@@ -13,26 +13,26 @@
 
 // Components
 // - UI
-import { Icon } from 'astro-icon/components'
-import Button from './Button.astro'
-import Switcher from './ModeSwitcher.astro'
+import { Icon } from "astro-icon/components";
+import Button from "./Button.astro";
+import Switcher from "./ModeSwitcher.astro";
 
 // Data
-import { navigationBarData } from '../../config/navigationBar'
-const { logo, navItems, navActions } = navigationBarData
+import { navigationBarData } from "../../config/navigationBar";
+const { logo, navItems, navActions } = navigationBarData;
 
 // Determine current path
-const path = new URL(Astro.request.url).pathname
+const path = new URL(Astro.request.url).pathname;
 function isActivePath(currentPath: string): boolean {
-	return path === currentPath || path === `${currentPath}/`
+	return path === currentPath || path === `${currentPath}/`;
 }
 
 // Type assertion for navActions to ensure type safety
 const savedNavActions = navActions.map((action) => ({
 	...action,
-	size: action.size as 'base' | 'lg' | 'sm',
-	style: action.style as 'primary' | 'secondary' | 'neutral'
-}))
+	size: action.size as "base" | "lg" | "sm",
+	style: action.style as "primary" | "secondary" | "neutral",
+}));
 ---
 
 <header class="header">

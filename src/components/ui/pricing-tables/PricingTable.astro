@@ -18,43 +18,43 @@
 
 // Components
 // - UI
-import Button from '../Button.astro'
-import List from '../List.astro'
+import Button from "../Button.astro";
+import List from "../List.astro";
+import Body from "./partials/Body.astro";
+import Footer from "./partials/Footer.astro";
 // -- Partials
-import Header from './partials/Header.astro'
-import Body from './partials/Body.astro'
-import Footer from './partials/Footer.astro'
+import Header from "./partials/Header.astro";
 
 // Props
 type PricingTableProps = {
-	type:'basic' | 'featured'
+	type: "basic" | "featured";
 	header: {
-		title: string
-		subtitle: string
-		currency: string
-		price: string
-		priceLabel: string
-		priceMontly?: string
-		priceLabelMontly?: string
-		buttonName: string
-		buttonLink: string
-	}
+		title: string;
+		subtitle: string;
+		currency: string;
+		price: string;
+		priceLabel: string;
+		priceMontly?: string;
+		priceLabelMontly?: string;
+		buttonName: string;
+		buttonLink: string;
+	};
 	body?: {
-		listItems: Array<{ listItem: string }>
-	}
+		listItems: Array<{ listItem: string }>;
+	};
 	footer?: {
-		buttonName: string
-		buttonLink: string
-	}
-}
+		buttonName: string;
+		buttonLink: string;
+	};
+};
 type Props = {
-	data: PricingTableProps
-	id?: string
-	listType?: 'basic' | 'checklist'
-	classes?: string
-}
-const { data, id, listType, classes } = Astro.props
-const { type, header, body, footer } = data
+	data: PricingTableProps;
+	id?: string;
+	listType?: "basic" | "checklist";
+	classes?: string;
+};
+const { data, id, listType, classes } = Astro.props;
+const { type, header, body, footer } = data;
 ---
 
 <div

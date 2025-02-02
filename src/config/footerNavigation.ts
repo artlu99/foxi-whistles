@@ -2,106 +2,108 @@
 // ------------
 // Description: The footer navigation data for the website.
 export interface Logo {
-	src: string
-	alt: string
-	text: string
+	src: string;
+	alt: string;
+	text: string;
 }
 
 export interface FooterAbout {
-	title: string
-	aboutText: string
-	logo: Logo
+	title: string;
+	aboutText: string;
+	logo: Logo;
 }
 
 export interface SubCategory {
-	subCategory: string
-	subCategoryLink: string
+	subCategory: string;
+	subCategoryLink: string;
 }
 
 export interface FooterColumn {
-	category: string
-	subCategories: SubCategory[]
+	category: string;
+	subCategories: SubCategory[];
 }
 
 export interface SubFooter {
-	copywriteText: string
+	copywriteText: string;
 }
 
 export interface FooterData {
-	footerAbout: FooterAbout
-	footerColumns: FooterColumn[]
-	subFooter: SubFooter
+	footerAbout: FooterAbout;
+	footerColumns: FooterColumn[];
+	subFooter: SubFooter;
 }
 
 export const footerNavigationData: FooterData = {
 	footerAbout: {
-		title: 'SassyHash',
+		title: "SassyHash",
 		aboutText:
-			'SassyHash leverages cryptographic building blocks and the open Farcaster Protocol, to share restricted-distribution information in self-sovereign, transparent, and sufficiently decentralized blah blah.',
+			"SassyHash leverages cryptographic building blocks and the open Farcaster Protocol, to share restricted-distribution information in self-sovereign, transparent, and sufficiently decentralized blah blah.",
 		logo: {
-			src: '/logo.svg',
-			alt: 'SassyHash',
-			text: 'SassyHash.'
-		}
+			src: "/logo.svg",
+			alt: "SassyHash",
+			text: "SassyHash.",
+		},
 	},
 	footerColumns: [
 		{
-			category: 'Product',
+			category: "Product",
 			subCategories: [
 				{
-					subCategory: 'FAQ',
-					subCategoryLink: '/faq'
+					subCategory: "FAQ",
+					subCategoryLink: "/faq",
 				},
 				{
-					subCategory: 'Pricing',
-					subCategoryLink: '/pricing'
+					subCategory: "Pricing",
+					subCategoryLink: "/pricing",
 				},
 				{
-					subCategory: 'Changelog',
-					subCategoryLink: '/changelog'
+					subCategory: "Changelog",
+					subCategoryLink: "/changelog",
 				},
-			]
+			],
 		},
 		{
-			category: 'Developers',
+			category: "Developers",
 			subCategories: [
 				{
-					subCategory: 'Quick Start',
-					subCategoryLink: '/blog/developer-journey'
+					subCategory: "Quick Start",
+					subCategoryLink: "/blog/developer-journey",
 				},
 				{
-					subCategory: 'Whitepaper',
-					subCategoryLink: '/rug#whitepaper'
+					subCategory: "Whitepaper",
+					subCategoryLink: "/rug#whitepaper",
 				},
 				{
 					subCategory: "Composer Action",
-					subCategoryLink: 'https://warpcast.com/~/developers/composer-actions?name=keccak-256&postUrl=https%3A%2F%2Fkeccak256-composer-action.artlu.workers.dev'
+					subCategoryLink:
+						"https://warpcast.com/~/developers/composer-actions?name=keccak-256&postUrl=https%3A%2F%2Fkeccak256-composer-action.artlu.workers.dev",
 				},
 				{
 					subCategory: "Cast Action",
-					subCategoryLink: 'https://warpcast.com/~/add-cast-action?url=https%3A%2F%2Fkeccak256-composer-action.artlu.workers.dev%2Fcast-action'
+					subCategoryLink:
+						"https://warpcast.com/~/add-cast-action?url=https%3A%2F%2Fkeccak256-composer-action.artlu.workers.dev%2Fcast-action",
 				},
 				{
 					subCategory: "GraphQL API",
-					subCategoryLink: 'https://whistles.artlu.xyz/graphql'
-				}
-			]
+					subCategoryLink: "https://whistles.artlu.xyz/graphql",
+				},
+			],
 		},
 		{
-			category: 'About us',
+			category: "About us",
 			subCategories: [
 				{
-					subCategory: 'News',
-					subCategoryLink: '/blog'
+					subCategory: "News",
+					subCategoryLink: "/blog",
 				},
 				{
-					subCategory: 'Support',
-					subCategoryLink: '/contact'
+					subCategory: "Support",
+					subCategoryLink: "/contact",
 				},
-			]
+			],
 		},
 	],
 	subFooter: {
-		copywriteText: '© SassyHash 2024.'
-	}
-}
+		copywriteText: "© SassyHash 2024.",
+	},
+};

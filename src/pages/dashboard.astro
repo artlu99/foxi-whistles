@@ -1,27 +1,27 @@
 ---
+// - Data
+import ClientDashboard from "../components/blocks/data/ClientDashboard.tsx";
+// - UI
+import JustHero from "../components/blocks/hero/JustHero.astro";
+import Button from "../components/ui/Button.astro";
 // Components
 // - Layout
-import Layout from '../layouts/Layout.astro'
-// - UI
-import JustHero from '../components/blocks/hero/JustHero.astro'
-import Button from '../components/ui/Button.astro'
-import { getSharedDatabaseMetrics } from './api/gql'
-// - Data
-import ClientDashboard from '../components/blocks/data/ClientDashboard.tsx'
+import Layout from "../layouts/Layout.astro";
+import { getSharedDatabaseMetrics } from "./api/gql";
 
 // Content
 // - SEO
 const SEO = {
-	title: 'SassyHash 💅 |Anonymized Analytics Dashboard',
-	description: 'See Anonymized analytics about SassyHash.'
-}
+	title: "SassyHash 💅 |Anonymized Analytics Dashboard",
+	description: "See Anonymized analytics about SassyHash.",
+};
 // - Page Header
 const header = {
-	title: 'Private Data <strong>Transparency</strong>.', 
-	text: 'Anonymized analytics for SassyHash.'
-}
+	title: "Private Data <strong>Transparency</strong>.",
+	text: "Anonymized analytics for SassyHash.",
+};
 
-const { numPartitions, numSchemas } = (await getSharedDatabaseMetrics())
+const { numPartitions, numSchemas } = await getSharedDatabaseMetrics();
 ---
 
 <Layout title={SEO.title} description={SEO.description}>

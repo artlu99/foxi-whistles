@@ -3,19 +3,19 @@ export const prerender = false;
 
 // Components
 // - UI
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 // - Layout
-import type { Session } from '@auth/core/types';
-import { Auth, SignOut } from 'auth-astro/components';
-import Siwf from './Siwf';
+import type { Session } from "@auth/core/types";
+import { Auth, SignOut } from "auth-astro/components";
+import Siwf from "./Siwf";
 
 // Props
 type Props = {
-	id?: string
-	title?: string
-	text?: string
-	classes?: string
-}
+	id?: string;
+	title?: string;
+	text?: string;
+	classes?: string;
+};
 ---
 
 <div>

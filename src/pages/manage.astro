@@ -1,22 +1,22 @@
 ---
+// - UI
+import JustHero from "../components/blocks/hero/JustHero.astro";
+import Button from "../components/ui/Button.astro";
 // Components
 // - Layout
-import Layout from '../layouts/Layout.astro'
-// - UI
-import JustHero from '../components/blocks/hero/JustHero.astro'
-import Button from '../components/ui/Button.astro'
+import Layout from "../layouts/Layout.astro";
 
 // Content
 // - SEO
 const SEO = {
-	title: 'SassyHash 💅 |Manage My Channels',
-	description: 'Manage Channels owned by me on Warpcast'
-}
+	title: "SassyHash 💅 |Manage My Channels",
+	description: "Manage Channels owned by me on Warpcast",
+};
 // - Page Header
 const header = {
-	title: 'Manage <strong>My</strong> Channels.',
-	text: 'How to Enable and Disable channels for SassyHash:' 
-}
+	title: "Manage <strong>My</strong> Channels.",
+	text: "How to Enable and Disable channels for SassyHash:",
+};
 ---
 
 <Layout title={SEO.title} description={SEO.description}>

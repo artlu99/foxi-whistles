@@ -3,25 +3,25 @@
 // ------------
 // Description: A  section with feeds organised a a vertical list of items.
 
+import Col from "../../ui/Col.astro";
+// - UI
+import Feed from "../../ui/Feed.astro";
+import Row from "../../ui/Row.astro";
 // Components
 // - Layout
-import Section from '../../ui/Section.astro'
-import Col from '../../ui/Col.astro'
-import Row from '../../ui/Row.astro'
-// - UI
-import Feed from '../../ui/Feed.astro'
+import Section from "../../ui/Section.astro";
 
 // Props
 type Props = {
 	data: Array<{
-		title: string
-		date?: string
-		body?: string
-		listItems?: Array<{ listItem: string }>
-	}>
-	classes?: string
-}
-const { data, classes } = Astro.props
+		title: string;
+		date?: string;
+		body?: string;
+		listItems?: Array<{ listItem: string }>;
+	}>;
+	classes?: string;
+};
+const { data, classes } = Astro.props;
 ---
 
 <Section id="changelog">

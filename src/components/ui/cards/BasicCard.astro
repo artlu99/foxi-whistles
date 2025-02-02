@@ -15,23 +15,32 @@
 
 // Components
 // - UI
-import { Image } from 'astro:assets'
-import { Icon } from 'astro-icon/components'
-import Card from './partials/Card.astro'
-import CardBody from './partials/CardBody.astro'
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import Card from "./partials/Card.astro";
+import CardBody from "./partials/CardBody.astro";
 
 // Props
 type Props = {
-	title?: string
-	subtitle?: string
-	titleSize?: 'sm' | 'base' | 'lg' | 'xl'
-	image?: any
-	icon?: string
-	link?: string
-	type?: 'image-top' | 'image-bottom'
-	classes?: string
-}
-const { title = '', subtitle, titleSize = 'lg', image, icon, link, type, classes } = Astro.props
+	title?: string;
+	subtitle?: string;
+	titleSize?: "sm" | "base" | "lg" | "xl";
+	image?: any;
+	icon?: string;
+	link?: string;
+	type?: "image-top" | "image-bottom";
+	classes?: string;
+};
+const {
+	title = "",
+	subtitle,
+	titleSize = "lg",
+	image,
+	icon,
+	link,
+	type,
+	classes,
+} = Astro.props;
 ---
 
 <Card classes={classes} link={link}>

@@ -10,14 +10,14 @@
 
 // Props
 type Props = {
-	span?: string
-	spanMobile?: string
-	align?: string
-	classes?: string
-}
-const { span, spanMobile = '12', align, classes } = Astro.props
+	span?: string;
+	spanMobile?: string;
+	align?: string;
+	classes?: string;
+};
+const { span, spanMobile = "12", align, classes } = Astro.props;
 
-const hasContent = Astro.slots.default
+const hasContent = Astro.slots.default;
 ---
 
 <div

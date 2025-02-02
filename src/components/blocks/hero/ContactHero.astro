@@ -3,22 +3,22 @@
 // ------------
 // Description: A hero section with a contact form
 
+import Col from "../../ui/Col.astro";
+import Row from "../../ui/Row.astro";
 // Components
 // - Layout
-import Section from '../../ui/Section.astro'
-import Row from '../../ui/Row.astro'
-import Col from '../../ui/Col.astro'
+import Section from "../../ui/Section.astro";
 // - UI
-import Form from '../contact/BasicForm.astro'
+import Form from "../contact/BasicForm.astro";
 
 // Props
 type Props = {
-	id?: string
-	title?: string
-	text?: string
-	classes?: string
-}
-const { id, title, text, classes } = Astro.props
+	id?: string;
+	title?: string;
+	text?: string;
+	classes?: string;
+};
+const { id, title, text, classes } = Astro.props;
 ---
 
 <Section id={id} classes={classes}>

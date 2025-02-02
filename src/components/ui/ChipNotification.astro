@@ -10,11 +10,11 @@
 
 // Props
 type Props = {
-	elevated?: boolean
-	radius?: string
-	classes?: string
-}
-const { elevated, radius = 'rounded', classes } = Astro.props
+	elevated?: boolean;
+	radius?: string;
+	classes?: string;
+};
+const { elevated, radius = "rounded", classes } = Astro.props;
 ---
 
 <div class:list={['chip', { ['chip--elevated']: elevated }, { [`${classes}`]: classes }, radius]}>

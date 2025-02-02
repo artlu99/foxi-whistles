@@ -3,16 +3,16 @@
 // ------------
 // Description: The blog tags page.
 
+import BlogPosts from "../../../components/blocks/blog/BlogPosts.astro";
+// - UI
+import Hero from "../../../components/blocks/hero/PageHeader.astro";
 // Components
 // - Layout
-import Layout from '../../../layouts/Layout.astro'
-// - UI
-import Hero from '../../../components/blocks/hero/PageHeader.astro'
-import BlogPosts from '../../../components/blocks/blog/BlogPosts.astro'
+import Layout from "../../../layouts/Layout.astro";
 
 // Data
-import { getCollection } from 'astro:content'
-const allPosts = await getCollection('blog')
+import { getCollection } from "astro:content";
+const allPosts = await getCollection("blog");
 ---
 
 <Layout>

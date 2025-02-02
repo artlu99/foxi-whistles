@@ -5,19 +5,19 @@
 // Properties:
 // - classes: Additional classes to be added to the Section
 
+import Col from "../../ui/Col.astro";
+import Row from "../../ui/Row.astro";
 // Components
 // - Layout
-import Section from '../../ui/Section.astro'
-import Row from '../../ui/Row.astro'
-import Col from '../../ui/Col.astro'
+import Section from "../../ui/Section.astro";
 // - UI
-import Card from '../../ui/cards/BasicCard.astro'
+import Card from "../../ui/cards/BasicCard.astro";
 
 // 	Props
 type Props = {
-	classes?: string
-}
-const { classes } = Astro.props
+	classes?: string;
+};
+const { classes } = Astro.props;
 ---
 
 <Section id="requests" classes={classes}>

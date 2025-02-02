@@ -1,36 +1,36 @@
 ---
+// - UI
+import CTA from "../components/blocks/CTA/BasicDark.astro";
+import FAQ from "../components/blocks/FAQ/Basic.astro";
+import Feature from "../components/blocks/features/FeatureList.astro";
+import Hero from "../components/blocks/hero/PageHeader.astro";
+import Price from "../components/blocks/pricing/PricingColumns.astro";
+import SocialProof from "../components/blocks/socialproof/Basic.astro";
+import Testimonial from "../components/blocks/testimonials/BasicDark.astro";
 // Components
 // - Layout
-import Layout from '../layouts/Layout.astro'
-// - UI
-import CTA from '../components/blocks/CTA/BasicDark.astro'
-import FAQ from '../components/blocks/FAQ/Basic.astro'
-import Feature from '../components/blocks/features/FeatureList.astro'
-import Hero from '../components/blocks/hero/PageHeader.astro'
-import Price from '../components/blocks/pricing/PricingColumns.astro'
-import SocialProof from '../components/blocks/socialproof/Basic.astro'
-import Testimonial from '../components/blocks/testimonials/BasicDark.astro'
+import Layout from "../layouts/Layout.astro";
 
 // Content
 // - SEO
 const SEO = {
-	title: 'SassyHash 💅 |Pricing made simple',
+	title: "SassyHash 💅 |Pricing made simple",
 	description:
-		'Discover the perfect SaaS pricing plan for your business. From startups to enterprises, our scalable solutions offer unparalleled features and 24/7 support.'
-}
+		"Discover the perfect SaaS pricing plan for your business. From startups to enterprises, our scalable solutions offer unparalleled features and 24/7 support.",
+};
 // - Page Header
 const header = {
-	title: 'Choose the plan that works for <strong>your</strong> needs',
-	text: 'All plans come with a 30-day money-back guarantee.'
-}
+	title: "Choose the plan that works for <strong>your</strong> needs",
+	text: "All plans come with a 30-day money-back guarantee.",
+};
 // - Testimonial data
-import testimonialBackground from '../assets/testimonial-bg-02.webp'
+import testimonialBackground from "../assets/testimonial-bg-02.webp";
 const testimonialData = {
 	blockquote:
 		"SassyHash isn't just an app—it's like having a mischievous yet brilliant sidekick for your business. It streamlines tasks and also cracks jokes to keep spirits high.",
-	figcaption: 'Charles Hoskinson',
-	cite: 'Co-Founder, Ethereum'
-}
+	figcaption: "Charles Hoskinson",
+	cite: "Co-Founder, Ethereum",
+};
 ---
 
 <Layout title={SEO.title} description={SEO.description}>

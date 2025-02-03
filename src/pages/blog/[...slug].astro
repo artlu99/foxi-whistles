@@ -8,7 +8,9 @@
 import Layout from "../../layouts/PostLayout.astro";
 
 // Data
+import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
+interface Props { entry: CollectionEntry<'blog'> }
 export async function getStaticPaths() {
 	const blogEntries = await getCollection("blog");
 	return blogEntries.map((entry) => ({

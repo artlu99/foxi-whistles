@@ -1,5 +1,10 @@
 [
 	{
+		"title": "Works fully with Warpcast",
+		"date": "2025-02-21",
+		"text": "<ul><li>cast and reply via Composer Action</li><li>never leave the feed</li><li><b>Keccak256</b> in Actions search</li></ul>"
+	},
+	{
 		"title": "Permissions inverted",
 		"date": "2024-12-04",
 		"text": "<ul><li>channels enabled by default</li><li>see <a href='/nospam'>opt-outs</a></li></ul>"

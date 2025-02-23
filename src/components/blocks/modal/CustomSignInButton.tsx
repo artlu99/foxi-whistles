@@ -44,6 +44,7 @@ function CustomSignInButton() {
 			if (!nonce) throw new Error('Unable to generate nonce')
 			const result = await sdk.actions.signIn({ nonce })
 			await signIn('credentials', undefined, {
+				message: result.message,
 				signature: result.signature,
 				name: context?.user?.username,
 				pfp: context?.user?.pfpUrl,

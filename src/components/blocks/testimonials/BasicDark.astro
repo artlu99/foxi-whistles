@@ -7,7 +7,7 @@
 // - Layout
 import Col from "../../ui/Col.astro";
 import Row from "../../ui/Row.astro";
-import Section from "../../ui/Section.astro";
+import Section, { type BgProps } from "../../ui/Section.astro";
 // - UI
 import Testimonial from "../../ui/Testimonial.astro";
 
@@ -16,7 +16,7 @@ type Props = {
 	blockquote?: string;
 	figcaption?: string;
 	cite?: string;
-	bg?: any;
+	bg?: BgProps;
 	bgPosition?: "left" | "right" | "center";
 };
 const {

@@ -16,6 +16,7 @@ type Props = {
 	text?: string;
 	classes?: string;
 };
+
 ---
 
 <div>
@@ -26,7 +27,7 @@ type Props = {
 				{session ? 'Logged in as ' + session.user?.name + '!' + session.user?.email : 'Not logged in'} 
 				<br />
 				<br />
-				{session?.user && <Image src={session.user.image ?? ""} alt={session.user.name ?? null} height="64" width="64" />} 
+				{session?.user?.image ? <Image src={session.user.image} alt={session.user.name ?? null} height="64" width="64" /> : null} 
 				 <br />
 				{session ? <SignOut><strong>Logout</strong></SignOut> : <Siwf client:only="react" />}
 				</>

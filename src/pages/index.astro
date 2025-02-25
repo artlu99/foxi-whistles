@@ -12,18 +12,29 @@ import Layout from "../layouts/Layout.astro";
 // Content
 // - Testimonial background
 import testimonialBackground from "../assets/testimonial-bg-01.webp";
+import testimonialBackground2 from "../assets/testimonial-bg-02.webp";
 // - SEO
 const SEO = {
 	title: "SassyHash 💅 |Whistling in a Cacophonous Space",
 	description:
 		"The Decentralized Whistles Protocol leverages cryptographic building blocks and the open Farcaster Protocol, to share restricted-distribution information in self-sovereign, transparent, and sufficiently decentralized blah blah.",
 };
+
+const testimonialData2 = {
+	blockquote: "Website Design: I wanna say mid, but it looks like a middle schooler threw it up during their lunch break. Don't make me vomit. That tasted worst than the negroni of hades",
+	figcaption: "an actual FC user",
+	cite: "original spelling and punctuation shown",
+	bg: testimonialBackground2,
+	bgPosition: "left",
+} as const;
+
 ---
 
 <Layout title={SEO.title} description={SEO.description}>
 	<Hero />
 	<Features />
 	<Testimonial bg={testimonialBackground} bgPosition="right" />
+	<Testimonial {...testimonialData2} />
 	<HighlightBlocks />
 	<CTA />
 </Layout>

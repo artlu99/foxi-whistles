@@ -63,3 +63,21 @@ export const MyMessagesSchema = z.object({
 		),
 	}),
 });
+
+export interface LeaderboardCastInfo {
+	fid: number;
+	rootParentUrl: string|null;
+	castHash: string;
+	count: number;
+}
+
+const LeaderboardCastInfoSchema = z.object({
+	fid: z.number(),
+	rootParentUrl: z.string().nullable(),
+	castHash: z.string(),
+	count: z.number(),
+});
+
+export const LeaderboardCastInfoResponseSchema = z.object({
+	leaderboard: z.array(LeaderboardCastInfoSchema),
+});

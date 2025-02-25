@@ -38,7 +38,7 @@ export const navigationBarData: NavData = {
 		text: "SassyHash",
 	},
 	navItems: [
-		{ name: "Home", link: "/" },
+		{ name: "🏆", link: "/leaderboard" },
 		{ name: "Blog", link: "/blog" },
 		{
 			name: "Resources",

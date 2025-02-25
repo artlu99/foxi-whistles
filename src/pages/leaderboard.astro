@@ -1,0 +1,42 @@
+---
+import MostSeenCasts from "../components/blocks/data/MostSeenCastsTable.tsx";
+// - UI
+import JustHero from "../components/blocks/hero/JustHero.astro";
+// Components
+// - Layout
+import Layout from "../layouts/Layout.astro";
+// - Data
+import { getMostSeenCasts } from "./api/redis";
+
+// Content
+// - SEO
+const SEO = {
+	title: "SassyHash 💅 |Leaderboard",
+	description: "See the leaderboard for SassyHash.",
+};
+// - Page Header
+const header = {
+	title: "Leaderboard",
+	text: "Weekly contest to elevate the sassiest hashes.",
+};
+
+const leaderboard = await getMostSeenCasts({})
+---
+
+<Layout title={SEO.title} description={SEO.description}>
+	<JustHero
+		title={header.title}
+		text={header.text}
+		id="contact"
+		classes="bg-neutral-50 dark:bg-neutral-950/80"
+	>
+	<hr />
+
+	<MostSeenCasts leaderboard={leaderboard} />
+	<span class="text-emphasis text-xs">as of 
+		{new Date().toLocaleDateString('en-US', {timeZone: 'America/New_York'}).split(' ')[0]}
+	</span> 
+	<hr />
+
+	</JustHero>
+</Layout>

@@ -19,8 +19,6 @@ const header = {
 	title: "Leaderboard",
 	text: "Weekly contest to elevate the sassiest hashes.",
 };
-
-const leaderboard = await getMostSeenCasts({})
 ---
 
 <Layout title={SEO.title} description={SEO.description}>
@@ -32,7 +30,7 @@ const leaderboard = await getMostSeenCasts({})
 	>
 	<hr />
 
-	<MostSeenCasts leaderboard={leaderboard} />
+	<MostSeenCasts client:only="react" />
 	<span class="text-emphasis text-xs">as of 
 		{new Date().toLocaleDateString('en-US', {timeZone: 'America/New_York'}).split(' ')[0]}
 	</span> 

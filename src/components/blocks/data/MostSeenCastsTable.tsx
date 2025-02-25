@@ -7,8 +7,11 @@ import {
 	getSortedRowModel,
 	useReactTable
 } from '@tanstack/react-table'
+import { fetcher } from 'itty-fetcher'
 import type { ReactNode } from 'react'
+import { useEffect, useState } from 'react'
 import type { LeaderboardCastInfo } from '../../../rpc/types'
+import { LeaderboardCastInfoResponseSchema } from '../../../rpc/types'
 
 const columnHelper = createColumnHelper<LeaderboardCastInfo>()
 const columns = [
@@ -73,11 +76,29 @@ const columns = [
 	})
 ]
 
-interface MostSeenCastsTableProps {
-	leaderboard: LeaderboardCastInfo[]
-}
-const MostSeenCastsTable = (props: MostSeenCastsTableProps) => {
-	const { leaderboard: data } = props
+const MostSeenCastsTable = () => {
+	const [data, setData] = useState<LeaderboardCastInfo[]>([])
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const res = await fetcher().get('/api/getMostSeenCasts')
+				const data = typeof res === 'string' ? JSON.parse(res) : res
+				const validator = LeaderboardCastInfoResponseSchema.safeParse(data)
+
+				if (validator.success) {
+					setData(validator.data)
+				} else {
+					console.error('Validation error:', validator.error)
+				}
+			} catch (error) {
+				console.error('Fetch error:', error)
+			}
+		}
+		fetchData()
+	}, [])
+
+	console.log('data:', data)
 
 	const table = useReactTable({
 		data,

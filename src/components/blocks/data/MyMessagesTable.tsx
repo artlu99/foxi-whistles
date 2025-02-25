@@ -13,7 +13,6 @@ import {
 import { fetcher } from 'itty-fetcher'
 import { sort } from 'radash'
 import { type ReactNode, useEffect, useState } from 'react'
-import type { SafeParseReturnType } from 'zod'
 import { type MyMessagesResponse, MyMessagesSchema } from '../../../rpc/types'
 
 type Message = {
@@ -76,36 +75,36 @@ const MyMessagesTable = (props: MyMessagesTableProps) => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const res = await fetcher().get('/api/getMyMessages', { fid })
-			let validator: SafeParseReturnType<MyMessagesResponse, MyMessagesResponse>
 			try {
-				validator = MyMessagesSchema.safeParse(JSON.parse(res as string))
-			} catch {
-				validator = MyMessagesSchema.safeParse(res)
-			}
+				const res = await fetcher().get('/api/getMyMessages', { fid })
+				const data = typeof res === 'string' ? JSON.parse(res) : res
+				const validator = MyMessagesSchema.safeParse(data)
 
-			if (validator.success) {
-				setResponse(validator.data)
-				setData(
-					sort(
-						validator.data.getDecryptedMessagesByFid.messages.map((msg) => {
-							const maybeUnixTimestamp = (Number(msg.timestamp) + Number(1609459200)) * 1000
-							const fallbackTimestamp =
-								maybeUnixTimestamp > Date.now() ? Number(msg.timestamp) : maybeUnixTimestamp
+				if (validator.success) {
+					setResponse(validator.data)
+					setData(
+						sort(
+							validator.data.getDecryptedMessagesByFid.messages.map((msg) => {
+								const maybeUnixTimestamp = (Number(msg.timestamp) + Number(1609459200)) * 1000
+								const fallbackTimestamp =
+									maybeUnixTimestamp > Date.now() ? Number(msg.timestamp) : maybeUnixTimestamp
 
-							return {
-								plaintext: msg.text,
-								timestamp: fallbackTimestamp,
-								ciphertext: keccak256(toUtf8Bytes(msg.text)).slice(2),
-								deleted: !!msg.deletedAt
-							}
-						}),
-						(c) => c.timestamp,
-						true
+								return {
+									plaintext: msg.text,
+									timestamp: fallbackTimestamp,
+									ciphertext: keccak256(toUtf8Bytes(msg.text)).slice(2),
+									deleted: !!msg.deletedAt
+								}
+							}),
+							(c) => c.timestamp,
+							true
+						)
 					)
-				)
-			} else {
-				console.error('validator.error:', validator)
+				} else {
+					console.error('Validation error:', validator.error)
+				}
+			} catch (error) {
+				console.error('Fetch error:', error)
 			}
 		}
 		fetchData()

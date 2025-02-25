@@ -3,12 +3,9 @@ import MostSeenCasts from "../components/blocks/data/MostSeenCastsTable.tsx";
 // - UI
 import JustHero from "../components/blocks/hero/JustHero.astro";
 // Components
+import AuthBlock from "../components/blocks/modal/AuthBlock.astro";
 // - Layout
 import Layout from "../layouts/Layout.astro";
-// - Data
-import { getMostSeenCasts } from "./api/redis";
-
-// Content
 // - SEO
 const SEO = {
 	title: "SassyHash 💅 |Leaderboard",
@@ -36,5 +33,6 @@ const header = {
 	</span> 
 	<hr />
 
+	<AuthBlock />
 	</JustHero>
 </Layout>

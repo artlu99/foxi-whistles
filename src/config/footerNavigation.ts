@@ -104,6 +104,6 @@ export const footerNavigationData: FooterData = {
 		},
 	],
 	subFooter: {
-		copywriteText: "© SassyHash 2024.",
+		copywriteText: "© SassyHash 2025.",
 	},
 };

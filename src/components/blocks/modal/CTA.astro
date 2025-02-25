@@ -1,0 +1,24 @@
+---
+// Signup Modal
+// ------------
+// Description: A modal after the user clicks on a CTA.
+
+// Components
+// - UI
+import Button from "../../ui/Button.astro";
+import Modal from "../../ui/Modal.astro";
+
+// Props
+type Props = {
+	classes?: string;
+};
+const { classes } = Astro.props;
+---
+
+<Modal id="CTA" classes={classes} title="Ur a real one!">
+	<div class="my-4 text-center">You really scrolled all teh way down the screen just to click the big red clickey.</div>
+		<Button style="primary" type="submit" classes="w-full" size="lg">
+			This button does nothing really
+		</Button>
+	</div>
+</Modal>

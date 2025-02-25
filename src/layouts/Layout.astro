@@ -1,5 +1,6 @@
 ---
 import Header from "../components/blocks/head/Header.astro";
+import CTAModal from "../components/blocks/modal/CTA.astro";
 import Modal from "../components/blocks/modal/SignUp.astro";
 // Scripts
 import Scripts from "../components/scripts/LocalScripts.astro";
@@ -42,6 +43,7 @@ const { title, description, ogImage, noindex } = Astro.props;
 		</Main>
 		<Footer />
 		<Modal />
+		<CTAModal />
 		<Scripts />
 	</body>
 </html>

@@ -19,11 +19,13 @@ export async function getMostSeenCasts({ limit = 10 }: { limit?: number } = {}):
 		.sort(([, a], [, b]) => Number(b) - Number(a))
 		.map(([key, cnt]) => {
 			const parts = key.split('-')
-			const fid = parts[0]
+			const fid = Number(parts[0])
+			const username = parts[1]
 			const castHash = parts[parts.length - 1]
-			const rootParentUrl = parts.slice(1, -1).join('-')
+			const rootParentUrl = parts.slice(2, -1).join('-')
 			return {
 				fid,
+				username,
 				rootParentUrl,
 				castHash,
 				count: Number(cnt)
@@ -38,11 +40,11 @@ export async function getMostSeenCasts({ limit = 10 }: { limit?: number } = {}):
 	})
 
 	return filteredCasts
-		.map((cast) => ({
-			...cast,
-			fid: Number(cast.fid),
-			rootParentUrl: cast.rootParentUrl === 'null' ? null : cast.rootParentUrl,
-			count: Number(cast.count)
-		}))
+		.map((cast) => {
+			return {
+				...cast,
+				rootParentUrl: cast.rootParentUrl === 'null' ? null : cast.rootParentUrl
+			}
+		})
 		.slice(0, limit)
 }

@@ -66,6 +66,7 @@ export const MyMessagesSchema = z.object({
 
 export interface LeaderboardCastInfo {
 	fid: number
+	username: string
 	rootParentUrl: string | null
 	castHash: string
 	count: number
@@ -73,6 +74,7 @@ export interface LeaderboardCastInfo {
 
 const LeaderboardCastInfoSchema = z.object({
 	fid: z.number(),
+	username: z.string(),
 	rootParentUrl: z.string().nullable(),
 	castHash: z.string(),
 	count: z.number()

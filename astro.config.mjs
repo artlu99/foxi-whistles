@@ -11,5 +11,5 @@ export default defineConfig({
 	site: "https://sassyhash.artlu.xyz/",
 	adapter: vercelServerless(),
 	integrations: [auth(), tailwind(), icon(), sitemap(), react()],
-	security: { checkOrigin: true },
+	security: { checkOrigin: false },
 });

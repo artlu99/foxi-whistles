@@ -2,7 +2,7 @@ import CredentialsProvider from "@auth/core/providers/credentials";
 import { createAppClient, viemConnector } from "@farcaster/auth-client";
 import { defineConfig } from "auth-astro";
 
-const SAFISH_SHORT_CIRCUIT = false;
+const SAFISH_SHORT_CIRCUIT = true;
 
 export default defineConfig({
   providers: [

@@ -14,15 +14,6 @@ function CustomSignInButton() {
 	useEffect(() => {
 		const load = async () => {
 			setContext(await sdk.context)
-
-			if (context?.client.added) {
-				sdk.on('primaryButtonClicked', () => sdk.actions.close())
-				await sdk.actions.setPrimaryButton({ text: 'Close Frame' })
-			} else {
-				sdk.on('primaryButtonClicked', () => sdk.actions.addFrame())
-				await sdk.actions.setPrimaryButton({ text: 'Add Frame' })
-			}
-
 			sdk.actions.ready({})
 		}
 
@@ -30,7 +21,7 @@ function CustomSignInButton() {
 			setIsSDKLoaded(true)
 			load()
 		}
-	}, [isSDKLoaded, context])
+	}, [isSDKLoaded])
 
 	const getNonce = useCallback(async () => {
 		const csrfToken = await fetch('/api/auth/csrf')
@@ -56,7 +47,7 @@ function CustomSignInButton() {
 	return (
 		<>
 			{context ? (
-				<div>Sign In only on web</div>
+				<div>Frames V2 Sign In turned off until IAB security is improved.</div>
 			) : (
 				<SignInButton
 					nonce={getNonce}

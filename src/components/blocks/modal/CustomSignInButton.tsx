@@ -1,7 +1,7 @@
 'use client'
 
-import { SignInButton, type StatusAPIResponse } from '@farcaster/auth-kit'
-import sdk, { type Context, type SignIn } from '@farcaster/frame-sdk'
+import { SignInButton } from '@farcaster/auth-kit'
+import sdk, { type Context } from '@farcaster/frame-sdk'
 import { signIn, signOut } from 'auth-astro/client'
 import { useCallback, useEffect, useState } from 'react'
 import './authKitStyles.css'
@@ -61,7 +61,12 @@ function CustomSignInButton() {
 	}, [])
 
 	const handleSuccess = useCallback(
-		(res: StatusAPIResponse | SignIn.SignInResult, username?: string, pfpUrl?: string) => {
+		(
+			// res: StatusAPIResponse | SignIn.SignInResult,
+			res: { message: string; signature: string; username?: string; pfpUrl?: string },
+			username?: string,
+			pfpUrl?: string
+		) => {
 			signIn('credentials', undefined, {
 				message: res.message,
 				signature: res.signature,

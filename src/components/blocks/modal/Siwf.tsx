@@ -6,7 +6,7 @@ import CustomSignInButton from "./CustomSignInButton";
 const config = {
 	relay: "https://relay.farcaster.xyz",
 	rpcUrl: "https://mainnet.optimism.io",
-	siweUri: "http://Whistles.Protocol/login",
+	siweUri: "https://Whistles.Protocol/login",
 	domain: "Whistles.Protocol",
 };
 

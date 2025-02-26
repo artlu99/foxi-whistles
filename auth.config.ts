@@ -73,7 +73,7 @@ export default defineConfig({
         const verifyResponse = await appClient.verifySignInMessage({
           message: credentials?.message as string,
           signature: credentials?.signature as `0x${string}`,
-          domain: "Whistles.Protocol",
+          domain: "sassyhash.artlu.xyz",
           nonce: csrfToken,
         });
 

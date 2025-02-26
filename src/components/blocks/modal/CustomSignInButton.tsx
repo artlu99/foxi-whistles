@@ -1,7 +1,7 @@
 'use client'
 
-import { SignInButton } from '@farcaster/auth-kit'
-import sdk, { type Context } from '@farcaster/frame-sdk'
+import { SignInButton, type StatusAPIResponse } from '@farcaster/auth-kit'
+import sdk, { type Context, type SignIn } from '@farcaster/frame-sdk'
 import { signIn, signOut } from 'auth-astro/client'
 import { useCallback, useEffect, useState } from 'react'
 import './authKitStyles.css'
@@ -42,11 +42,7 @@ function CustomSignInButton() {
 		const seamlessSignIn = async () => {
 			const nonce = await getNonce()
 			const result = await sdk.actions.signIn({ nonce })
-			handleSuccess({
-				...result,
-				username: context?.user?.username,
-				pfpUrl: context?.user?.pfpUrl
-			})
+			handleSuccess2(result, context?.user?.username, context?.user?.pfpUrl)
 		}
 
 		if (context) {
@@ -60,24 +56,28 @@ function CustomSignInButton() {
 		return nonce
 	}, [])
 
-	const handleSuccess = useCallback(
-		(
-			// res: StatusAPIResponse | SignIn.SignInResult,
-			res: { message: string; signature: string; username?: string; pfpUrl?: string },
-			username?: string,
-			pfpUrl?: string
-		) => {
+	const handleSuccess = useCallback((res: StatusAPIResponse) => {
+		signIn('credentials', undefined, {
+			message: res.message,
+			signature: res.signature,
+			name: res.username,
+			pfp: res.pfpUrl,
+			redirect: false
+		})
+	}, [])
+
+	const handleSuccess2 = useCallback(
+		(res: SignIn.SignInResult, username?: string, pfpUrl?: string) => {
 			signIn('credentials', undefined, {
 				message: res.message,
 				signature: res.signature,
-				name: username ?? res.username,
-				pfp: pfpUrl ?? res.pfpUrl,
+				name: username,
+				pfp: pfpUrl,
 				redirect: false
 			})
 		},
 		[]
 	)
-
 	return (
 		<>
 			<SignInButton

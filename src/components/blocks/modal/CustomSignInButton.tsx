@@ -1,7 +1,7 @@
 'use client'
 
 import { SignInButton, type StatusAPIResponse } from '@farcaster/auth-kit'
-import sdk, { type Context, type SignIn } from '@farcaster/frame-sdk'
+import sdk, { type Context } from '@farcaster/frame-sdk'
 import { signIn, signOut } from 'auth-astro/client'
 import { useCallback, useEffect, useState } from 'react'
 import './authKitStyles.css'
@@ -15,8 +15,13 @@ function CustomSignInButton() {
 		const load = async () => {
 			setContext(await sdk.context)
 
-			sdk.on('primaryButtonClicked', () => sdk.actions.close())
-			await sdk.actions.setPrimaryButton({ text: 'Close Frame' })
+			if (context?.client.added) {
+				sdk.on('primaryButtonClicked', () => sdk.actions.close())
+				await sdk.actions.setPrimaryButton({ text: 'Close Frame' })
+			} else {
+				sdk.on('primaryButtonClicked', () => sdk.actions.addFrame())
+				await sdk.actions.setPrimaryButton({ text: 'Add Frame' })
+			}
 
 			sdk.actions.ready({})
 		}
@@ -25,19 +30,7 @@ function CustomSignInButton() {
 			setIsSDKLoaded(true)
 			load()
 		}
-	}, [isSDKLoaded])
-
-	useEffect(() => {
-		const seamlessSignIn = async () => {
-			const nonce = await getNonce()
-			const result = await sdk.actions.signIn({ nonce })
-			handleSuccess2(result, context?.user?.username, context?.user?.pfpUrl)
-		}
-
-		if (context) {
-			seamlessSignIn()
-		}
-	}, [context])
+	}, [isSDKLoaded, context])
 
 	const getNonce = useCallback(async () => {
 		const csrfToken = await fetch('/api/auth/csrf')
@@ -60,26 +53,18 @@ function CustomSignInButton() {
 		})
 	}, [])
 
-	const handleSuccess2 = useCallback(
-		(res: SignIn.SignInResult, username?: string, pfpUrl?: string) => {
-			signIn('credentials', undefined, {
-				message: res.message,
-				signature: res.signature,
-				name: username,
-				pfp: pfpUrl,
-				redirect: false
-			})
-		},
-		[]
-	)
 	return (
 		<>
-			<SignInButton
-				nonce={getNonce}
-				onSuccess={handleSuccess}
-				onError={() => setError(true)}
-				onSignOut={() => signOut()}
-			/>
+			{context ? (
+				<div>Sign In only on web</div>
+			) : (
+				<SignInButton
+					nonce={getNonce}
+					onSuccess={handleSuccess}
+					onError={() => setError(true)}
+					onSignOut={() => signOut()}
+				/>
+			)}
 			{error && <div>Unable to sign in at this time.</div>}
 		</>
 	)

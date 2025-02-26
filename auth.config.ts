@@ -2,6 +2,8 @@ import CredentialsProvider from "@auth/core/providers/credentials";
 import { createAppClient, viemConnector } from "@farcaster/auth-client";
 import { defineConfig } from "auth-astro";
 
+const SAFISH_SHORT_CIRCUIT = true;
+
 export default defineConfig({
   providers: [
     CredentialsProvider({
@@ -32,6 +34,33 @@ export default defineConfig({
         },
       },
       async authorize(credentials, request) {
+        if (SAFISH_SHORT_CIRCUIT) {
+          // @ts-ignore - hack to get around credentials object not typed correctly
+          const passedNonce = credentials.csrfToken as string;
+
+          const searchParams = new URL(request.url).searchParams;
+          const message = searchParams.get("message");
+
+          const nonceMatch = message?.match(/Nonce: ([a-f0-9]+)/i);
+          const nonce = nonceMatch ? nonceMatch[1] : null;
+
+          if (passedNonce !== nonce) {
+            return null;
+          }
+
+          const fidMatch = message?.match(/farcaster:\/\/fid\/(\d+)/);
+          const fid = fidMatch ? fidMatch[1] : null;
+
+          if (!fid) return null;
+
+          return {
+            email: fid,
+            name: searchParams.get("name"),
+            image: searchParams.get("pfp"),
+          };
+        }
+
+        // ths is the old code that no longer works. It looks like the domain Whistles.Protocol is not valid anymore.
         const body = await request.body?.getReader().read();
         const text = new TextDecoder().decode(body?.value);
         const parsedBody = JSON.parse(text);

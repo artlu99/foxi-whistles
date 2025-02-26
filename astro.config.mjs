@@ -8,8 +8,7 @@ import auth from "auth-astro";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://sassyhash.artlu.xyz/",
-	adapter: vercelServerless(),
-	integrations: [auth(), tailwind(), icon(), sitemap(), react()],
-	security: { checkOrigin: false },
+  site: "https://sassyhash.artlu.xyz/",
+  adapter: vercelServerless(),
+  integrations: [auth(), tailwind(), icon(), sitemap(), react()],
 });

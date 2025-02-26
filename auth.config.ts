@@ -2,7 +2,7 @@ import CredentialsProvider from "@auth/core/providers/credentials";
 import { createAppClient, viemConnector } from "@farcaster/auth-client";
 import { defineConfig } from "auth-astro";
 
-const SAFISH_SHORT_CIRCUIT = true;
+const SAFISH_SHORT_CIRCUIT = false;
 
 export default defineConfig({
   providers: [
@@ -34,6 +34,9 @@ export default defineConfig({
         },
       },
       async authorize(credentials, request) {
+        console.log("credentials", credentials);  
+        console.log("request", request);
+
         if (SAFISH_SHORT_CIRCUIT) {
           // @ts-ignore - hack to get around credentials object not typed correctly
           const passedNonce = credentials.csrfToken as string;
@@ -45,6 +48,9 @@ export default defineConfig({
           const nonce = nonceMatch ? nonceMatch[1] : null;
 
           if (passedNonce !== nonce) {
+            console.error("nonce mismatch");
+            console.error("passedNonce", passedNonce);
+            console.error("nonce", nonce);
             return null;
           }
 
@@ -80,6 +86,7 @@ export default defineConfig({
         const { success, fid } = verifyResponse;
 
         if (!success) {
+          console.error("verifyResponse", verifyResponse);
           return null;
         }
 

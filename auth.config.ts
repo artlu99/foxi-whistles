@@ -1,8 +1,5 @@
 import CredentialsProvider from "@auth/core/providers/credentials";
-import { createAppClient, viemConnector } from "@farcaster/auth-client";
 import { defineConfig } from "auth-astro";
-
-const SAFISH_SHORT_CIRCUIT = true;
 
 export default defineConfig({
   providers: [
@@ -10,90 +7,40 @@ export default defineConfig({
       name: "Farcaster",
       credentials: {
         message: {
-          label: "Message",
+          label: "csrfToken",
           type: "text",
           placeholder: "0x0",
         },
         signature: {
-          label: "Signature",
-          type: "text",
-          placeholder: "0x0",
-        },
-        // In a production app with a server, these should be fetched from
-        // your Farcaster data indexer rather than have them accepted as part
-        // of credentials.
-        name: {
-          label: "Name",
-          type: "text",
-          placeholder: "0x0",
-        },
-        pfp: {
-          label: "Pfp",
+          label: "callbackUrl",
           type: "text",
           placeholder: "0x0",
         },
       },
       async authorize(credentials, request) {
-        console.log("credentials", credentials);  
-        console.log("request", request);
+        // @ts-ignore - hack to get around credentials object not typed correctly
+        const passedNonce = credentials.csrfToken as string;
 
-        if (SAFISH_SHORT_CIRCUIT) {
-          // @ts-ignore - hack to get around credentials object not typed correctly
-          const passedNonce = credentials.csrfToken as string;
+        const searchParams = new URL(request.url).searchParams;
+        const message = searchParams.get("message");
 
-          const searchParams = new URL(request.url).searchParams;
-          const message = searchParams.get("message");
+        const nonceMatch = message?.match(/Nonce: ([a-f0-9]+)/i);
+        const nonce = nonceMatch ? nonceMatch[1] : null;
 
-          const nonceMatch = message?.match(/Nonce: ([a-f0-9]+)/i);
-          const nonce = nonceMatch ? nonceMatch[1] : null;
-
-          if (passedNonce !== nonce) {
-            console.error("nonce mismatch");
-            console.error("passedNonce", passedNonce);
-            console.error("nonce", nonce);
-            return null;
-          }
-
-          const fidMatch = message?.match(/farcaster:\/\/fid\/(\d+)/);
-          const fid = fidMatch ? fidMatch[1] : null;
-
-          if (!fid) return null;
-
-          return {
-            email: fid,
-            name: searchParams.get("name"),
-            image: searchParams.get("pfp"),
-          };
-        }
-
-        // ths is the old code that no longer works. It looks like the domain Whistles.Protocol is not valid anymore.
-        const body = await request.body?.getReader().read();
-        const text = new TextDecoder().decode(body?.value);
-        const parsedBody = JSON.parse(text);
-        const csrfToken = parsedBody.csrfToken;
-
-        const appClient = createAppClient({
-          ethereum: viemConnector(),
-        });
-
-        const verifyResponse = await appClient.verifySignInMessage({
-          message: credentials?.message as string,
-          signature: credentials?.signature as `0x${string}`,
-          domain: "Whistles.Protocol",
-          nonce: csrfToken,
-        });
-
-        const { success, fid } = verifyResponse;
-
-        if (!success) {
-          console.error("verifyResponse", verifyResponse);
+        if (passedNonce !== nonce) {
+          console.error("nonce mismatch: ", passedNonce, nonce);
           return null;
         }
 
+        const fidMatch = message?.match(/farcaster:\/\/fid\/(\d+)/);
+        const fid = fidMatch ? fidMatch[1] : null;
+
+        if (!fid) return null;
+
         return {
-          email: fid.toString(),
-          name: credentials?.name as string,
-          image: credentials?.pfp as string,
+          email: fid,
+          name: searchParams.get("name"),
+          image: searchParams.get("pfp"),
         };
       },
     }),

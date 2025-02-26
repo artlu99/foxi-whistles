@@ -1,7 +1,7 @@
 'use client'
 
 import { SignInButton, type StatusAPIResponse } from '@farcaster/auth-kit'
-import sdk, { type Context } from '@farcaster/frame-sdk'
+import sdk, { type Context, type SignIn } from '@farcaster/frame-sdk'
 import { signIn, signOut } from 'auth-astro/client'
 import { useCallback, useEffect, useState } from 'react'
 import './authKitStyles.css'
@@ -12,7 +12,7 @@ async function getCsrfToken() {
 			if (!response.ok) throw new Error('Failed to fetch CSRF token')
 			return response.json()
 		})
-		.then((data) => data.csrfToken)
+		.then((data) => data.csrfToken as string)
 	if (!csrfToken) throw new Error('No CSRF token found')
 	return csrfToken
 }
@@ -40,15 +40,12 @@ function CustomSignInButton() {
 
 	useEffect(() => {
 		const seamlessSignIn = async () => {
-			const nonce = await getCsrfToken()
-			if (!nonce) throw new Error('Unable to generate nonce')
+			const nonce = await getNonce()
 			const result = await sdk.actions.signIn({ nonce })
-			await signIn('credentials', undefined, {
-				message: result.message,
-				signature: result.signature,
-				name: context?.user?.username,
-				pfp: context?.user?.pfpUrl,
-				redirect: false
+			handleSuccess({
+				...result,
+				username: context?.user?.username,
+				pfpUrl: context?.user?.pfpUrl
 			})
 		}
 
@@ -63,15 +60,18 @@ function CustomSignInButton() {
 		return nonce
 	}, [])
 
-	const handleSuccess = useCallback((res: StatusAPIResponse) => {
-		signIn('credentials', undefined, {
-			message: res.message,
-			signature: res.signature,
-			name: res.username,
-			pfp: res.pfpUrl,
-			redirect: false
-		})
-	}, [])
+	const handleSuccess = useCallback(
+		(res: StatusAPIResponse | SignIn.SignInResult, username?: string, pfpUrl?: string) => {
+			signIn('credentials', undefined, {
+				message: res.message,
+				signature: res.signature,
+				name: username ?? res.username,
+				pfp: pfpUrl ?? res.pfpUrl,
+				redirect: false
+			})
+		},
+		[]
+	)
 
 	return (
 		<>

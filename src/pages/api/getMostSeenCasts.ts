@@ -10,8 +10,11 @@ import { getMostSeenCasts } from './redis'
 export async function GET(request: { request: Request }) {
 	sendCorsHeaders(request.request)
 
+	const { searchParams } = new URL(request.request.url)
+	const viewerFid = searchParams.get('viewerFid')
+
 	try {
-		const mostSeenCasts = await getMostSeenCasts()
+		const mostSeenCasts = await getMostSeenCasts({ fid: viewerFid ? Number(viewerFid) : null })
 		return new Response(JSON.stringify(mostSeenCasts), {
 			status: 200,
 			headers: { 'Content-Type': 'application/json' }

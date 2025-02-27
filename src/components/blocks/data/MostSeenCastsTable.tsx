@@ -39,20 +39,34 @@ const TableRow = ({ isEven, children }: { isEven: boolean; children: React.React
 	<tr className={isEven ? 'bg-white' : 'bg-gray-50'}>{children}</tr>
 )
 
-const CastContent = ({ cast }: { cast: LeaderboardCastInfo }) => (
-	<div className="w-full">
-		{cast.username ? (
-			<FarcasterEmbed
-				url={`https://warpcast.com/${cast.username}/${cast.castHash.slice(0, 8)}`}
-				key={cast.castHash}
-			/>
-		) : (
-			<span className="text-sm text-gray-900">
-				{cast.fid} / {cast.castHash}
-			</span>
-		)}
-	</div>
-)
+const CastContent = ({ cast }: { cast: LeaderboardCastInfo }) => {
+	const [showDecodedText, setShowDecodedText] = useState(false)
+
+	return (
+		<div className="w-full">
+			{cast.username ? (
+				<>
+					<FarcasterEmbed
+						url={`https://warpcast.com/${cast.username}/${cast.castHash.slice(0, 8)}`}
+						key={cast.castHash}
+					/>
+					{cast.decodedText ? (
+						<>
+							<button type="button" onClick={() => setShowDecodedText(!showDecodedText)}>
+								{showDecodedText ? 'Hide Decoded Text' : 'Show Decoded Text'}
+							</button>
+							{showDecodedText && <div>{cast.decodedText}</div>}
+						</>
+					) : null}
+				</>
+			) : (
+				<span className="text-sm text-gray-900">
+					{cast.fid} / {cast.castHash.slice(0, 8)}
+				</span>
+			)}
+		</div>
+	)
+}
 
 const CastCard = ({ cast, index }: { cast: LeaderboardCastInfo; index: number }) => (
 	<div className="overflow-hidden rounded-lg bg-white shadow">
@@ -127,14 +141,20 @@ const TableSkeleton = () => (
 	</div>
 )
 
-const MostSeenCastsTable = () => {
+interface MostSeenCastsTableProps {
+	fid: number | null
+}
+
+const MostSeenCastsTable = ({ fid }: MostSeenCastsTableProps) => {
 	const [data, setData] = useState<LeaderboardCastInfo[]>([])
 	const [isLoading, setIsLoading] = useState(true)
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const res = await fetcher().get('/api/getMostSeenCasts')
+				const res = await fetcher().get(
+					fid ? `/api/getMostSeenCasts?viewerFid=${fid}` : '/api/getMostSeenCasts'
+				)
 				const data = typeof res === 'string' ? JSON.parse(res) : res
 				const validator = LeaderboardCastInfoResponseSchema.safeParse(data)
 
@@ -150,7 +170,7 @@ const MostSeenCastsTable = () => {
 			}
 		}
 		fetchData()
-	}, [])
+	}, [fid])
 
 	if (isLoading) {
 		return (
@@ -190,7 +210,9 @@ const MostSeenCastsTable = () => {
 							<th
 								scope="col"
 								className="px-3 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-							></th>
+							>
+								{' '}
+							</th>
 							<th
 								scope="col"
 								className="w-12 px-3 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-500"

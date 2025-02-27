@@ -1,21 +1,27 @@
 import { Redis } from '@upstash/redis'
+import { sift } from 'radash'
 import type { LeaderboardCastInfo } from '../../rpc/types'
+import { getTextByCastHash } from './gql'
 
 const redis = new Redis({
 	url: import.meta.env.UPSTASH_REDIS_REST_URL,
 	token: import.meta.env.UPSTASH_REDIS_REST_READ_ONLY_TOKEN
 })
 
-export async function getMostSeenCasts({ limit = 10 }: { limit?: number } = {}): Promise<
-	LeaderboardCastInfo[]
-> {
+export async function getMostSeenCasts({
+	fid,
+	limit = 10
+}: {
+	fid: number | null
+	limit?: number
+}): Promise<LeaderboardCastInfo[]> {
 	const usage = await redis.hgetall('action-usage')
 
 	if (!usage) {
 		return []
 	}
 
-	const topNCasts = Object.entries(usage)
+	const allCasts = Object.entries(usage)
 		.sort(([, a], [, b]) => Number(b) - Number(a))
 		.map(([key, cnt]) => {
 			const parts = key.split('-')
@@ -34,12 +40,12 @@ export async function getMostSeenCasts({ limit = 10 }: { limit?: number } = {}):
 
 	// Keep track of how many times we've seen each fid
 	const fidCounts: { [key: string]: number } = {}
-	const filteredCasts = topNCasts.filter((cast) => {
+	const filteredCasts = allCasts.filter((cast) => {
 		fidCounts[cast.fid] = (fidCounts[cast.fid] || 0) + 1
 		return fidCounts[cast.fid] <= 3
 	})
 
-	return filteredCasts
+	const topNCasts = filteredCasts
 		.map((cast) => {
 			return {
 				...cast,
@@ -47,4 +53,21 @@ export async function getMostSeenCasts({ limit = 10 }: { limit?: number } = {}):
 			}
 		})
 		.slice(0, limit)
+
+	const enhancedTopNCasts = sift(
+		await Promise.all(
+			topNCasts.map(async (cast) => {
+				try {
+					const res = await getTextByCastHash(cast.castHash, fid)
+					return {
+						...cast,
+						decodedText: res?.getTextByCastHash.decodedText
+					}
+				} catch (error) {
+					return cast
+				}
+			})
+		)
+	)
+	return enhancedTopNCasts
 }

@@ -1,6 +1,6 @@
 import { GraphQLClient, gql } from 'graphql-request'
 import type { ZodObject, ZodRawShape } from 'zod'
-import { GRAPHQL_ENDPOINT, YOGA_READ_TOKEN } from '../../rpc/constants'
+import { GRAPHQL_ENDPOINT, YOGA_READ_TOKEN, YOGA_WHISTLES_BEARER } from '../../rpc/constants'
 import {
 	type DatabaseViewResponse,
 	DatabaseViewSchema,
@@ -11,7 +11,9 @@ import {
 	type MyMessagesResponse,
 	MyMessagesSchema,
 	type SharedDatabaseMetricsResponse,
-	SharedDatabaseMetricsSchema
+	SharedDatabaseMetricsSchema,
+	type TextByCastHashResponse,
+	TextByCastHashSchema
 } from '../../rpc/types'
 
 const queries: Record<string, string> = {
@@ -55,6 +57,16 @@ const queries: Record<string, string> = {
 				}
 			}
 		}
+	`,
+	getTextByCastHash: gql`
+		query getTextByCastHash($castHash: String!, $fid: Int!) {
+			getTextByCastHash(castHash: $castHash, viewerFid: $fid) {
+				isDecrypted
+				timestamp
+				text
+				decodedText
+			}
+		}
 	`
 }
 
@@ -96,12 +108,35 @@ export const getMyMessages = async (fid: number, limit = 500) => {
 	return res
 }
 
+export const getTextByCastHash = async (castHash: string, fid: number | null) => {
+	if (!fid) {
+		throw new Error('Fid is required')
+	}
+
+	try {
+		const res = await genericGraphQLQuery<TextByCastHashResponse>(
+			'getTextByCastHash',
+			TextByCastHashSchema,
+			{ castHash, fid },
+			YOGA_WHISTLES_BEARER
+		)
+		return res
+	} catch (error) {
+		throw new Error(`Failed to get text by cast hash: ${castHash} for: ${fid}`)
+	}
+}
+
 const genericGraphQLQuery = async <T>(
 	queryName: string,
 	schema: ZodObject<ZodRawShape>,
-	variables?: Record<string, unknown>
+	variables?: Record<string, unknown>,
+	bearerToken?: string
 ) => {
-	const graphQLClient = new GraphQLClient(GRAPHQL_ENDPOINT)
+	const graphQLClient = bearerToken
+		? new GraphQLClient(GRAPHQL_ENDPOINT, {
+				headers: { authorization: `Bearer ${bearerToken}` }
+			})
+		: new GraphQLClient(GRAPHQL_ENDPOINT)
 
 	const query = queries[queryName]
 	try {

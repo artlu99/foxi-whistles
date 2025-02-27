@@ -64,12 +64,31 @@ export const MyMessagesSchema = z.object({
 	})
 })
 
+export interface TextByCastHashResponse {
+	getTextByCastHash: {
+		isDecrypted: boolean
+		timestamp: string
+		text: string
+		decodedText: string | null
+	}
+}
+
+export const TextByCastHashSchema = z.object({
+	getTextByCastHash: z.object({
+		isDecrypted: z.boolean(),
+		timestamp: z.string(),
+		text: z.string(),
+		decodedText: z.string().nullable()
+	})
+})
+
 export interface LeaderboardCastInfo {
 	fid: number
 	username: string
 	rootParentUrl: string | null
 	castHash: string
 	count: number
+	decodedText?: string | null
 }
 
 const LeaderboardCastInfoSchema = z.object({
@@ -77,7 +96,8 @@ const LeaderboardCastInfoSchema = z.object({
 	username: z.string(),
 	rootParentUrl: z.string().nullable(),
 	castHash: z.string(),
-	count: z.number()
+	count: z.number(),
+	decodedText: z.string().nullable().optional()
 })
 
 export const LeaderboardCastInfoResponseSchema = z.array(LeaderboardCastInfoSchema)

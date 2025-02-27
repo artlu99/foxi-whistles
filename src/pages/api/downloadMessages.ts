@@ -11,7 +11,13 @@ import { toUtf8Bytes } from '@ethersproject/strings'
 import { getSession } from 'auth-astro/server'
 // - Utils
 import { sort } from 'radash'
-import { sendCorsHeaders } from './common'
+import {
+	errorResponses,
+	sendResponse,
+	validateAuthenticatedUser,
+	validateCorsAndGenerateHeaders,
+	validateFid
+} from './common'
 import { getMyMessages } from './gql'
 
 // Excel for Windows uses 1900 date system, Excel for Mac uses 1904 date system
@@ -19,7 +25,11 @@ const EXCEL_WINDOWS_EPOCH_OFFSET = 25569
 const EXCEL_MAC_EPOCH_OFFSET = 24107
 
 export async function GET(request: { request: Request }) {
-	sendCorsHeaders(request.request)
+	const corsHeaders = validateCorsAndGenerateHeaders(request.request)
+	// If corsHeaders is a Response, it means there was a CORS error
+	if (corsHeaders instanceof Response) {
+		return corsHeaders
+	}
 
 	const url = new URL(request.request.url)
 	const requestedFid = Number.parseInt(url.searchParams.get('fid') || '0')
@@ -31,28 +41,16 @@ export async function GET(request: { request: Request }) {
 	const authenticatedFid = session?.user?.email ? Number.parseInt(session?.user?.email) : null
 
 	if (!authenticatedFid) {
-		return new Response(JSON.stringify({ message: 'Unauthorized - Please log in' }), {
-			status: 401,
-			headers: { 'Content-Type': 'application/json' }
-		})
+		return errorResponses.unauthorized(corsHeaders)
 	}
 
 	// Verify the requested FID matches the authenticated user's FID
-	if (requestedFid !== authenticatedFid) {
-		return new Response(
-			JSON.stringify({ message: "Unauthorized - Cannot access other users' data" }),
-			{
-				status: 403,
-				headers: { 'Content-Type': 'application/json' }
-			}
-		)
+	if (!validateAuthenticatedUser(authenticatedFid, requestedFid)) {
+		return errorResponses.forbidden(corsHeaders)
 	}
 
-	if (!requestedFid || !format) {
-		return new Response(JSON.stringify({ message: 'Missing required parameters' }), {
-			status: 400,
-			headers: { 'Content-Type': 'application/json' }
-		})
+	if (!requestedFid || !format || !validateFid(requestedFid)) {
+		return errorResponses.badRequest('Missing or invalid required parameters', corsHeaders)
 	}
 
 	try {
@@ -78,10 +76,7 @@ export async function GET(request: { request: Request }) {
 		// Handle different format types
 		switch (format) {
 			case 'json': {
-				return new Response(JSON.stringify(messages), {
-					status: 200,
-					headers: { 'Content-Type': 'application/json' }
-				})
+				return sendResponse(messages, 200, 'application/json', corsHeaders)
 			}
 
 			case 'csv':
@@ -90,31 +85,21 @@ export async function GET(request: { request: Request }) {
 				const csvContent = `plaintext,timestamp,ciphertext,deleted\n${messages
 					.map((e) => {
 						const timestamp = isExcelFormat
-							? new Date(e.timestamp).getTime() / 1000 / 86400 + platform === 'mac'
-								? EXCEL_MAC_EPOCH_OFFSET
-								: EXCEL_WINDOWS_EPOCH_OFFSET
+							? new Date(e.timestamp).getTime() / 1000 / 86400 +
+								(platform === 'mac' ? EXCEL_MAC_EPOCH_OFFSET : EXCEL_WINDOWS_EPOCH_OFFSET)
 							: e.timestamp
 						return `"${e.plaintext.replace(/"/g, '""')}",${timestamp},${e.ciphertext},${e.deleted}`
 					})
 					.join('\n')}`
 
-				return new Response(csvContent, {
-					status: 200,
-					headers: { 'Content-Type': 'text/csv' }
-				})
+				return sendResponse(csvContent, 200, 'text/csv', corsHeaders)
 			}
 
 			default:
-				return new Response(JSON.stringify({ message: 'Invalid format specified' }), {
-					status: 400,
-					headers: { 'Content-Type': 'application/json' }
-				})
+				return errorResponses.badRequest('Invalid format specified', corsHeaders)
 		}
 	} catch (error) {
 		console.error('Download error:', error)
-		return new Response(JSON.stringify({ message: 'Internal server error' }), {
-			status: 500,
-			headers: { 'Content-Type': 'application/json' }
-		})
+		return errorResponses.serverError('Internal server error', corsHeaders)
 	}
 }

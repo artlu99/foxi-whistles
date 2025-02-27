@@ -39,26 +39,24 @@ const TableRow = ({ isEven, children }: { isEven: boolean; children: React.React
 	<tr className={isEven ? 'bg-white' : 'bg-gray-50'}>{children}</tr>
 )
 
-const CastContent = ({ cast }: { cast: LeaderboardCastInfo }) => {
-	const [showDecodedText, setShowDecodedText] = useState(false)
-
+const CastContent = ({
+	cast,
+	showDecoded = false
+}: {
+	cast: LeaderboardCastInfo
+	showDecoded?: boolean
+}) => {
 	return (
 		<div className="w-full">
 			{cast.username ? (
-				<>
+				showDecoded ? (
+					<>{cast.decodedText}</>
+				) : (
 					<FarcasterEmbed
 						url={`https://warpcast.com/${cast.username}/${cast.castHash.slice(0, 8)}`}
 						key={cast.castHash}
 					/>
-					{cast.decodedText ? (
-						<>
-							<button type="button" onClick={() => setShowDecodedText(!showDecodedText)}>
-								{showDecodedText ? 'Hide Decoded Text' : 'Show Decoded Text'}
-							</button>
-							{showDecodedText && <div>{cast.decodedText}</div>}
-						</>
-					) : null}
-				</>
+				)
 			) : (
 				<span className="text-sm text-gray-900">
 					{cast.fid} / {cast.castHash.slice(0, 8)}
@@ -68,23 +66,30 @@ const CastContent = ({ cast }: { cast: LeaderboardCastInfo }) => {
 	)
 }
 
-const CastCard = ({ cast, index }: { cast: LeaderboardCastInfo; index: number }) => (
-	<div className="overflow-hidden rounded-lg bg-white shadow">
-		<div className="flex items-center justify-between border-b border-gray-200 bg-gray-50 px-4 py-2">
-			<div className="flex items-center gap-3">
-				<span className="text-sm font-medium text-gray-500">#{index + 1}</span>
-				<div className="flex items-center gap-1">
-					<span className="text-sm font-medium text-gray-900">{cast.count.toLocaleString()}</span>
-					<span className="text-xs text-gray-500">unique view attempts</span>
+const CastCard = ({ cast, index }: { cast: LeaderboardCastInfo; index: number }) => {
+	const [showDecoded, setShowDecoded] = useState(false)
+	return (
+		<div className="overflow-hidden rounded-lg bg-white shadow">
+			<div className="flex items-center justify-between border-b border-gray-200 bg-gray-50 px-4 py-2">
+				<div className="flex items-center gap-3">
+					<span className="text-sm font-medium text-gray-500">#{index + 1}</span>
+					<div className="flex items-center gap-1">
+						<span className="text-sm font-medium text-gray-900">{cast.count.toLocaleString()}</span>
+						<span className="text-xs text-gray-500">unique view attempts</span>
+					</div>
 				</div>
+				{cast.decodedText ? (
+					<button type="button" className="text-sm" onClick={() => setShowDecoded(!showDecoded)}>
+						{showDecoded ? '🙈': '💅'}
+					</button>
+				) : null}
+			</div>
+			<div className="p-4">
+				<CastContent cast={cast} showDecoded={showDecoded} />
 			</div>
 		</div>
-		<div className="p-4">
-			<CastContent cast={cast} />
-		</div>
-	</div>
-)
-
+	)
+}
 const CardSkeleton = ({ index }: { index: number }) => (
 	<div className="overflow-hidden rounded-lg bg-white shadow">
 		<div className="flex items-center justify-between border-b border-gray-200 bg-gray-50 px-4 py-2">
@@ -113,7 +118,9 @@ const TableSkeleton = () => (
 					<th
 						scope="col"
 						className="px-3 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-					></th>
+					>
+						{' '}
+					</th>
 					<th
 						scope="col"
 						className="w-12 px-3 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-500"

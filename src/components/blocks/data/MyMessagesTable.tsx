@@ -63,7 +63,7 @@ const columns = [
 ]
 
 interface MyMessagesTableProps {
-	fid: number
+	fid: number | null
 }
 const MyMessagesTable = (props: MyMessagesTableProps) => {
 	const { fid } = props

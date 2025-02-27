@@ -12,7 +12,8 @@ import {
 } from '@tanstack/react-table'
 import { fetcher } from 'itty-fetcher'
 import { sort } from 'radash'
-import { type ReactNode, useEffect, useState } from 'react'
+import { type ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
+import { UAParser } from 'ua-parser-js'
 import { type MyMessagesResponse, MyMessagesSchema } from '../../../rpc/types'
 
 type Message = {
@@ -126,28 +127,66 @@ const MyMessagesTable = (props: MyMessagesTableProps) => {
 		onPaginationChange: setPagination
 	})
 
-	const downloadData = async (format: 'csv' | 'json' | 'csv-xlsx') => {
-		try {
-			// Create a hidden anchor element to trigger the download
-			const link = document.createElement('a')
-			link.href = `/api/downloadMessages?fid=${fid}&format=${format}`
-			const extension = format === 'json' ? 'json' : 'csv'
-			link.download = `${fid}.${extension}` // Set the filename
-			document.body.appendChild(link)
-			link.click()
-			document.body.removeChild(link)
-		} catch (error) {
-			console.error('Download failed:', error)
-			// You might want to add some user feedback here
-		}
-	}
-
 	const renderCell = (content: unknown): ReactNode => {
 		if (typeof content === 'bigint') {
 			return content.toString()
 		}
 		return content as ReactNode
 	}
+
+	const downloadData = useCallback(
+		async (format: 'csv' | 'json' | 'csv-xlsx', platform?: 'mac' | 'windows') => {
+			try {
+				// Create a hidden anchor element to trigger the download
+				const link = document.createElement('a')
+				link.href = `/api/downloadMessages?fid=${fid}&format=${format}${platform ? `&platform=${platform}` : ''}`
+				const extension = format === 'json' ? 'json' : 'csv'
+				link.download = `${fid}.${extension}` // Set the filename
+				document.body.appendChild(link)
+				link.click()
+				document.body.removeChild(link)
+			} catch (error) {
+				console.error('Download failed:', error)
+				// You might want to add some user feedback here
+			}
+		},
+		[fid]
+	)
+
+	const platformSpecificDownloadButtons = useMemo(() => {
+		const parser = new UAParser()
+		const os = parser.getOS().name?.toLowerCase() || ''
+
+		return ['windows'].includes(os) ? (
+			<>
+				[
+				<button type="button" onClick={() => downloadData('csv-xlsx', 'windows')}>
+					csv-xlsx
+				</button>
+				]
+			</>
+		) : ['ios', 'macos'].includes(os) ? (
+			<>
+				[
+				<button type="button" onClick={() => downloadData('csv-xlsx', 'mac')}>
+					csv-xlsx
+				</button>
+				]
+			</>
+		) : (
+			<>
+				[
+				<button type="button" onClick={() => downloadData('csv-xlsx', 'mac')}>
+					Mac Excel
+				</button>
+				] [
+				<button type="button" onClick={() => downloadData('csv-xlsx', 'windows')}>
+					Win Excel
+				</button>
+				]
+			</>
+		)
+	}, [downloadData])
 
 	return response ? (
 		<div className="p-2">
@@ -160,11 +199,7 @@ const MyMessagesTable = (props: MyMessagesTableProps) => {
 				<button type="button" onClick={() => downloadData('json')}>
 					json
 				</button>
-				] [
-				<button type="button" onClick={() => downloadData('csv-xlsx')}>
-					csv-xlsx
-				</button>
-				]
+				] {platformSpecificDownloadButtons}
 			</div>
 			<table>
 				<thead>

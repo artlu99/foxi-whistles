@@ -10,12 +10,13 @@ import { toUtf8Bytes } from '@ethersproject/strings'
 // - Session
 import { getSession } from 'auth-astro/server'
 // - Utils
-import { fetcher } from 'itty-fetcher'
 import { sort } from 'radash'
-// - Types
-import { MyMessagesSchema } from '../../rpc/types'
-// - Utils
 import { sendCorsHeaders } from './common'
+import { getMyMessages } from './gql'
+
+// Excel for Windows uses 1900 date system, Excel for Mac uses 1904 date system
+const EXCEL_WINDOWS_EPOCH_OFFSET = 25569
+const EXCEL_MAC_EPOCH_OFFSET = 24107
 
 export async function GET(request: { request: Request }) {
 	sendCorsHeaders(request.request)
@@ -23,6 +24,7 @@ export async function GET(request: { request: Request }) {
 	const url = new URL(request.request.url)
 	const requestedFid = Number.parseInt(url.searchParams.get('fid') || '0')
 	const format = url.searchParams.get('format') || 'json'
+	const platform = url.searchParams.get('platform') || 'mac'
 
 	// Get the authenticated user's FID from the session
 	const session = await getSession(request.request)
@@ -54,18 +56,10 @@ export async function GET(request: { request: Request }) {
 	}
 
 	try {
-		// Fetch messages using existing endpoint
-		const response = await fetcher().get('/api/getMyMessages', { fid: requestedFid })
-		const validator = MyMessagesSchema.safeParse(
-			typeof response === 'string' ? JSON.parse(response) : response
-		)
-
-		if (!validator.success) {
-			throw new Error('Invalid data format')
-		}
+		const myMessages = await getMyMessages(requestedFid)
 
 		const messages = sort(
-			validator.data.getDecryptedMessagesByFid.messages.map((msg) => {
+			myMessages.getDecryptedMessagesByFid.messages.map((msg) => {
 				const maybeUnixTimestamp = (Number(msg.timestamp) + Number(1609459200)) * 1000
 				const fallbackTimestamp =
 					maybeUnixTimestamp > Date.now() ? Number(msg.timestamp) : maybeUnixTimestamp
@@ -96,7 +90,9 @@ export async function GET(request: { request: Request }) {
 				const csvContent = `plaintext,timestamp,ciphertext,deleted\n${messages
 					.map((e) => {
 						const timestamp = isExcelFormat
-							? new Date(e.timestamp).getTime() / 1000 / 86400 + 25569
+							? new Date(e.timestamp).getTime() / 1000 / 86400 + platform === 'mac'
+								? EXCEL_MAC_EPOCH_OFFSET
+								: EXCEL_WINDOWS_EPOCH_OFFSET
 							: e.timestamp
 						return `"${e.plaintext.replace(/"/g, '""')}",${timestamp},${e.ciphertext},${e.deleted}`
 					})

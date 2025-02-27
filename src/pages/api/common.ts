@@ -1,10 +1,17 @@
-const allowedOrigins = [
-	'https://sassyhash.artlu.xyz',
-	'https://foxi-whistles.vercel.app',
-	'http://localhost:4321'
-]
 const allowedMethods = ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 const allowedHeaders = ['Content-Type', 'Authorization']
+
+// Helper to check if an origin is allowed
+const isOriginAllowed = (origin: string | null) => {
+	// If no origin header, it's likely a same-origin request
+	if (!origin) return true
+
+	// For localhost development
+	if (origin.startsWith('http://localhost:')) return true
+
+	// For production: either use whitelist OR verify HTTPS
+	return origin.startsWith('https://')
+}
 
 export const sendResponse = <T>(
 	data: T,
@@ -55,13 +62,8 @@ export const validateAuthenticatedUser = (
 }
 
 export const validateCorsAndGenerateHeaders = (request: Request) => {
-	const origin = request.headers.get('Origin') ?? ''
+	const origin = request.headers.get('Origin')
 	const requestMethod = request.method.toUpperCase()
-
-	// If origin is not in allowed list, return 403
-	if (!allowedOrigins.includes(origin)) {
-		return sendResponse({ message: 'Origin not allowed' }, 403)
-	}
 
 	// If method is not allowed, return 405
 	if (!allowedMethods.includes(requestMethod)) {
@@ -70,11 +72,25 @@ export const validateCorsAndGenerateHeaders = (request: Request) => {
 		})
 	}
 
-	const corsHeaders = {
-		'Access-Control-Allow-Origin': origin,
+	// Generate CORS headers based on origin
+	const corsHeaders: Record<string, string> = {
 		'Access-Control-Allow-Methods': allowedMethods.join(', '),
 		'Access-Control-Allow-Headers': allowedHeaders.join(', '),
 		'Access-Control-Max-Age': '86400' // 24 hours cache for preflight requests
+	}
+
+	// Set origin header based on validation
+	if (isOriginAllowed(origin)) {
+		// If origin is allowed, echo it back
+		if (origin) {
+			corsHeaders['Access-Control-Allow-Origin'] = origin
+		} else {
+			// No origin header (same-origin request) or local development
+			corsHeaders['Access-Control-Allow-Origin'] = '*'
+		}
+	} else {
+		// Origin not allowed
+		return sendResponse({ message: 'Origin not allowed' }, 403)
 	}
 
 	// Handle preflight requests

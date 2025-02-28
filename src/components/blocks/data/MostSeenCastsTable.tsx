@@ -1,10 +1,14 @@
 'use client'
 
+import type { Message } from '@farcaster/core'
 import { fetcher } from 'itty-fetcher'
 import { useEffect, useState } from 'react'
 import { FarcasterEmbed } from 'react-farcaster-embed/dist/client'
 import type { LeaderboardCastInfo } from '../../../rpc/types'
 import { LeaderboardCastInfoResponseSchema } from '../../../rpc/types'
+
+const MAX_PAGE_SIZE = 100
+const MODERATOR_FIDS = [6546, 3115, 475488]
 
 // Common styles as constants
 const styles = {
@@ -46,17 +50,43 @@ const CastContent = ({
 	cast: LeaderboardCastInfo
 	showDecoded?: boolean
 }) => {
+	const [modLikes, setModLikes] = useState<number[]>([])
+
+	useEffect(() => {
+		const fetchLikes = async () => {
+			const res = await fetcher({
+				base: 'https://nemes.farcaster.xyz:2281'
+			}).get<{ messages: Message[] }>(
+				`/v1/reactionsByCast?target_fid=${cast.fid}&target_hash=${cast.castHash}&reaction_type=1&page_size=${MAX_PAGE_SIZE}`
+			)
+
+			setModLikes(
+				res?.messages.map((m) => m.data?.fid ?? 0).filter((fid) => MODERATOR_FIDS.includes(fid)) ??
+					[]
+			)
+		}
+		fetchLikes()
+	}, [cast])
+
 	return (
 		<div className="w-full">
 			{cast.username ? (
-				showDecoded ? (
-					<>{cast.decodedText}</>
-				) : (
+				<>
+					{showDecoded ? <>{cast.decodedText}</> : null}
 					<FarcasterEmbed
 						url={`https://warpcast.com/${cast.username}/${cast.castHash.slice(0, 8)}`}
 						key={cast.castHash}
 					/>
-				)
+					{showDecoded ? (
+						<div className="text-sm text-gray-500">
+							Liked by: {modLikes.map((fid) => fid.toString()).join(', ')}
+						</div>
+					) : (
+						<div className="text-sm text-gray-500">
+							Liked by: {modLikes.length.toLocaleString()} moderators
+						</div>
+					)}
+				</>
 			) : (
 				<span className="text-sm text-gray-900">
 					{cast.fid} / {cast.castHash.slice(0, 8)}
@@ -80,7 +110,7 @@ const CastCard = ({ cast, index }: { cast: LeaderboardCastInfo; index: number })
 				</div>
 				{cast.decodedText ? (
 					<button type="button" className="text-sm" onClick={() => setShowDecoded(!showDecoded)}>
-						{showDecoded ? '🙈': '💅'}
+						{showDecoded ? '🙈' : '💅'}
 					</button>
 				) : null}
 			</div>

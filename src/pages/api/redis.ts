@@ -1,5 +1,5 @@
 import { Redis } from '@upstash/redis'
-import { sift } from 'radash'
+import { sort, sift, unique } from 'radash'
 import type { LeaderboardCastInfo } from '../../rpc/types'
 import { getTextByCastHash } from './gql'
 
@@ -9,10 +9,10 @@ const redis = new Redis({
 })
 
 export async function getMostSeenCasts({
-	fid,
+	viewerFid,
 	limit = 10
 }: {
-	fid: number | null
+	viewerFid: number | null
 	limit?: number
 }): Promise<LeaderboardCastInfo[]> {
 	const usage = await redis.hgetall('action-usage')
@@ -54,11 +54,24 @@ export async function getMostSeenCasts({
 		})
 		.slice(0, limit)
 
+	const viewersCasts = allCasts
+		.filter((cast) => cast.fid === viewerFid)
+		.map((stringifiedCast) => ({
+			...stringifiedCast,
+			rootParentUrl: stringifiedCast.rootParentUrl === 'null' ? null : stringifiedCast.rootParentUrl
+		}))
+
+	const topNCastsPlusViewersCasts = sort(
+		unique(topNCasts.concat(viewersCasts), (c) => c.castHash),
+		(c) => c.count,
+		true // descending === true
+	)
+
 	const enhancedTopNCasts = sift(
 		await Promise.all(
-			topNCasts.map(async (cast) => {
+			topNCastsPlusViewersCasts.map(async (cast) => {
 				try {
-					const res = await getTextByCastHash(cast.castHash, fid)
+					const res = await getTextByCastHash(cast.castHash, viewerFid)
 					return {
 						...cast,
 						decodedText: res?.getTextByCastHash.decodedText

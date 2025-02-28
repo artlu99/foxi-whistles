@@ -18,7 +18,9 @@ export async function GET(request: { request: Request }) {
 	const viewerFid = searchParams.get('viewerFid')
 
 	try {
-		const mostSeenCasts = await getMostSeenCasts({ fid: viewerFid ? Number(viewerFid) : null })
+		const mostSeenCasts = await getMostSeenCasts({
+			viewerFid: viewerFid ? Number(viewerFid) : null
+		})
 		return sendResponse(mostSeenCasts, 200, 'application/json', corsHeaders)
 	} catch (error) {
 		console.error('Error response:', error)

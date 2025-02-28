@@ -32,7 +32,7 @@ const fid = session?.user?.email ? Number.parseInt(session?.user?.email) : null;
 		id="contact"
 		classes="bg-neutral-50 dark:bg-neutral-950/80"
 	>
-	
+	<AuthBlock />	
 	<details class="group w-full">
 		<summary class="flex w-full cursor-pointer items-center justify-between rounded-lg p-3 hover:bg-neutral-100 dark:hover:bg-neutral-900">
 			<span class="text-xl sm:text-2xl font-bold">Rules</span>
@@ -55,7 +55,5 @@ const fid = session?.user?.email ? Number.parseInt(session?.user?.email) : null;
 		{new Date().toLocaleDateString('en-US', {timeZone: 'America/New_York'}).split(' ')[0]}
 	</span> 
 	<hr />
-
-	<AuthBlock />
 	</JustHero>
 </Layout>

@@ -8,40 +8,26 @@ import type { LeaderboardCastInfo } from '../../../rpc/types'
 import { LeaderboardCastInfoResponseSchema } from '../../../rpc/types'
 
 const MAX_PAGE_SIZE = 100
-const MODERATOR_FIDS = [6546, 3115, 475488]
+const MODERATORS: Record<number, string> = {
+	533: 'alexpaden',
+	3115: 'ghostlinkz.eth',
+	4163: 'kmacb.eth',
+	6546: 'artlu',
+	8004: 'ahn.eth',
+	10174: 'cryptowenmoon.eth',
+	10215: 'zoo',
+	15850: 'christin',
+	16567: 'serendipity',
+	191780: 'agrimony.eth',
+	475488: 'hankmoody',
+	535389: 'xbornid.eth'
+}
+const MODERATOR_FIDS = Object.keys(MODERATORS).map(Number)
 
-// Common styles as constants
-const styles = {
-	th: 'px-2 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-500 sm:px-3',
-	td: 'px-2 py-2 text-sm text-gray-500 sm:px-3',
-	tdContent: 'px-2 py-2 sm:px-3',
-	skeleton: 'animate-pulse bg-gray-200 rounded'
-} as const
+const client = fetcher({ base: 'https://nemes.farcaster.xyz:2281' })
 
-// Helper components for table structure
-const TableHeader = ({
-	children,
-	className = ''
-}: {
-	children: React.ReactNode
-	className?: string
-}) => (
-	<th scope="col" className={`${styles.th} ${className}`}>
-		{children}
-	</th>
-)
-
-const TableCell = ({
-	children,
-	className = ''
-}: {
-	children: React.ReactNode
-	className?: string
-}) => <td className={`${styles.td} ${className}`}>{children}</td>
-
-const TableRow = ({ isEven, children }: { isEven: boolean; children: React.ReactNode }) => (
-	<tr className={isEven ? 'bg-white' : 'bg-gray-50'}>{children}</tr>
-)
+const pluralize = (count: number, singular: string, plural?: string) =>
+	count === 1 ? `${count} ${singular}` : `${count} ${plural ?? `${singular}s`}`
 
 const CastContent = ({
 	cast,
@@ -54,10 +40,13 @@ const CastContent = ({
 
 	useEffect(() => {
 		const fetchLikes = async () => {
-			const res = await fetcher({
-				base: 'https://nemes.farcaster.xyz:2281'
-			}).get<{ messages: Message[] }>(
-				`/v1/reactionsByCast?target_fid=${cast.fid}&target_hash=${cast.castHash}&reaction_type=1&page_size=${MAX_PAGE_SIZE}`
+			const res = await client.get<{ messages: Message[] }>(
+				`/v1/reactionsByCast?${new URLSearchParams({
+					target_fid: cast.fid.toString(),
+					target_hash: cast.castHash,
+					reaction_type: '1',
+					page_size: MAX_PAGE_SIZE.toString()
+				})}`
 			)
 
 			setModLikes(
@@ -77,13 +66,13 @@ const CastContent = ({
 						url={`https://warpcast.com/${cast.username}/${cast.castHash.slice(0, 8)}`}
 						key={cast.castHash}
 					/>
-					{showDecoded ? (
+					{showDecoded && modLikes.length > 0 ? (
 						<div className="text-sm text-gray-500">
-							Liked by: {modLikes.map((fid) => fid.toString()).join(', ')}
+							Liked by: {modLikes.map((fid) => MODERATORS[fid]).join(', ')}
 						</div>
 					) : (
 						<div className="text-sm text-gray-500">
-							Liked by: {modLikes.length.toLocaleString()} moderators
+							Liked by: {pluralize(modLikes.length, 'moderator')}
 						</div>
 					)}
 				</>

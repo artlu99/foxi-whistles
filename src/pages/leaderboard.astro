@@ -4,7 +4,7 @@ export const prerender = false;
 // - Session
 import { getSession } from "auth-astro/server";
 // Components
-import MostSeenCasts from "../components/blocks/data/MostSeenCastsTable.tsx";
+import MostSeenCastsTable from "../components/blocks/data/MostSeenCastsTable.tsx";
 // - UI
 import JustHero from "../components/blocks/hero/JustHero.astro";
 import AuthBlock from "../components/blocks/modal/AuthBlock.astro";
@@ -50,7 +50,7 @@ const fid = session?.user?.email ? Number.parseInt(session?.user?.email) : null;
 		</div>
 	</details>
 	<hr />
-	<MostSeenCasts fid={fid} client:only="react" />
+	<MostSeenCastsTable fid={fid} client:only="react" />
 	<span class="text-emphasis text-xs">as of 
 		{new Date().toLocaleDateString('en-US', {timeZone: 'America/New_York'}).split(' ')[0]}
 	</span> 

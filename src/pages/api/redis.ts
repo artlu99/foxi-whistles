@@ -1,5 +1,5 @@
 import { Redis } from '@upstash/redis'
-import { sort, sift, unique } from 'radash'
+import { sift, sort, unique } from 'radash'
 import type { LeaderboardCastInfo } from '../../rpc/types'
 import { getTextByCastHash } from './gql'
 
@@ -10,10 +10,12 @@ const redis = new Redis({
 
 export async function getMostSeenCasts({
 	viewerFid,
-	limit = 10
+	limit = 10,
+	excludeFids = [6546]
 }: {
 	viewerFid: number | null
 	limit?: number
+	excludeFids?: number[]
 }): Promise<LeaderboardCastInfo[]> {
 	const usage = await redis.hgetall('action-usage')
 
@@ -40,10 +42,12 @@ export async function getMostSeenCasts({
 
 	// Keep track of how many times we've seen each fid
 	const fidCounts: { [key: string]: number } = {}
-	const filteredCasts = allCasts.filter((cast) => {
-		fidCounts[cast.fid] = (fidCounts[cast.fid] || 0) + 1
-		return fidCounts[cast.fid] <= 3
-	})
+	const filteredCasts = allCasts
+		.filter((cast) => {
+			fidCounts[cast.fid] = (fidCounts[cast.fid] || 0) + 1
+			return fidCounts[cast.fid] <= 3
+		})
+		.filter((cast) => !excludeFids.includes(cast.fid))
 
 	const topNCasts = filteredCasts
 		.map((cast) => {

@@ -262,7 +262,7 @@ const MostSeenCastsTable = ({ fid, totalPool, minPayout }: MostSeenCastsTablePro
 
 	useEffect(() => {
 		if (data.length) {
-			const smoothData = calculateSmoothScores(data)
+			const smoothData = calculateSmoothScores(data.filter((cast) => cast.fid !== 6546).slice(0, 10))
 			setSmoothData(smoothData)
 		}
 		// count how many unique FIDs are in the top 10 of the (valid) data

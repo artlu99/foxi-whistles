@@ -5,7 +5,6 @@ export const prerender = false;
 import { getSession } from "auth-astro/server";
 import BasicContest from "../components/blocks/contest/Basic.astro";
 // Components
-import MostSeenCastsTable from "../components/blocks/data/MostSeenCastsTable.tsx";
 // - UI
 import JustHero from "../components/blocks/hero/JustHero.astro";
 import AuthBlock from "../components/blocks/modal/AuthBlock.astro";
@@ -34,9 +33,9 @@ const fid = session?.user?.email ? Number.parseInt(session?.user?.email) : null;
 		classes="bg-neutral-50 dark:bg-neutral-950/80"
 	>
 	<AuthBlock />	
-	<BasicContest totalPool={100} minPayout={5} />
+	<BasicContest totalPool={100} minPayout={5} topN={15}/>
 	<hr />
-	<MostSeenCastsTable fid={fid} totalPool={100} minPayout={5} client:only="react" />
+	<div>This page has moved to the <a href="https://gib-rewards.artlu.xyz" target="_blank" class="text-emphasis">Frame V2</a></div>
 	<span class="text-emphasis text-xs">as of 
 		{new Date().toLocaleDateString('en-US', {timeZone: 'America/New_York'}).split(' ')[0]}
 	</span> 

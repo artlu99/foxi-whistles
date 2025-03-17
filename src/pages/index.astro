@@ -28,11 +28,21 @@ const testimonialData2 = {
 	bgPosition: "left",
 } as const;
 
+const testimonialData3 = {
+	blockquote: "Have boosted all the examples above at one point, with the exception of Sassy Hash (which is neat)",
+	figcaption: "co-founder, Farcaster",
+	cite: "@dwr.eth",
+	bg: testimonialBackground2,
+	bgPosition: "left",
+	url: "https://warpcast.com/dwr.eth/0xffedab0a"
+} as const;
+
 ---
 
 <Layout title={SEO.title} description={SEO.description}>
 	<Hero />
 	<Features />
+	<Testimonial {...testimonialData3} />
 	<Testimonial bg={testimonialBackground} bgPosition="right" />
 	<Testimonial {...testimonialData2} />
 	<HighlightBlocks />

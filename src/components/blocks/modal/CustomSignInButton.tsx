@@ -47,7 +47,7 @@ function CustomSignInButton() {
 	return (
 		<>
 			{context ? (
-				<div>Frames V2 Sign In turned off until IAB security is improved.</div>
+				<div>Frames V2 Sign In turned off.</div>
 			) : (
 				<SignInButton
 					nonce={getNonce}

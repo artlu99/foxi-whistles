@@ -14,13 +14,13 @@ import Col from "../../ui/Col.astro";
 import Row from "../../ui/Row.astro";
 import Section from "../../ui/Section.astro";
 
-// Content
-// - Hero Image
-// import heroImage from '../../../assets/hero-01.png'
 // - Avatars
 import user1 from "../../../assets/avatars/avatar-01.webp";
 import user2 from "../../../assets/avatars/avatar-02.webp";
 import user3 from "../../../assets/avatars/avatar-03.webp";
+// Content
+// - Hero Image
+import FarcasterLogo from "../../../assets/logos/farcaster-logo.svg";
 const avatars = [
 	{ image: { src: user1.src, alt: "user name" }, link: "/" },
 	{ image: { src: user2.src, alt: "user name" }, link: "/" },
@@ -38,7 +38,21 @@ const avatars = [
 			</ChipNotification>
 			<h1>Be private <strong>in public</strong>.</h1>
 
-			<p class="pb-0 text-lg">
+			// ... existing code ...
+			<br />
+			<Button
+				size="lg"
+				link="https://warpcast.com/~/channel/p2p"
+				external="cursor-arrow-ripple"
+				classes="bg-red-600 hover:bg-red-700 text-white font-bold text-xl px-8 py-4 transform hover:scale-105 transition-all"
+			>
+			<Image src={FarcasterLogo} alt="Farcaster Logo" width="20" height="20" />
+				SassyHash Warpcast Channel /p2p 
+			</Button>
+			<br />
+			// ... mmmm positive vibes only ...
+
+			<p class="pb-0 text-lg mt-8">
 				Say it for everyone, then add some IYKYK. Technology assures perfect fidelity with your
 				original words.
 			</p>

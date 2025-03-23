@@ -5,9 +5,7 @@
 
 // - UI
 import { Image } from "astro:assets";
-import AvatarGroup from "../../ui/AvatarGroup.astro";
 import Button from "../../ui/Button.astro";
-import ChipNotification from "../../ui/ChipNotification.astro";
 // Components
 // - Layout
 import Col from "../../ui/Col.astro";
@@ -32,14 +30,8 @@ const avatars = [
 	<Row>
 		<Col span="2" />
 		<Col span="8" align="center">
-			<ChipNotification radius="rounded-full" classes="mb-6">
-				<strong>3+</strong> satisfied customers
-				<AvatarGroup avatars={avatars} radius="rounded-full" slot="button" />
-			</ChipNotification>
 			<h1>Be private <strong>in public</strong>.</h1>
 
-			// ... existing code ...
-			<br />
 			<Button
 				size="lg"
 				link="https://warpcast.com/~/channel/p2p"
@@ -47,15 +39,10 @@ const avatars = [
 				classes="bg-red-600 hover:bg-red-700 text-white font-bold text-xl px-8 py-4 transform hover:scale-105 transition-all"
 			>
 			<Image src={FarcasterLogo} alt="Farcaster Logo" width="20" height="20" />
-				SassyHash Warpcast Channel /p2p 
+				Warpcast Channel /p2p 
 			</Button>
-			<br />
-			// ... mmmm positive vibes only ...
-
-			<p class="pb-0 text-lg mt-8">
-				Say it for everyone, then add some IYKYK. Technology assures perfect fidelity with your
-				original words.
-			</p>
+			<br /><br />
+			
 			<Button
 				size="lg"
 				link="https://warpcast.com/~/developers/composer-actions?name=keccak-256&postUrl=https%3A%2F%2Fkeccak256-composer-action.artlu.workers.dev"
@@ -66,35 +53,34 @@ const avatars = [
 				link="https://warpcast.com/~/add-cast-action?url=https%3A%2F%2Fkeccak256-composer-action.artlu.workers.dev%2Fcast-action"
 				external="squares-plus">Cast Action</Button
 			>
-			<div class="mt-5 flex justify-center">
-				<Image
-					src={'https://r2.fc-clients-cast-action.artlu.xyz/qr-install-keccak256-composer-action.png'}
-					alt={'QR Code'}
-					height="200"
-					width="200"
-				/>
-			</div>
+			<br />
+			
+			
+
 			<p class="text-md my-2 pb-0">
-				Scan me with <a href="https://recaster.org" target="_blank" rel="noopener noreferrer"
+				Also: launch in <a href="https://recaster.org" target="_blank" rel="noopener noreferrer"
 					>Recaster</a
-				> to launch as Mini-App.
+				> as a Featured Mini-App.
 			</p>
-			<p class="text-md my-2 pb-0">
-				Independent user-written
-				<a
-					href="https://warpcast.com/hankmoody/0x588598b1"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					intro cast
-				</a> + 
+			<p class="text-md my-8 pb-0">
+
 			 <a
 				href="https://paragraph.xyz/@hankmoody/how-to-decode-and-encode-messages"
 				target="_blank"
 				rel="noopener noreferrer"
 			>
-				mini-tutorial
-			</a> (<i>3 min read with screenshots</i>). 
+				 How To Decode and Encode Messages
+			</a> 
+			<br />
+			and 
+			<br />
+			 <a
+				href="https://paragraph.xyz/@hankmoody/how-to-participate-in-sassy-%F0%9F%92%85-rewards"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				How To Participate in Sassy 💕 Rewards
+			</a>
 			</p>
 		</Col>
 		<Col span="2" />

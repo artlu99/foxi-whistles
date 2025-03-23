@@ -73,5 +73,5 @@ export const navigationBarData: NavData = {
 			],
 		},
 	],
-	navActions: [{ name: "Try it now", link: "/", style: "primary", size: "lg" }],
+	navActions: [],
 };

@@ -46,23 +46,6 @@ export const footerNavigationData: FooterData = {
 	},
 	footerColumns: [
 		{
-			category: "Product",
-			subCategories: [
-				{
-					subCategory: "FAQ",
-					subCategoryLink: "/faq",
-				},
-				{
-					subCategory: "Pricing",
-					subCategoryLink: "/pricing",
-				},
-				{
-					subCategory: "Changelog",
-					subCategoryLink: "/changelog",
-				},
-			],
-		},
-		{
 			category: "Developers",
 			subCategories: [
 				{
@@ -70,35 +53,8 @@ export const footerNavigationData: FooterData = {
 					subCategoryLink: "/blog/developer-journey",
 				},
 				{
-					subCategory: "Whitepaper",
-					subCategoryLink: "/rug#whitepaper",
-				},
-				{
-					subCategory: "Composer Action",
-					subCategoryLink:
-						"https://warpcast.com/~/developers/composer-actions?name=keccak-256&postUrl=https%3A%2F%2Fkeccak256-composer-action.artlu.workers.dev",
-				},
-				{
-					subCategory: "Cast Action",
-					subCategoryLink:
-						"https://warpcast.com/~/add-cast-action?url=https%3A%2F%2Fkeccak256-composer-action.artlu.workers.dev%2Fcast-action",
-				},
-				{
 					subCategory: "GraphQL API",
 					subCategoryLink: "https://whistles.artlu.xyz/graphql",
-				},
-			],
-		},
-		{
-			category: "About us",
-			subCategories: [
-				{
-					subCategory: "News",
-					subCategoryLink: "/blog",
-				},
-				{
-					subCategory: "Support",
-					subCategoryLink: "/contact",
 				},
 			],
 		},

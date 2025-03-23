@@ -1,17 +1,14 @@
 ---
 // - UI
 import CTA from "../components/blocks/CTA/BasicDark.astro";
-import Features from "../components/blocks/features/FeatureCards.astro";
 import Hero from "../components/blocks/hero/HomeCTA.astro";
-import HighlightBlocks from "../components/blocks/highlights/HightlightRows.astro";
-import Testimonial from "../components/blocks/testimonials/BasicDark.astro";
 // Components
 // - Layout
 import Layout from "../layouts/Layout.astro";
 
 // Content
 // - Testimonial background
-import testimonialBackground from "../assets/testimonial-bg-01.webp";
+
 import testimonialBackground2 from "../assets/testimonial-bg-02.webp";
 // - SEO
 const SEO = {
@@ -41,10 +38,5 @@ const testimonialData3 = {
 
 <Layout title={SEO.title} description={SEO.description}>
 	<Hero />
-	<Features />
-	<Testimonial {...testimonialData3} />
-	<Testimonial bg={testimonialBackground} bgPosition="right" />
-	<Testimonial {...testimonialData2} />
-	<HighlightBlocks />
 	<CTA />
 </Layout>

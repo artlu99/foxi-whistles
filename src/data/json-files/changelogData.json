@@ -1,5 +1,10 @@
 [
 	{
+		"title": "Simplification",
+		"date": "2025-03-22",
+		"text": "<ul><li>Composer cleaned up: no more private or anon casting</li><li>all jokes removed from website</li></ul>"
+	},
+	{
 		"title": "Sassy Contest goes live",
 		"date": "2025-03-18",
 		"text": "<ul><li>real payouts</li><li><b>Sassquatch</b> channel /sasquatch</li><li>install frame for notifications</li></ul>"

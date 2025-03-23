@@ -44,21 +44,7 @@ export const footerNavigationData: FooterData = {
 			text: "SassyHash.",
 		},
 	},
-	footerColumns: [
-		{
-			category: "Developers",
-			subCategories: [
-				{
-					subCategory: "Quick Start",
-					subCategoryLink: "/blog/developer-journey",
-				},
-				{
-					subCategory: "GraphQL API",
-					subCategoryLink: "https://whistles.artlu.xyz/graphql",
-				},
-			],
-		},
-	],
+	footerColumns: [],
 	subFooter: {
 		copywriteText: "© SassyHash 2025.",
 	},

@@ -12,18 +12,8 @@ import Col from "../../ui/Col.astro";
 import Row from "../../ui/Row.astro";
 import Section from "../../ui/Section.astro";
 
-// - Avatars
-import user1 from "../../../assets/avatars/avatar-01.webp";
-import user2 from "../../../assets/avatars/avatar-02.webp";
-import user3 from "../../../assets/avatars/avatar-03.webp";
-// Content
 // - Hero Image
 import FarcasterLogo from "../../../assets/logos/farcaster-logo.svg";
-const avatars = [
-	{ image: { src: user1.src, alt: "user name" }, link: "/" },
-	{ image: { src: user2.src, alt: "user name" }, link: "/" },
-	{ image: { src: user3.src, alt: "user name" }, link: "/" },
-];
 ---
 
 <Section id="intro" padding="top" classes="bg-neutral-50 dark:bg-neutral-900">
@@ -35,14 +25,14 @@ const avatars = [
 			<Button
 				size="lg"
 				link="https://warpcast.com/~/channel/p2p"
-				external="cursor-arrow-ripple"
 				classes="bg-red-600 hover:bg-red-700 text-white font-bold text-xl px-8 py-4 transform hover:scale-105 transition-all"
 			>
+			Channel: /p2p
 			<Image src={FarcasterLogo} alt="Farcaster Logo" width="20" height="20" />
-				Warpcast Channel /p2p 
 			</Button>
 			<br /><br />
 			
+
 			<Button
 				size="lg"
 				link="https://warpcast.com/~/developers/composer-actions?name=keccak-256&postUrl=https%3A%2F%2Fkeccak256-composer-action.artlu.workers.dev"
@@ -54,13 +44,11 @@ const avatars = [
 				external="squares-plus">Cast Action</Button
 			>
 			<br />
-			
-			
 
 			<p class="text-md my-2 pb-0">
-				Also: launch in <a href="https://recaster.org" target="_blank" rel="noopener noreferrer"
+				or, a <a href="https://recaster.org" target="_blank" rel="noopener noreferrer"
 					>Recaster</a
-				> as a Featured Mini-App.
+				> Featured Mini-App.
 			</p>
 			<p class="text-md my-8 pb-0">
 
@@ -81,18 +69,23 @@ const avatars = [
 			>
 				How To Participate in Sassy 💕 Rewards
 			</a>
+
+			<br />
+			<br />
+
+			<Button
+				size="lg"
+				link="https://warpcast.com/~/frames/launch?domain=gib-rewards.artlu.xyz"
+				classes="bg-red-600 hover:bg-red-700 text-white font-bold text-xl px-8 py-4 transform hover:scale-105 transition-all"
+				external="squares-plus"
+			>
+			Gib Rewards Frame
+			</Button>
+			
 			</p>
 		</Col>
 		<Col span="2" />
 		<Col span="2" />
-		<!-- <Col span="8">
-			<Image
-				src={heroImage}
-				alt="SassyHash. The decentralized protocol for whistling"
-				class="translate-y-8 shadow-2xl shadow-neutral-200 dark:shadow-neutral-950"
-				format="webp"
-			/>
-		</Col> -->
 		<Col span="2" />
 	</Row>
 </Section>

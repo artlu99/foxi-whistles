@@ -1,0 +1,26 @@
+---
+// Farcaster Embed
+// ------------
+
+import { FarcasterEmbed } from "react-farcaster-embed/dist/client";
+
+
+// Props
+type Props = {
+	username: string;
+	hash: string;
+};
+const {
+	username,
+	hash,
+} = Astro.props;
+---
+<>
+	<a href={`https://warpcast.com/${username}/${hash}`} target="_blank">
+		{username} - {hash.slice(0, 10)}
+	</a>
+	<FarcasterEmbed
+		username={username}
+		hash={hash}
+	/>
+</>

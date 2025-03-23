@@ -1,0 +1,218 @@
+---
+// Casts Testimonial section
+// ------------
+
+// - Layout
+import Col from "../../ui/Col.astro";
+// Components
+import FCEmbed from "../../ui/FCEmbed.astro";
+import Row from "../../ui/Row.astro";
+import Section, { type BgProps } from "../../ui/Section.astro";
+
+// Props
+type Props = {
+	bg?: BgProps;
+	bgPosition?: "left" | "right" | "center";
+};
+const {
+	bg,
+	bgPosition = "center",
+} = Astro.props;
+
+const casts = [
+	{
+		user: "dwr.eth",
+		hash: "0xe311f3eba5302fb848ad519faf03793521bb0355",
+	},
+	{
+		user: "hankmoody",
+		hash: "0x170aeeb7b43fd8a0ad25aad3e0892c227cac51a5",
+	},
+];
+const showFeed = true;
+---
+
+<Section
+	id="cast-testimonials"
+	padding="none"
+	bg={bg}
+	bgPosition={bgPosition}
+	classes="dark:border-t border-y border-neutral-800 bg-neutral dark:bg-neutral-900"
+>
+	<FCEmbed username="kmacb.eth" hash="0xc8f3b8c8c7917a525c239d6ce704ce5d59ab1ca0" />
+
+	<Row>
+		<Col span="12">	
+			{showFeed && <ul
+				aria-label="Nested user feed"
+				role="feed"
+				class="relative flex flex-col gap-12 py-12 pl-6 before:absolute before:top-0 before:left-6 before:h-full before:-translate-x-1/2 before:border before:border-dashed before:border-slate-200 after:absolute after:top-6 after:left-6 after:bottom-6 after:-translate-x-1/2 after:border after:border-slate-200 "
+				>
+				<li role="article" class="relative pl-6 ">
+					<div class="flex flex-col flex-1 gap-2">
+					<a
+						href="#"
+						class="absolute z-10 inline-flex items-center justify-center w-6 h-6 text-white rounded-full -left-3 ring-2 ring-white"
+					>
+						<img
+						src="https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/bc698287-5adc-4cc5-a503-de16963ed900/original"
+						alt="user name"
+						title="user name"
+						width="48"
+						height="48"
+						class="max-w-full rounded-full"
+						/>
+					</a>
+					<h4 class="flex flex-col items-start text-base font-medium leading-6 text-slate-700 md:flex-row lg:items-center">
+						<span class="flex-1">
+						Dan Romero
+						<span class="text-sm font-normal text-slate-500">
+							{" "}
+							via <a href="https://warpcast.com/dwr.eth/0xe311f3eb" target="_blank" class="text-slate-500">Farcaster</a>
+						</span>
+						</span>
+						<span class="text-xs font-normal text-slate-400">
+						{" "}
+						3 hours ago
+						</span>
+					</h4>
+					<p class="text-sm text-slate-500">
+						Check out SassyHash{" "}
+					</p>
+					<a href="https://sassyhash.artlu.xyz" target="_blank" class="text-sm text-slate-500"><img src="https://sassyhash.artlu.xyz/og-clean.jpg" alt="SassyHash" class="max-h-40" /></a>
+					</div>
+
+					<ul
+					role="group"
+					class="relative flex flex-col gap-12 py-12 pl-6 before:absolute before:top-6 before:left-6 before:bottom-6 before:-translate-x-1/2 before:border before:border-dashed before:border-slate-200 after:absolute after:top-12 after:left-6 after:bottom-12 after:-translate-x-1/2 after:border after:border-slate-200"
+					>
+					<li role="article" class="relative pl-6 ">
+						<div class="flex flex-col flex-1 gap-2">
+						<a
+							href="#"
+							class="absolute z-10 inline-flex items-center justify-center w-6 h-6 text-white rounded-full -left-3 ring-2 ring-white"
+						>
+							<img
+							src="https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/a531ee98-67f5-4335-4db3-e388ba5e1400/rectcrop3"
+							alt="user name"
+							title="user name"
+							width="48"
+							height="48"
+							class="max-w-full rounded-full"
+							/>
+						</a>
+						<h4 class="flex flex-col items-start text-base font-medium leading-6 text-slate-700 md:flex-row lg:items-center">
+							<span class="flex-1">
+							lovejoy{" "}
+							<span class="text-sm font-normal text-slate-500">
+								{" "}
+								replied{" "}
+							</span>
+							</span>
+							<span class="text-xs font-normal text-slate-400">
+							{" "}
+							3 hours ago
+							</span>
+						</h4>
+						<p class="text-sm text-slate-500">
+							da0e157d5295121bb03daf87f92fa314fe76fb806062f322eb760430454183ba<br />
+							<br />
+(mute the phrase '!sassy1' to stop seeing SassyHash 💅 in your feed)
+						</p>
+						</div>
+					</li>
+					</ul>
+
+				</li>
+				<li role="article" class="relative pl-6 ">
+					<div class="flex flex-col flex-1 gap-2">
+					<a
+						href="#"
+						class="absolute z-10 inline-flex items-center justify-center w-6 h-6 text-white rounded-full -left-3 ring-2 ring-white"
+					>
+						<img
+						src="https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/6db997b7-66fb-4c45-2cbf-063f61333700/rectcrop3"
+						alt="user name"
+						title="user name"
+						width="48"
+						height="48"
+						class="max-w-full rounded-full"
+						/>
+					</a>
+					<h4 class="flex flex-col items-start text-base font-medium leading-6 text-slate-700 md:flex-row lg:items-center">
+						<span class="flex-1">
+						HankMoody{" "}
+						<span class="text-sm font-normal text-slate-500">
+							{" "}
+							via <a href="https://warpcast.com/hankmoody/0x170aeeb7" target="_blank" class="text-slate-500">Farcaster</a>
+						</span>
+						<span class="text-xs font-normal text-slate-400">
+						{" "}
+						2 hours ago
+						</span>
+					</h4>
+					<p class="text-sm text-slate-500">
+Friends,<br />
+<br />
+A while ago I told you about a fabulous and fun tool that <a href="https://warpcast.com/artlu" target="_blank" class="text-slate-500">@artlu</a> had created and that we were testing on the channel. Yesterday, <a href="https://warpcast.com/dwr.eth" target="_blank" class="text-slate-500">@dwr.eth</a> himself posted about SassyHash.<br />
+<br />
+Now you can participate in a fun tournament to win rewards in USDC, DEGEN, and BURRITO.<br />
+<br />
+I'm leaving you with a short guide, especially if you want to share it with other communities so more people know what it's all about.<br />
+<br />
+<a href="https://warpcast.com/girl-ua" target="_blank" class="text-slate-500">@girl-ua</a> <a href="https://warpcast.com/dummie.eth" target="_blank" class="text-slate-500">@dummie.eth</a> <a href="https://warpcast.com/zoo" target="_blank" class="text-slate-500">@zoo</a> <a href="https://warpcast.com/christin" target="_blank" class="text-slate-500">@christin</a> <a href="https://warpcast.com/bizarrebeast" target="_blank" class="text-slate-500">@bizarrebeast</a> <a href="https://warpcast.com/project7" target="_blank" class="text-slate-500">@project7</a> <a href="https://warpcast.com/jonathancolton" target="_blank" class="text-slate-500">@jonathancolton</a> <a href="https://warpcast.com/milibooo" target="_blank" class="text-slate-500">@milibooo</a> <br />
+<br />
+<a href="https://warpcast.com/fdea177773fa6d92ee9f5be98e9340b870e9e64b4c1358e4bebea73ae6aa1d95" target="_blank" class="text-slate-500">fdea177773fa6d92ee9f5be98e9340b870e9e64b4c1358e4bebea73ae6aa1d95</a><br />
+<br />
+(mute the phrase '!sassy1' to stop seeing SassyHash 💅 in your feed)
+					</p>
+					<a href="https://paragraph.xyz/@hankmoody/how-to-participate-in-sassy-💅-rewards" target="_blank" class="text-sm text-slate-500">
+						<img src="https://paragraph.xyz/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fpapyrus_images%2F784ef03d1ed3443229294e02723568c1.webp&w=1080&q=75" alt="SassyHash" class="max-h-40" />
+					</a>
+					</div>
+					<ul
+					role="group"
+					class="relative flex flex-col gap-12 py-12 pl-6 before:absolute before:top-6 before:left-6 before:bottom-6 before:-translate-x-1/2 before:border before:border-dashed before:border-slate-200 after:absolute after:top-12 after:left-6 after:bottom-12 after:-translate-x-1/2 after:border after:border-slate-200"
+					>
+					<li role="article" class="relative pl-6 ">
+						<div class="flex flex-col flex-1 gap-2">
+						<a
+							href="#"
+							class="absolute z-10 inline-flex items-center justify-center w-6 h-6 text-white rounded-full -left-3 ring-2 ring-white"
+						>
+							<img
+							src="https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/85465615-5957-49de-7f18-70856d880500/rectcrop3"
+							alt="user name"
+							title="user name"
+							width="48"
+							height="48"
+							class="max-w-full rounded-full"
+							/>
+						</a>
+						<h4 class="flex flex-col items-start text-base font-medium leading-6 text-slate-700 md:flex-row lg:items-center">
+							<span class="flex-1">
+							Dvyne🎩 (dummie.eth){" "}
+							<span class="text-sm font-normal text-slate-500">
+								{" "}
+								replied{" "}
+							</span>
+							</span>
+							<span class="text-xs font-normal text-slate-400">
+							{" "}
+							3 hours ago
+							</span>
+						</h4>
+						<p class="text-sm text-slate-500">
+							Perfect and brief explanation <br />
+							Thank you 🙌🏾
+						</p>
+						</div>
+					</li>
+					</ul>
+				</li>
+				</ul>}
+		  </>
+		
+		</Col>
+	</Row>
+</Section>

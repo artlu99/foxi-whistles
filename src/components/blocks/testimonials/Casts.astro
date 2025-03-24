@@ -33,7 +33,7 @@ const casts = [
 		hash: "0x170aeeb7b43fd8a0ad25aad3e0892c227cac51a5",
 	},
 ];
-const showFeed = true;
+const showFeed = false;
 ---
 
 <Section
@@ -41,10 +41,8 @@ const showFeed = true;
 	padding="none"
 	bg={bg}
 	bgPosition={bgPosition}
-	classes="dark:border-t border-y border-neutral-800 bg-neutral dark:bg-neutral-900"
+	classes="dark:border-t border-neutral-800 bg-neutral dark:bg-neutral-900"
 >
-	<FCEmbed username="kmacb.eth" hash="0xc8f3b8c8c7917a525c239d6ce704ce5d59ab1ca0" />
-
 	<Row>
 		<Col span="12">	
 			{showFeed && <ul
@@ -317,9 +315,87 @@ I'm leaving you with a short guide, especially if you want to share it with othe
 					</li>
 					</ul>
 				</li>
-				</ul>}
-		  </>
-		
+			</ul>}
+		</Col>
+		<Col span="12">
+			<section class="mx-auto max-w-lg divide-y divide-slate-200 rounded shadow-md shadow-slate-200 px-4 sm:px-0">
+				<details class="group p-4">
+				<summary class="relative cursor-pointer list-none pr-8 font-medium text-slate-700 transition-colors duration-300 focus-visible:outline-none group-hover:text-slate-900  [&::-webkit-details-marker]:hidden">
+					Is it easy & kind of fun?
+					<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="absolute right-0 top-1 h-4 w-4 shrink-0 stroke-slate-700 transition duration-300 group-open:rotate-45"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+					stroke-width="1.5"
+					aria-labelledby="title-ac13 desc-ac13"
+					>
+					<title id="title-ac13">Open icon</title>
+					<desc id="desc-ac13">
+						icon that represents the state of the summary
+					</desc>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M12 4v16m8-8H4"
+					/>
+					</svg>
+				</summary>
+				<FCEmbed username="kmacb.eth" hash="0xc8f3b8c8c7917a525c239d6ce704ce5d59ab1ca0" />
+				</details>
+				<details class="group p-4">
+				<summary class="relative cursor-pointer list-none pr-8 font-medium text-slate-700 transition-colors duration-300 focus-visible:outline-none group-hover:text-slate-900  [&::-webkit-details-marker]:hidden">
+					Is it allowed on Farcaster?
+					<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="absolute right-0 top-1 h-4 w-4 shrink-0 stroke-slate-700 transition duration-300 group-open:rotate-45"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+					stroke-width="1.5"
+					aria-labelledby="title-ac14 desc-ac14"
+					>
+					<title id="title-ac14">Open icon</title>
+					<desc id="desc-ac14">
+						icon that represents the state of the summary
+					</desc>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M12 4v16m8-8H4"
+					/>
+					</svg>
+				</summary>
+				<FCEmbed username="dwr.eth" hash="0xe311f3eba5302fb848ad519faf03793521bb0355" />
+				</details>
+				<details class="group p-4">
+				<summary class="relative cursor-pointer list-none pr-8 font-medium text-slate-700 transition-colors duration-300 focus-visible:outline-none group-hover:text-slate-900  [&::-webkit-details-marker]:hidden">
+					Is there a short guide to know what it's all about?
+					<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="absolute right-0 top-1 h-4 w-4 shrink-0 stroke-slate-700 transition duration-300 group-open:rotate-45"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+					stroke-width="1.5"
+					aria-labelledby="title-ac15 desc-ac15"
+					>
+					<title id="title-ac15">Open icon</title>
+					<desc id="desc-ac15">
+						icon that represents the state of the summary
+					</desc>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M12 4v16m8-8H4"
+					/>
+					</svg>
+				</summary>
+				<FCEmbed username="hankmoody" hash="0x170aeeb7b43fd8a0ad25aad3e0892c227cac51a5" />
+				</p>
+				</details>
+			</section>
 		</Col>
 	</Row>
 </Section>

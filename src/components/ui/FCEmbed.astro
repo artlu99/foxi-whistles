@@ -4,7 +4,6 @@
 
 import { FarcasterEmbed } from "react-farcaster-embed/dist/client";
 
-
 // Props
 type Props = {
 	username: string;
@@ -15,12 +14,10 @@ const {
 	hash,
 } = Astro.props;
 ---
-<>
-	<a href={`https://warpcast.com/${username}/${hash}`} target="_blank">
-		{username} - {hash.slice(0, 10)}
-	</a>
+<div class="w-full max-w-sm md:max-w-md lg:max-w-lg">
 	<FarcasterEmbed
 		username={username}
 		hash={hash}
+		client:load
 	/>
-</>
+</div>
